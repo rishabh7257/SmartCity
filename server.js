@@ -9,7 +9,7 @@ var morgan = require('morgan');
 var cookieSession = require('cookie-session');
 var path = require('path');
 var mysql = require('./models/mysql');
-
+//checking the changes made @SwatiK
 var app = express();
 
 app.set('port', process.env.PORT || 3000);
