@@ -1,0 +1,149 @@
+<!-- <section id="main-content" ng-controller= "ClientDashboard">
+          <section class="wrapper">            
+              
+      <div class="row"><h1>Client Home Page {{clientname }}</h1></div>
+              
+            <div class="row"></div>
+  
+            <div class="row"></div>  
+
+          </section>
+     </section> -->
+     
+     
+      <!--main content start-->
+      <section id="main-content" ng-controller= "ClientDashboard" ng-init="getData()">
+          <section class="wrapper">
+		  <div class="row">
+				<div class="col-lg-12">
+					<h3 class="page-header"><i class="fa fa-user-md"></i> Profile</h3>
+					<ol class="breadcrumb">
+						<li><i class="fa fa-home"></i><a href="index.html">Home</a></li>
+						<li><i class="fa fa-user-md"></i>Profile</li>
+					</ol>
+				</div>
+			</div>
+              <div class="row">
+                <!-- profile-widget -->
+                <div class="col-lg-12">
+                    <div class="profile-widget profile-widget-info">
+                          <div class="panel-body">
+                            <div class="col-lg-2 col-sm-2">
+                                           
+                              <div class="follow-ava">
+                                  <img src="img/clientlogo.jpeg" alt="">
+                              </div>
+                              <h6>Client</h6>
+                            </div>
+                            <div class="col-lg-4 col-sm-4 follow-info">
+                                <p>{{clientProperties.fname}} {{clientProperties.lname}}</p>
+								<p><i class="fa fa-twitter">{{clientProperties.email}}</i></p>
+                                <h6>
+                                    <span><i class="icon_clock_alt"></i>Last Login: 11:05 AM {{lastlogin}}</span>
+                                   
+                                </h6>
+                            </div>
+                            <div class="col-lg-2 col-sm-6 follow-info weather-category">
+                                      <ul>
+                                          <li class="active">
+                                              
+                                              <i class="fa fa-comments fa-2x"> </i><br>
+											  
+										Number of Building
+                                          </li>
+										   
+                                      </ul>
+                            </div>
+							<div class="col-lg-2 col-sm-6 follow-info weather-category">
+                                      <ul>
+                                          <li class="active">
+                                              
+                                              <i class="fa fa-bell fa-2x"> </i><br>
+											  
+											 Number of Guards 
+                                          </li>
+										   
+                                      </ul>
+                            </div>
+							<div class="col-lg-2 col-sm-6 follow-info weather-category">
+                                      <ul>
+                                          <li class="active">
+                                              
+                                              <i class="fa fa-tachometer fa-2x"> </i><br>
+											  
+											Balance Due $
+                                          </li>
+										   
+                                      </ul>
+                            </div>
+                          </div>
+                    </div>
+                </div>
+              </div>
+              <!-- page start-->
+              <div class="row">
+                 <div class="col-lg-12">
+                    <section class="panel">
+                       
+                    
+						
+						
+						<!--  I have added here -->
+						                                           <!-- profile -->
+                                  <div id="profile" class="tab-pane">
+                                    <section class="panel">
+                                      <div class="bio-graph-heading">
+                                              Your Information
+                                      </div>
+                                      <div class="panel-body bio-graph-info">
+                                          <h1>Bio Graph</h1>
+                                          <div class="row">
+                                              <div class="bio-row">
+                                                  <p><span>First Name </span>: {{clientProperties.fname}} </p>
+                                              </div>
+                                              <div class="bio-row">
+                                                  <p><span>Last Name </span>: {{clientProperties.lname}} </p>
+                                              </div>                                              
+                                              <div class="bio-row">
+                                                  <p><span>Address</span>: {{clientProperties.address}}</p>
+                                              </div>
+                                             
+                                              <div class="bio-row">
+                                                  <p><span>ZipCode </span>: {{clientProperties.zipcode}} </p>
+                                              </div>
+                                               <div class="bio-row">
+                                                  <p><span>City </span>:  {{clientProperties.city}}</p>
+                                              </div>
+                                              
+                                              <div class="bio-row">
+                                                  <p><span>Mobile </span>: {{clientProperties.phonenumber}} </p>
+                                              </div>
+                                             
+                                             <div class="bio-row">
+                                                  <p><span>Email </span>:{{clientProperties.email}} </p>
+                                              </div>
+                                          </div>
+                                      </div>
+                                    </section>
+                                      <section>
+                                          <div class="row">                                              
+                                          </div>
+                                      </section>
+                                      <div class="panel-footer text-center">
+							<button class="btn btn-primary" ng-click="modifyClientInfo()">Edit Information</button>
+						</div>
+                                  </div>
+						
+						
+						
+						<!--  -->
+						
+						
+                      </section>
+                 </div>
+              </div>
+
+              <!-- page end-->
+          </section>
+      </section>
+      <!--main content end-->

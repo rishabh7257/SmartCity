@@ -1,0 +1,118 @@
+
+
+<div ng-controller ="ClientController">
+
+<!-- container section start -->
+  <section id="container" class="">
+     
+      <header class="header dark-bg">
+            <div class="toggle-nav">
+                <div class="icon-reorder tooltips" data-original-title="Toggle Navigation" data-placement="bottom"></div>
+            </div>
+
+            <!--logo start-->
+            <a href="#" class="logo">WFMS</a>
+            <!--logo end-->
+
+            <div class="nav search-row" id="top_menu">
+                <!--  search form start -->
+                <ul class="nav top-menu">                    
+                    <li>
+                        <form class="navbar-form">
+                            <input class="form-control" placeholder="Search" type="text">
+                        </form>
+                    </li>                    
+                </ul>
+                <!--  search form end -->                
+            </div>
+
+            <div class="top-nav notification-row">                
+                <!-- notificatoin dropdown start-->
+                <ul class="nav pull-right top-menu">
+                    <!-- user login dropdown start-->
+                    <li class="dropdown">
+                        <a data-toggle="dropdown" class="dropdown-toggle" href="#">
+                            <span class="profile-ava">
+                                <img alt="" src="img/avatar-mini3.jpg">
+                            </span>
+                            <span class="username" ng-model="clientName">{{clientName}}</span>
+                            <b class="caret"></b>
+                        </a>
+                        <ul class="dropdown-menu extended logout">
+                            <div class="log-arrow-up"></div>
+                            <li>
+                                <a href="login.html"><i class="icon_key_alt"></i> Log Out</a>
+                            </li>
+                        </ul>
+                    </li>
+                    <!-- user login dropdown end -->
+                </ul>
+                <!-- notificatoin dropdown end-->
+            </div>
+      </header>      
+      <!--header end-->
+
+      <!--sidebar start-->
+      <aside>
+          <div id="sidebar"  class="nav-collapse ">
+              <!-- sidebar menu start-->
+              <ul class="sidebar-menu">                
+                  <li class="active">
+                      <a class="" href ng-click="setTemplate('clientHome')">
+                          <i class="icon_house_alt"></i>
+                          <span>Dashboard</span>
+                      </a>
+                  </li>
+            <li class="sub-menu">
+                      <a class="" href ng-click="setTemplate('viewBuilding')">
+                          <i class="icon_document_alt"></i>
+                          <span>Building</span>
+                      </a>
+                  </li>       
+                  <li class="sub-menu">
+                      <a class="" href ng-click="setTemplate('clientBillingInfo')" >
+                          <i class="icon_desktop"></i>
+                          <span>Billing Information</span>                          
+                      </a>
+                  </li>
+                  <li>                     
+                      <a class="" href ng-click="setTemplate('viewReport')">
+                          <i class="icon_piechart"></i>
+                          <span>Report</span>
+                          
+                      </a>
+                                         
+                  </li>
+                  <li>
+                      <a class="" href ng-click="setTemplate('viewAlert')">
+                          <i class="icon_genius"></i>
+                          <span>Alerts</span>
+                      </a>
+                  </li>
+                  <li>                     
+                      <a class="" href ng-click="setTemplate('viewMap')">
+                          <i class="icon_piechart"></i>
+                          <span>Map</span>
+                          
+                      </a>
+                                         
+                  </li>
+                  </li>       
+                  <li class="sub-menu">
+                      <a class="" href ng-click= >
+                          <i class="icon_key_alt"></i>
+                          <span>Logout</span>                          
+                      </a>
+                  </li>
+              </ul>
+              <!-- sidebar menu end-->
+          </div>
+      </aside>
+      <!--sidebar end-->
+      
+      <!--main content start-->
+      <div ng-include="getTemplate('wfms')"></div>
+      <!--main content end-->
+  </section>
+  <!-- container section start -->
+  </div>

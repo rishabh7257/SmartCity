@@ -1,0 +1,20 @@
+<div ng-controller="ShowClientRegisController" ng-init = "getData()">
+<div class="container">
+
+      <form class="login-form" style="margin-top: 50px; margin-bottom: 50px">        
+        <div class="login-wrap">
+            <p class="login-img"><i class="icon_lock_alt"></i></p>
+            <div class="input-group">
+              <span class="input-group-addon"><i class="icon_profile"></i></span>
+              <input type="email" class="form-control" ng-model="email" placeholder="Email" autofocus>
+            </div>
+            <div class="input-group">
+                <span class="input-group-addon"><i class="icon_key_alt"></i></span>
+                <input type="password" class="form-control" ng-model="password" placeholder="Password">
+            </div>
+            <button class="btn btn-primary btn-lg btn-block" ng-click="loginClient()">Login</button>
+            <button class="btn btn-info btn-lg btn-block" ng-click="registerClient()">Register</button>
+        </div>
+      </form>
+    </div>
+  </div>

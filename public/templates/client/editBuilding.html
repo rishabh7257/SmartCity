@@ -1,0 +1,128 @@
+<div class="modal-header">
+	<h3 class="modal-title">Add Building</h3>
+</div>
+
+<div class="modal-body">
+	<form>
+		<div class="row">
+			<div class="col-xs-12">
+				<div class="col-xs-3">
+					<h5>
+						<strong>Name</strong>
+					</h5>
+				</div>
+				<div class="col-xs-9 col-xs-pull-1">
+					<input type="text" name="firstName" ng-model="buildingname"
+						class="form-control" placeholder="Building Name" required>
+				</div>
+
+			</div>
+		</div>
+
+		<div class="row" style="padding-top: 2%;">
+
+			<div class="col-xs-12">
+				<div class="col-xs-3">
+					<h5>
+						<strong>Start Date</strong>
+					</h5>
+				</div>
+
+
+
+				<div class="col-xs-9 col-xs-pull-1">
+					<p class="input-group">
+						<!-- <input type="date" placeholder="yyyy-MM-dd"
+							ng-model="start_date | date: 'yyyy-MM-dd'"
+							value="{{ date | date: 'yyyy-MM-dd' }}" /> -->
+							
+							
+							<input type="date" id="release_date" name="input"
+							ng-model="start_date" placeholder="yyyy-MM-dd"
+							 required />
+					</p>
+				</div>
+			</div>
+		</div>
+
+
+
+		<div class="row" style="padding-top: 2%;">
+
+			<div class="col-xs-12">
+				<div class="col-xs-3">
+					<h5>
+						<strong>Release Date</strong>
+					</h5>
+				</div>
+
+
+
+				<div class="col-xs-9 col-xs-pull-1">
+
+					<p class="input-group">
+					<!-- 	<input type="date" placeholder="yyyy-MM-dd"
+							ng-model="release_date" max=value= "{{ date | date: 'yyyy-MM-dd' }}" />
+ -->
+						<input type="date" id="release_date" name="input"
+							ng-model="release_date" placeholder="start date"
+							 required />
+					</p>
+				</div>
+			</div>
+		</div>
+
+
+
+
+		<div class="row" style="padding-top: 2%;">
+			<div class="col-xs-12">
+				<div class="col-xs-3">
+					<h5>
+						<strong>Check Points</strong>
+					</h5>
+				</div>
+				<div class="col-xs-9 col-xs-pull-1">
+					<textarea class="form-control" rows="2" ng-model="checkpoint"></textarea>
+				</div>
+			</div>
+		</div>
+
+
+		<div class="row" style="padding-top: 2%;">
+			<div class="col-xs-12">
+				<div class="col-xs-3">
+					<h5>
+						<strong>Number of Guards</strong>
+					</h5>
+				</div>
+				<div class="col-xs-9 col-xs-pull-1">
+					<textarea class="form-control" rows="2" ng-model="no_of_guards"></textarea>
+				</div>
+			</div>
+		</div>
+
+
+		<div class="row" style="padding-top: 2%;">
+			<div class="col-xs-12">
+				<div class="col-xs-3">
+					<h5>
+						<strong>Address</strong>
+					</h5>
+				</div>
+				<div class="col-xs-9 col-xs-pull-1">
+					<textarea class="form-control" rows="2" ng-model="address"></textarea>
+				</div>
+			</div>
+		</div>
+	</form>
+</div>
+
+<div class="modal-footer">
+	<div class="pull-left text-danger">{{formError}}</div>
+	<button class="btn btn-primary" ng-click="okay()">Update</button>
+	<button class="btn btn-danger" ng-click="cancel()">Cancel</button>
+</div>
+
+
+

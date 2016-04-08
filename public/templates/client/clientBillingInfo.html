@@ -1,0 +1,64 @@
+<div ng-controller="clientBillingInfo" ng-init = "getBillingInfo()">
+	<section id="main-content">
+		<section class="wrapper">
+
+			<div class="row">
+				<div class="col-lg-12">
+					<h3 class="page-header">
+						<i class="fa fa-file-text-o"></i> Billing Information
+					</h3>
+					<ol class="breadcrumb">
+						<li><i class="fa fa-home"></i><a href ng-click="setTemplate('clientHome')">Home</a></li>
+						<li><i class="icon_document_alt"></i>Billing Information</li>
+					</ol>
+				</div>
+			</div>
+			<div class="row">
+				<div class="col-lg-12">
+					<section class="panel">
+					<div ng-repeat = "data in billingInfo">
+						<header class="panel-heading" ng-model = "buildingName"> Building Name: {{buildingName}} </header>
+						<div class="panel-body">
+							<form class="form-horizontal "  >
+							
+
+								<div class="form-group">
+									<label class="col-lg-2 control-label">Building Name</label>
+									<div class="col-lg-10">
+										<p class="form-control-static">email@example.com</p>
+									</div>
+								</div>
+								<div class="form-group">
+									<label class="col-lg-2 control-label">Number of Gaurds Assigned</label>
+									<div class="col-lg-10">
+										<p class="form-control-static">email@example.com</p>
+									</div>
+								</div>
+								<div class="form-group">
+									<label class="col-lg-2 control-label">Release Date</label>
+									<div class="col-lg-10">
+										<p class="form-control-static">email@example.com</p>
+									</div>
+								</div>
+								<div class="form-group">
+									<label class="col-lg-2 control-label">Monthly Subscription</label>
+									<div class="col-lg-10">
+										<p class="form-control-static">{{data.monthly_service}}</p>
+									</div>
+								</div>
+								<div class="form-group">
+									<label class="col-lg-2 control-label">Balance</label>
+									<div class="col-lg-10">
+										<p class="form-control-static">email@example.com</p>
+									</div>
+								</div>
+															</form>
+						</div>
+						</div>
+					</section>
+				</div>
+			</div>
+		</section>
+	</section>
+</div>
+</div>

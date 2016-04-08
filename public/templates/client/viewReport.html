@@ -1,0 +1,71 @@
+<div ng-controller="viewReportClientController" ng-init = "getdata()">
+   <section id="main-content">
+      <section class="wrapper">
+         <div class="row">
+            <div class="col-lg-12">
+               <h3 class="page-header"><i class="fa fa-table"></i>Report</h3>
+               <ol class="breadcrumb">
+                  <li><i class="fa fa-home"></i><a href ng-click="setTemplate('clientHome')">Home</a></li>
+                  <li><i class="fa fa-table"></i>Report</li>
+               </ol>
+            </div>
+         </div>
+         <div class="row">
+            <div class="col-lg-12">
+               <div class="row">
+                  <div class="col-lg-6">
+                     <section class="panel">
+                        <header class="panel-heading">
+                           View Report
+                        </header>
+                        <div class="panel-body">
+                           <form class="form-horizontal " action="#">
+                              <!--date picker start-->
+                              <div class="form-group">
+                                 <label class="control-label col-sm-4">Date</label>
+                                 <div class="col-sm-6">
+                                    <input id="cp1" type="date"  ng-model = "reportDate"  size="16" class="form-control" placeholder = "YYYY-MM-DD" />
+                                    
+                                 </div>
+                              </div>
+                              <div class="collapse navbar-collapse navbar-ex1-collapse">
+                                 <ul class="nav navbar-nav">
+                                    <li class="dropdown">
+                                       <a href="javascript:;"
+                                          class="dropdown-toggle" data-toggle="dropdown">Building Name <b
+                                          class="caret"></b></a>
+                                       <ul class="dropdown-menu">
+                                          <div ng-repeat ="data in buildingName">
+                                             <li><a ng-click = "generateReport(this)" >{{data.buildingname}}</a></li>
+                                          </div>
+                                       </ul>
+                                       </li>
+                                       </ul>
+                                       </div>
+                                       </form>
+                                       </div>
+                                       </section>
+                                       </div>
+                                       </div>
+                                       </div>
+                                       </div>
+                                      <div class="container-fluid">
+
+
+                                       <div class="container-fluid">
+  
+                                         <div class="row">
+                                           <div class="col-lg-4" ><div class="well">.col-sm-4</div></div>
+                                           <div class="col-lg-4"><div class="well">.col-sm-4</div></div>
+                                           <div class="col-lg-4" ><div class="well">.col-sm-4</div></div>
+                                         </div>
+                                       
+                                       </div>
+                                       </div>
+                                       </section>
+                                       </section>
+                                       </div>
+                                       
+
+                          
+
