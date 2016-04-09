@@ -27,7 +27,8 @@ module.exports = function (app, passport) {
     app.delete('/api/deleteClient', ensureAuthenticated, clientController.deleteClient);
     app.post('/api/updateClientBillingInfo', ensureAuthenticated, clientController.updateClientBillingInfo);
     app.get('/api/getClientInfo/:idperson', ensureAuthenticated, clientController.getClientInfo);
-  
+    app.get('/api/t', clientController.powerStatus);
+
 //    // Admin
 //    //app.post('/api/createAlert' ,adminController.createAlert);
 //    app.post('/api/publishAlert',adminController.publishAlert);

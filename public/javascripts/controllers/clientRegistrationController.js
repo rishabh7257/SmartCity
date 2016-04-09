@@ -13,7 +13,7 @@ wfms.controller("ClientRegistrationController", function($scope, $modalInstance,
 $scope.register = function() {
 
 	console.log("Inside register Funct");
-	if($scope.firstname === "" || $scope.lastname === "" || $scope.address === "" || $scope.city === "" || $scope.zipcode=== "" || $scope.email=== "" ||  $scope.number === "" ||  $scope.password === ""){
+	if($scope.firstname === "" || $scope.lastname === "" || $scope.address === "" || $scope.city === "" || $scope.zipcode=== "" || $scope.email=== "" ||  $scope.number === "" ||  $scope.password === "" || $scope.usertype == " "){
 		$scope.formError = "Form Invalid !!!";
 	}else{
 		
@@ -27,9 +27,10 @@ $scope.register = function() {
 				email : $scope.email,
 				phonenumber : $scope.number,
 				password : $scope.password,
-				usertype: "CLNT"
+				usertype: $scope.usertype
 					
 			};
+		console.log("In controller usertype is "+ $scope.usertype)
 		DataService.postData("/api/register",params).success(function(response){
 			$modalInstance.close(true);
 		}).error(function(err){
