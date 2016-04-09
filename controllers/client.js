@@ -37,7 +37,19 @@ createClient = function(req,res){
 	}
 };
 
-
+powerStatus = function(req,res) {
+	console.log("inside powerStatus");
+	mysql.queryDb("select alertinfo.thresholdLevel, alertinfo.date from alertinfo WHERE date between date_sub(CURDATE(), INTERVAL 7 day) and CURDATE()",function(err,rows){
+	//mysql.queryDb("Select * from alertinfo",function(err,rows){
+		console.log("Inside powerStatus");
+		if (err) {
+			res.status(500).json({ status : 500, message : "Error while retrieving data" });
+		} else {
+			console.log("Rows fetched");
+			res.status(200).json({ status : 200, data: rows });
+			}
+		});
+};
 
 getClient=function(req,res){
 	
@@ -119,7 +131,8 @@ function dumpIntoMongo(data) {
 	});
 }
 
-exports.getFutureWeather = getFutureWeather
-exports.createClient = createClient;
+exports.getFutureWeather = getFutureWeather;
+
+exports.powerStatus = powerStatus; 
 exports.getClient = getClient;
 exports.getClientInfo=getClientInfo;

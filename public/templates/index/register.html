@@ -19,6 +19,18 @@
                                               <input class="form-control" ng-model="lastname" id="lastname" name="lastname" minlength="5" type="text" required />
                                           </div>
                                       </div>
+                                       <div class="form-group ">
+                                          <label for="cname" class="control-label col-lg-2">Tenant Type <span class="required">*</span></label>
+                                          <div class="col-lg-10">
+								
+							 <select class="form-control" ng-model="usertype">
+										<option value="Hospital">Hospital</option>
+										<option value="Residential">Residential</option>
+										<option value="Commercial">Commercial</option>
+									</select>
+
+							</div>
+                                      </div>
                                       <div class="form-group ">
                                           <label for="cname" class="control-label col-lg-2">Address<span class="required">*</span></label>
                                           <div class="col-lg-10">

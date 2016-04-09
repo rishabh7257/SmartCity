@@ -1,4 +1,4 @@
-	var crypto = require('crypto');
+var crypto = require('crypto');
 var passport = require('passport');
 var moment = require('moment');
 var dateutil = require('../util/dateutil');
@@ -16,7 +16,7 @@ exports.register = function(req, res) {
     var city = req.body.city;
     var zipcode = req.body.zipcode;
     var phonenumber = req.body.phonenumber;
-
+    console.log("usertype is"+usertype);
     req.checkBody('email', 'Please enter a valid email.').notEmpty().isEmail();
     var errors = req.validationErrors();
     if (errors) {
@@ -41,7 +41,7 @@ exports.register = function(req, res) {
         last_login:created,
         password_salt:new_salt
     };
-
+    
     mysql.queryDb('insert into login set ?',data,function(err,result){
       if(err) {
         console.log(err);
