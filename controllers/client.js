@@ -1,5 +1,15 @@
 var dateutil = require('../util/dateutil'),
-	moment = require('moment');
+	moment = require('moment'),
+	Forecast = require('forecast.io');
+var mongo = require('../models/mongo');
+
+
+var mongodb = require('mongodb');
+var db = new mongodb.Db('smartcity', new mongodb.Server(
+		'ds045704.mongolab.com', 45704, {
+			auto_reconnect : true
+		}), {});
+
 
 createClient = function(req,res){
 	console.log(JSON.stringify(req.body));
@@ -27,79 +37,7 @@ createClient = function(req,res){
 	}
 };
 
-updateClientBillingInfo = function(req,res){
-	if(!req.body.idclient){
-		res.status(400).json({ status : 400, message : "Bad Request" });
-	}else{
-		
-		mysql.queryDb('select building.idbuilding, building.no_of_guards, building.start_date, building.release_date from wfms.building inner join wfms.client on building.idclient = client.idclient where ?? = ? AND ?? = ?',['building.idclient',req.body.idclient, 'building.buildingstatus' , "Active"],function(err,rows){
 
-			if (err) {
-				res.status(500).json({ status : 500, message : "Error while retrieving data" });
-			} else {
-				console.log(rows[0].start_date);
-				for(var i = 0 ; i<rows.length;i++) {
-					
-					
-					console.log(rows[i].start_date);
-					var start_date = moment(rows[i].start_date,'YYYY-MM-DD');
-					
-					console.log("start_date " + start_date)
-					var end_date = moment(rows[i].release_date,'YYYY-MM-DD');
-					
-					console.log("end_date: "+ end_date);
-					var numberOfDays = end_date.diff(start_date, 'days');
-					
-					console.log(numberOfDays);
-					console.log("rows"+rows[i].no_of_guards);
-
-					var monthlySubscrption = (numberOfDays * rows[i].no_of_guards * 10);
-					console.log("monthlySubscrption: "+monthlySubscrption);
-					mysql.queryDb("UPDATE building SET ?? = ? WHERE ?? = ? AND ?? = ? AND ?? = ?", 
-					['service_fees',monthlySubscrption,'idclient',req.body.idclient,'buildingstatus',"Active",'idbuilding',rows[i].idbuilding], 
-						function(err, response) {
-						if (err) {
-							console.log("Error while perfoming query !!!" + err);
-							
-						} else {
-							console.log("Done Successfully");
-							if(i === rows.length-1){
-								res.status(200).json({ status : 200, message : "Client has been updated Succesfully" });
-							}
-						}
-					});
-				}
-				
-			}
-		});
-	}
-
-
-};
-
-updateClient = function(req,res){
-	if(!req.body.idperson || !req.body.start_date || !req.body.end_date){
-		res.status(400).json({ status : 400, message : "Bad Request" });
-	}else{
-		var newParam ={
-				start_date : moment(req.body.start_date,'DD-MM-YYYY').toDate(),
-				end_date : moment(req.body.end_date,'DD-MM-YYYY').toDate()
-		};
-		console.log(start_date);
-		//and ?? = ? and ?? = ?
-		//'start_date',old.start_date,'end_date',old.end_date
-		mysql.queryDb("UPDATE client SET ? WHERE ?? = ?", 
-			[newParam,'idperson',req.body.idperson], 
-			function(err, response) {
-			if (err) {
-				console.log("Error while perfoming query !!!" + err);
-				res.status(500).json({ status : 500, message : "Please try again later" });
-			} else {
-				res.status(200).json({ status : 200, message : "Client has been updated Succesfully" });
-			}
-		});
-	}
-};
 
 getClient=function(req,res){
 	
@@ -117,38 +55,7 @@ getClient=function(req,res){
 	}
 };
 
-deleteClient=function(req,res){
-	console.log(JSON.stringify(req.body));
-	if(!req.body.idperson){
-		res.status(400).json({ status : 400, message : "Bad Request" });
-	}else{
-		var idperson = req.body.idperson,
-		idclient = req.body.idclient,
-		start_date = req.body.start_date,
-		end_date = req.body.end_date;
 
-		mysql.queryDb('DELETE FROM client WHERE ?',[{idperson:idperson}],function(err,response){
-			if (err) {
-				console.log("Error while deleting client details !!!");
-				console.log(err);
-				res.status(500).json({ status : 500, message : "Error while deleting client details !!!" });
-			} else {
-				res.status(200).json({ status : 200, message : "Client details has been deleted Succesfully" });
-			}
-		});
-	}
-};
-
-listAllClients=function(req,res){
-	mysql.queryDb('SELECT * FROM client left join person on client.idperson = person.idperson',function(err,rows){
-		if (err) {
-			console.log("Error while listing all the client details !!!"  + err);
-			res.status(500).json({ status : 500, message : "Error while listing client details !!!" });
-		} else {
-			res.status(200).json({ status : 200, data : rows});
-		}
-	});
-};
 
 getClientInfo=function(req,res){
 	idperson = req.params.idperson;
@@ -162,10 +69,57 @@ mysql.queryDb('SELECT * FROM person WHERE ?',[{idperson:idperson}],function(err,
 });
 };
 
-exports.updateClientBillingInfo = updateClientBillingInfo;
+getWeatherForecast = function(req,res) {
+	
+	var cityName = req.params.city;
+	
+	
+}
+
+
+getFutureWeather = function(req, res){
+
+	var options = {
+			APIKey: "d6fc86674f86842ceb0a9b550a0e8f28",
+			timeout: 1000
+	},
+	forecast = new Forecast(options);
+
+	forecast.get(37.766602,-122.45108, function (err, res, data) {
+		if (err) {
+			throw err;  
+		}
+		console.log(data);
+		dumpIntoMongo(data);
+
+	});
+};
+
+function dumpIntoMongo(data) {
+	var db = mongo.getMongoConnection();
+	
+	db.open(function(err, db) {
+		db.authenticate('username', 'password', function(err) {
+			if (err) {
+				throw err;
+			} else {
+				db.collection('future_weather', function(err, collection) {
+					
+					collection.insert(data, function(err, res) {
+						if (err) {
+							throw err;
+						} else {
+							console.log('inserted');
+						}
+						db.close();
+					});
+				});
+			}
+		});
+	});
+}
+
+exports.getFutureWeather = getFutureWeather
 exports.createClient = createClient;
-exports.updateClient = updateClient;
-exports.deleteClient = deleteClient;
 exports.getClient = getClient;
-exports.listAllClients = listAllClients;
 exports.getClientInfo=getClientInfo;

@@ -5,13 +5,10 @@ wfms.controller("ClientDashboard", function($scope, $rootScope, $modal,
 	$scope.getData = function() {
 		
 		clientInfo();
+		getFutureData();
 		
 	}
-	
 
-
-	
-	
 	function clientInfo(){
 		
 		//var uri = urlConstants.GET_USER_DETAILS+$rootScope.userId;
@@ -26,7 +23,18 @@ wfms.controller("ClientDashboard", function($scope, $rootScope, $modal,
 		});
 	}
 	
-	
+	function getFutureData() {
+		DataService.postData("/api/getfutureWeather",[]).success(function(response){
+			
+			//angular.toJson(response);
+			console.log(response.data[0]);
+			
+			
+		}).error(function(err){
+			console.log(err.message);
+		});
+		
+	}
 	
 	
 	$scope.modifyClientInfo = function(data) {

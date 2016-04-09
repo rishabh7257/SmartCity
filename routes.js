@@ -21,12 +21,9 @@ module.exports = function (app, passport) {
     
     // Client
     app.get('/api/getClient/:idperson', ensureAuthenticated, clientController.getClient);
-    app.get('/api/listAllClients', ensureAuthenticated, clientController.listAllClients);
-    app.put('/api/updateClient', ensureAuthenticated, clientController.updateClient);
     app.post('/api/createClient', ensureAuthenticated, clientController.createClient);
-    app.delete('/api/deleteClient', ensureAuthenticated, clientController.deleteClient);
-    app.post('/api/updateClientBillingInfo', ensureAuthenticated, clientController.updateClientBillingInfo);
-    app.get('/api/getClientInfo/:idperson', ensureAuthenticated, clientController.getClientInfo);
+    app.get('/api/getClientInfo/:idperson', clientController.getClientInfo);
+    app.post('/api/getfutureWeather', clientController.getFutureWeather);
   
 //    // Admin
 //    //app.post('/api/createAlert' ,adminController.createAlert);
