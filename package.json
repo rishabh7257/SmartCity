@@ -19,14 +19,13 @@
     "ejs": "latest",
     "express": "4.x",
     "express-validator": "latest",
+    "highcharts": "^4.2.3",
     "moment": "^2.9.0",
+    "mongodb": "latest",
     "morgan": "^1.5.2",
     "mysql": "latest",
     "passport": "latest",
     "passport-local": "latest",
-    "redis":"latest",
-    "socket-io":"latest",
-    "mongodb":"latest",
-    "forecast-io":"latest"
+    "redis": "latest"
   }
 }

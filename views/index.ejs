@@ -40,6 +40,7 @@
 <link rel="stylesheet" href="http://www.w3schools.com/lib/w3.css">
  -->
 
+
 <!-- Bootstrap CSS -->    
     <link href="css/bootstrap.min.css" rel="stylesheet">
     <!-- bootstrap theme -->
@@ -177,6 +178,12 @@
 	<script src="js/sparklines.js"></script>	
 	<script src="js/charts.js"></script>
 	<script src="js/jquery.slimscroll.min.js"></script>
+    
+    <!-- High Chart-->
+    <script src="http://code.highcharts.com/highcharts.src.js"></script>
+    <script src="https://rawgit.com/pablojim/highcharts-ng/master/dist/highcharts-ng.js"></script>
+
+
   <script>
 
       //knob
@@ -222,47 +229,7 @@
 	    }
 	  });
 	});
-
-
-
-  </script>
-    
-    <script>  
-	            var socket = io.connect('//localhost:3000');
-	            
-	            socket.on('objTemp', function(data) {
-	                $('#objTemp').html(parseInt(data.objTemp));
-	                $('#ambTemp').html(parseInt(data.ambTemp));
-	                $.ajax( { url: "https://api.mongolab.com/api/1/databases/cmpe295b_siemt/collections/temp?apiKey=rvu6pAb1B5s-xO1eQBgXKTWMzRQOHQ-0",
-	                data: JSON.stringify( { "SensorId" : data.sensorId,
-	                						"ObjectTemp":data.objTemp,
-	                                        "AmbientTemp":data.ambTemp,
-	                                        "timeStamp":new Date() } ),
-	                type: "POST",
-	                contentType: "application/json" } );
-	            });
-	            
-
-	              socket.on('humTemp', function(data) {
-	                $('#humidity').html(parseInt(data.humidity));
-	                $.ajax( { url: "https://api.mongolab.com/api/1/databases/cmpe295b_siemt/collections/humidity?apiKey=rvu6pAb1B5s-xO1eQBgXKTWMzRQOHQ-0",
-	                data: JSON.stringify( { "SensorId" : data.sensorId,
-	                						"Temperature":data.humTemp,
-	                                        "Humidity":data.humidity,
-	                                        "timeStamp":new Date()} ),
-	                type: "POST",
-	                contentType: "application/json" } );
-	            }); 
-
-	               socket.on('Pressure', function(data) {
-	                $('#pressure').html(parseInt(data.press));
-	                $.ajax( { url: "https://api.mongolab.com/api/1/databases/cmpe295b_siemt/collections/pressure?apiKey=rvu6pAb1B5s-xO1eQBgXKTWMzRQOHQ-0",
-	                data: JSON.stringify( {  "SensorId" : data.sensorId,
-	                						 "Pressure":data.press,
-	                                        "timeStamp":new Date() } ),
-	                type: "POST",
-	                contentType: "application/json" } );
-	            });         
-	        </script> 
+    </script>
+ 
 </body>
 </html>
