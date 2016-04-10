@@ -9,8 +9,10 @@ var morgan = require('morgan');
 var cookieSession = require('cookie-session');
 var path = require('path');
 var mysql = require('./models/mysql');
+var mongo = require('./models/mongo');
 //checking the changes made @SwatiK
 var app = express();
+var io=require('socket.io');
 
 app.set('port', process.env.PORT || 3000);
 app.use(cookieParser());
@@ -36,11 +38,10 @@ app.get('*', function(req, res){
     res.render("index");
 });
 
+
+
 //Connection pool initialization
 mysql.createConnPool();
-// Pooja Shukla Test Commit
-//PopulateCache
-//cache.populateCache();
 app.listen(app.get('port'), function() {
     console.log('%s: Node server started on %d ...', Date(Date.now()), app.get('port'));
 });
