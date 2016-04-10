@@ -128,6 +128,34 @@ wfms.controller("ClientDashboard", function($scope, $rootScope, $modal,
         loading: false
     }
 
+    
+    $scope.getOutageBarChart = {
+            options: { 
+                chart: {
+                    type: 'bar'
+                }
+            },
+            xAxis: {
+                categories: ['Apples', 'Bananas', 'Oranges']
+            },
+            yAxis: {
+                title: {
+                    text: 'Fruit eaten'
+                }
+            },
+            series: [{
+                name: 'Jane',
+                data: [1, 0, 4]
+            }, {
+                name: 'John',
+                data: [5, 7, 3]
+            }],
+            title: {
+                text: 'Hello'
+            },
+            loading: false
+        }
+
     $scope.clientPowerStatus = function(){
 		//alert("Power controller called");
 		DataService.getData("/api/t",[]).success(function(response){
@@ -202,6 +230,8 @@ wfms.controller("ClientDashboard", function($scope, $rootScope, $modal,
 		}, function() {
 		});
 	};
+	
+	
 	
 	$scope.getWeatherData = function () { // On DOM ready...
 
