@@ -82,10 +82,10 @@
               </div>
            <!--   <div id="container" style="width: 800px; height: 310px; margin: 0 auto">
  -->     
- <div id ="chartsDiv" ng-controller= "ClientDashboard" ><div style="margin-top: 100px; text-align: center" id="loading">
-        <i class="fa fa-spinner fa-spin"></i>
-        <button ng-click="getWeatherData()"></button> Loading data from external source
-    </div> </div>
+  <div id ="chartsDiv" ng-controller= "ClientDashboard" ><div style="margin-top: 100px; text-align: center" id="loading">
+   
+        <button ng-click="getWeatherData()">Get Weather Data</button> 
+    </div> </div> 
               <!-- page start-->
               <div class="row">
                  <div class="col-lg-12">
@@ -134,7 +134,23 @@
 							            
 							            Power Outage Status:
 							           {{powerStatus}}
-							          
+							            <div ng-if="powerStatus=='Red'">
+							           <div class="w3-card-24 w3-red" style ="width: 150px;
+  height: 100px;
+  margin: 16px;
+  padding: 16px"><p>Power Outage predicted in next week</p></div></div>
+   <div ng-if="powerStatus=='Yellow'">
+   <div class="w3-card-24 w3-yellow" style ="width: 150px;
+  height: 100px;
+  margin: 16px;
+  padding: 16px"><p>Maintenance in Progres </p></div></div>
+   <div ng-if="{{powerStatus}}=='Green'">
+   <div class="w3-card-24 w3-green" style ="width: 150px;
+  height: 100px;
+  margin: 16px;
+  padding: 16px"><p>No Outages and maintenance needed</p></div></div>
+
+</div>
 							            </div>
 						                     </section>
                                       <section>
