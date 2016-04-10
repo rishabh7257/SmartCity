@@ -8,10 +8,56 @@ wfms.controller("ClientDashboard", function($scope, $rootScope, $modal,
 		clientInfo();
 		getFutureData();
 		
-	}
+	};
+	
+	$scope.addPoints = function () {
+        var seriesArray = $scope.highchartsNG.series
+        var rndIdx = Math.floor(Math.random() * seriesArray.length);
+        seriesArray[rndIdx].data = seriesArray[rndIdx].data.concat([1, 10, 20])
+    };
 
-<<<<<<< HEAD
-=======
+    $scope.addSeries = function () {
+        var rnd = []
+        for (var i = 0; i < 10; i++) {
+            rnd.push(Math.floor(Math.random() * 20) + 1)
+        }
+        $scope.highchartsNG.series.push({
+            data: rnd
+        })
+    }
+
+    $scope.removeRandomSeries = function () {
+        var seriesArray = $scope.highchartsNG.series
+        var rndIdx = Math.floor(Math.random() * seriesArray.length);
+        seriesArray.splice(rndIdx, 1)
+    }
+
+    $scope.options = {
+        type: 'line'
+    }
+
+    $scope.swapChartType = function () {
+        if (this.highchartsNG.options.chart.type === 'line') {
+            this.highchartsNG.options.chart.type = 'bar'
+        } else {
+            this.highchartsNG.options.chart.type = 'line'
+        }
+    }
+
+    $scope.highchartsNG = {
+        options: {
+            chart: {
+                type: 'bar'
+            }
+        },
+        series: [{
+            data: [10, 15, 12, 8, 7]
+        }],
+        title: {
+            text: 'Hello'
+        },
+        loading: false
+    }
 	$scope.clientPowerStatus = function(){
 		//alert("Power controller called");
 		DataService.getData("/api/t",[]).success(function(response){
@@ -36,7 +82,6 @@ wfms.controller("ClientDashboard", function($scope, $rootScope, $modal,
 		
 	}
 	
->>>>>>> 6a0f286aefd2d603029d4835f71903d0922571f6
 	function clientInfo(){
 		
 		//var uri = urlConstants.GET_USER_DETAILS+$rootScope.userId;

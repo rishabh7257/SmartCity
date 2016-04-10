@@ -4,6 +4,7 @@ var dateutil = require('../util/dateutil'),
 var mongo = require('../models/mongo');
 
 
+
 var mongodb = require('mongodb');
 var db = new mongodb.Db('smartcity', new mongodb.Server(
 		'ds045704.mongolab.com', 45704, {

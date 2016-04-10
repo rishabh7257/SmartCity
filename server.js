@@ -14,6 +14,7 @@ var mongo = require('./models/mongo');
 var app = express();
 var io=require('socket.io');
 
+
 app.set('port', process.env.PORT || 3000);
 app.use(cookieParser());
 app.use(bodyParser.json()); // to support JSON-encoded bodies
@@ -37,8 +38,6 @@ require('./routes')(app, passport);
 app.get('*', function(req, res){
     res.render("index");
 });
-
-
 
 //Connection pool initialization
 mysql.createConnPool();
