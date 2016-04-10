@@ -102,7 +102,7 @@ wfms.controller("ClientDashboard", function($scope, $rootScope, $modal,
 
     }
     $scope.chart2 = {
-        options: {
+        options: { 
             chart: {
                 type: 'bar'
             }
