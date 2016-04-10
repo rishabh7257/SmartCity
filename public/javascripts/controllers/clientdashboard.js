@@ -3,6 +3,7 @@ wfms.controller("ClientDashboard", function($scope, $rootScope, $modal,
 		$location, DataService) {
 
 	$rootScope.userType = "Hospital";
+	
 	$scope.getData = function() {
 		
 		clientInfo();
@@ -11,7 +12,7 @@ wfms.controller("ClientDashboard", function($scope, $rootScope, $modal,
 	};
 	
 	$scope.addPoints = function () {
-        var seriesArray = $scope.highchartsNG.series
+        var seriesArray = $scope.chart2.series
         var rndIdx = Math.floor(Math.random() * seriesArray.length);
         seriesArray[rndIdx].data = seriesArray[rndIdx].data.concat([1, 10, 20])
     };
@@ -21,13 +22,13 @@ wfms.controller("ClientDashboard", function($scope, $rootScope, $modal,
         for (var i = 0; i < 10; i++) {
             rnd.push(Math.floor(Math.random() * 20) + 1)
         }
-        $scope.highchartsNG.series.push({
+        $scope.chart2.series.push({
             data: rnd
         })
     }
 
     $scope.removeRandomSeries = function () {
-        var seriesArray = $scope.highchartsNG.series
+        var seriesArray = $scope.chart2.series
         var rndIdx = Math.floor(Math.random() * seriesArray.length);
         seriesArray.splice(rndIdx, 1)
     }
@@ -36,21 +37,90 @@ wfms.controller("ClientDashboard", function($scope, $rootScope, $modal,
         type: 'line'
     }
 
+    
     $scope.swapChartType = function () {
-        if (this.highchartsNG.options.chart.type === 'line') {
-            this.highchartsNG.options.chart.type = 'bar'
+        if (this.chart2.options.chart.type === 'line') {
+            this.chart2.options.chart.type = 'bar'
         } else {
-            this.highchartsNG.options.chart.type = 'line'
+            this.chart2.options.chart.type = 'line'
         }
     }
-    $scope.highchartsNG = {
+    
+    $scope.chart1={
+    		 options: {
+                 chart: {
+                     type: 'pie',
+                     plotBackgroundColor: null,
+                     plotBorderWidth: null,
+                     plotShadow: false
+
+                 },
+                 title: {
+                     text: 'Status Counts in the Current Stage.'
+                 },
+                 tooltip: {
+                     pointFormat: '{series.name}: <b>{point.percentage:.1f}%</b>'
+                 },
+                 plotOptions: {
+                     pie: {
+                    	 allowPointSelect: true,
+                         cursor: 'pointer',
+                         dataLabels: {
+                             enabled: true,
+                             format: '<b>{point.name}</b>: {point.percentage:.1f} %'
+                         },
+                         showInLegend: true
+                     }
+                 }
+             },
+             series: [{       
+                     name: 'Brands',
+                     colorByPoint: true,
+                     data: [{
+                         name: 'Microsoft Internet Explorer',
+                         y: 56.33
+                     }, {
+                         name: 'Chrome',
+                         y: 24.03
+                         
+                     }, {
+                         name: 'Firefox',
+                         y: 10.38
+                     }, {
+                         name: 'Safari',
+                         y: 4.77
+                     }, {
+                         name: 'Opera',
+                         y: 0.91
+                     }, {
+                         name: 'Proprietary or Undetectable',
+                         y: 0.2
+                     }]
+                 }],
+
+             loading: false
+
+    }
+    $scope.chart2 = {
         options: {
             chart: {
                 type: 'bar'
             }
         },
+        xAxis: {
+            categories: ['Apples', 'Bananas', 'Oranges']
+        },
+        yAxis: {
+            title: {
+                text: 'Fruit eaten'
+            }
+        },
         series: [{
-            data: [10, 15, 12, 8, 7]
+            name: 'Jane',
+            data: [1, 0, 4]
+        }, {
+            name: 'John',
+            data: [5, 7, 3]
         }],
         title: {
             text: 'Hello'
