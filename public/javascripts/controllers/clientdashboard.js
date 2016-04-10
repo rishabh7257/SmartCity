@@ -10,8 +10,7 @@ wfms.controller("ClientDashboard", function($scope, $rootScope, $modal,
 		
 	}
 
-<<<<<<< HEAD
-=======
+
 	$scope.clientPowerStatus = function(){
 		//alert("Power controller called");
 		DataService.getData("/api/t",[]).success(function(response){
@@ -36,7 +35,6 @@ wfms.controller("ClientDashboard", function($scope, $rootScope, $modal,
 		
 	}
 	
->>>>>>> 6a0f286aefd2d603029d4835f71903d0922571f6
 	function clientInfo(){
 		
 		//var uri = urlConstants.GET_USER_DETAILS+$rootScope.userId;
