@@ -84,8 +84,6 @@ seenByClient = function(req,res){
 			}
 		});
 	}
-
-
 };
 
 alertPerDay = function(req,res){

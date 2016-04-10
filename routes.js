@@ -25,6 +25,7 @@ module.exports = function (app, passport) {
     app.post('/api/getfutureWeather', clientController.getFutureWeather);
     app.get('/api/getClientInfo/:idperson', ensureAuthenticated, clientController.getClientInfo);
     app.get('/api/t', clientController.powerStatus);
+    app.get('/graph', function(req,res){ res.render("googleCharts"); });
 
 //    // Admin
 //    //app.post('/api/createAlert' ,adminController.createAlert);
