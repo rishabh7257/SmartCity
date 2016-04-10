@@ -15,7 +15,7 @@ wfms.controller("ClientDashboard", function($scope, $rootScope, $modal,
 		//alert("Power controller called");
 		DataService.getData("/api/t",[]).success(function(response){
 			//alert("User Type" + $rootScope.userType);
-			alert("Data is"+response.data.length);
+		//c	alert("Data is"+response.data.length);
 			for (var i = 0; i < response.data.length; i++) {
 				if(($rootScope.userType=="Hospital" && response.data[i].thresholdLevel >1) ||
 						($rootScope.userType=="Commercial" && response.data[i].thresholdLevel >5) ||
@@ -41,7 +41,7 @@ wfms.controller("ClientDashboard", function($scope, $rootScope, $modal,
 		DataService.getData("/api/getClientInfo/7",[]).success(function(response){
 			
 			//angular.toJson(response);
-			console.log(response.data[0]);
+			//console.log(response.data[0]);
 			$scope.clientProperties = response.data[0];
 			
 		}).error(function(err){
@@ -75,6 +75,30 @@ wfms.controller("ClientDashboard", function($scope, $rootScope, $modal,
 		});
 	};
 	
+	$scope.getWeatherData = function () { // On DOM ready...
+
+	    // Set the hash to the yr.no URL we want to parse
+	    alert("Inside WeatherData");
+	       // var place = 'United_Kingdom/England/London';
+	        //place = 'France/Rhône-Alpes/Val_d\'Isère~2971074';
+	        //place = 'Norway/Sogn_og_Fjordane/Vik/Målset';
+	        var place = 'United_States/California/San_Francisco';
+	        //place = 'United_States/Minnesota/Minneapolis';
+	        location.hash = 'https://www.yr.no/place/' + place + '/forecast_hour_by_hour.xml';
+
+	    
+
+	    // Then get the XML file through Highcharts' jsonp provider, see
+	    // https://github.com/highcharts/highcharts/blob/master/samples/data/jsonp.php
+	    // for source code.
+	    $.getJSON(
+	        'https://www.highcharts.com/samples/data/jsonp.php?url=' + location.hash.substr(1) + '&callback=?',
+	        function (xml) {
+	            window.meteogram = new Meteogram(xml, 'container');
+	        }
+	    );
+
+	};
 	
 });
 	
