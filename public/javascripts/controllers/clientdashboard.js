@@ -128,6 +128,7 @@ wfms.controller("ClientDashboard", function($scope, $rootScope, $modal,
         loading: false
     }
 
+    
     $scope.clientPowerStatus = function(){
 		//alert("Power controller called");
 		DataService.getData("/api/t",[]).success(function(response){
@@ -157,10 +158,13 @@ wfms.controller("ClientDashboard", function($scope, $rootScope, $modal,
 		//var uri = urlConstants.GET_USER_DETAILS+$rootScope.userId;
 		DataService.getData("/api/getClientInfo/7",[]).success(function(response){
 			
-			//angular.toJson(response);
-			//console.log(response.data[0]);
+			console.log("Response" + response.data[0]);
 			$scope.clientProperties = response.data[0];
-			
+			$rootScope.userId = response.data[0].email;
+			$rootScope.userName = response.data[0].name;
+			$rootScope.userLastLogin = response.data[0].lastLogin;
+			$rootScope.city = response.data[0].city;
+			console.log("City: " + $rootScope.city);
 		}).error(function(err){
 			console.log(err.message);
 		});
@@ -169,16 +173,12 @@ wfms.controller("ClientDashboard", function($scope, $rootScope, $modal,
 	function getFutureData() {
 		DataService.postData("/api/getfutureWeather",[]).success(function(response){
 			
-			//angular.toJson(response);
 			console.log(response.data[0]);
-			
 			
 		}).error(function(err){
 			console.log(err.message);
 		});
-		
 	}
-	
 	
 	$scope.modifyClientInfo = function(data) {
 		console.log("did i get called");
@@ -205,20 +205,9 @@ wfms.controller("ClientDashboard", function($scope, $rootScope, $modal,
 	
 	$scope.getWeatherData = function () { // On DOM ready...
 
-	    // Set the hash to the yr.no URL we want to parse
-	    alert("Inside WeatherData");
-	       // var place = 'United_Kingdom/England/London';
-	        //place = 'France/Rh�ne-Alpes/Val_d\'Is�re~2971074';
-	        //place = 'Norway/Sogn_og_Fjordane/Vik/M�lset';
 	        var place = 'United_States/California/San_Francisco';
-	        //place = 'United_States/Minnesota/Minneapolis';
 	        location.hash = 'https://www.yr.no/place/' + place + '/forecast_hour_by_hour.xml';
 
-	    
-
-	    // Then get the XML file through Highcharts' jsonp provider, see
-	    // https://github.com/highcharts/highcharts/blob/master/samples/data/jsonp.php
-	    // for source code.
 	    $.getJSON(
 	        'https://www.highcharts.com/samples/data/jsonp.php?url=' + location.hash.substr(1) + '&callback=?',
 	        function (xml) {

@@ -1,10 +1,7 @@
 var loginController = require('./controllers/login');
 var clientController = require('./controllers/client');
-//var adminController = require('./controllers/admin');
-//var reportController = require('./controllers/report');
-//var alertController = require('./controllers/alert');
-//var guardController = require('./controllers/guard');
-//var buildingController = require('./controllers/building');
+var utilController = require('./controllers/util');
+var eventsController = require('./controllers/events');
 
 module.exports = function (app, passport) {
 
@@ -26,6 +23,13 @@ module.exports = function (app, passport) {
     app.get('/api/getClientInfo/:idperson', ensureAuthenticated, clientController.getClientInfo);
     app.get('/api/t', clientController.powerStatus);
     app.get('/graph', function(req,res){ res.render("googleCharts"); });
+    
+    //Util
+    app.get('/api/getLongLat/:city', ensureAuthenticated, utilController.getLongLat);
+    
+    //Events
+    app.get('/api/getEvents/:city', ensureAuthenticated, eventsController.getEvents);
+    
 
 //    // Admin
 //    //app.post('/api/createAlert' ,adminController.createAlert);
