@@ -97,7 +97,7 @@ module.exports = function (app, passport) {
         var file = req.params.file;
         res.render('templates/index/' + file);
     });
-
+ 
     //Auth Middleware
     
     function ensureAuthenticated(req, res, next) {
