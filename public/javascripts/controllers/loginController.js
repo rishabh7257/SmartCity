@@ -18,17 +18,15 @@ wfms.controller("LoginController", function($scope, $rootScope,
 	 		};
 	 		DataService.postData(urlConstants.LOGIN, params).success(
 	 				function(response) {
-	 					/*
-	 					 * For encrypting password at client side as well
-	 					 * $scope.pwd =
-	 					 * CryptoJS.SHA256($scope.pwd).toString(CryptoJS.enc.hex);
-						 */
+	 					
+	 					console.log("Response" + response.city);
 	 					$window.sessionStorage.userId = response.email;
 	 					$window.sessionStorage.userName = response.name;
 	 					$window.sessionStorage.userLastLogin = response.lastLogin;
 	 					$rootScope.userId = response.email;
 	 					$rootScope.userName = response.name;
 	 					$rootScope.userLastLogin = response.lastLogin;
+	 					$rootScope.city = response.city;
 	 					$location.path('/home');
 	 				}).error(function(err) {
 	 			$scope.signInFormError = err.message;

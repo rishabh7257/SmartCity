@@ -39,14 +39,11 @@ createClient = function(req,res){
 };
 
 powerStatus = function(req,res) {
-	console.log("inside powerStatus");
 	mysql.queryDb("select alertinfo.thresholdLevel, alertinfo.date from alertinfo WHERE date between date_sub(CURDATE(), INTERVAL 7 day) and CURDATE()",function(err,rows){
-	//mysql.queryDb("Select * from alertinfo",function(err,rows){
-		console.log("Inside powerStatus");
+	
 		if (err) {
 			res.status(500).json({ status : 500, message : "Error while retrieving data" });
 		} else {
-			console.log("Rows fetched");
 			res.status(200).json({ status : 200, data: rows });
 			}
 		});
@@ -92,20 +89,19 @@ getWeatherForecast = function(req,res) {
 
 getFutureWeather = function(req, res){
 
-	var options = {
-			APIKey: "d6fc86674f86842ceb0a9b550a0e8f28",
-			timeout: 1000
-	},
-	forecast = new Forecast(options);
-
-	forecast.get(37.766602,-122.45108, function (err, res, data) {
-		if (err) {
-			throw err;  
-		}
-		console.log(data);
-		dumpIntoMongo(data);
-
-	});
+//	var options = {
+//			APIKey: "d6fc86674f86842ceb0a9b550a0e8f28",
+//			timeout: 1000
+//	},
+//	forecast = new Forecast(options);
+//
+//	forecast.get(37.766602,-122.45108, function (err, res, data) {
+//		if (err) {
+//			throw err;  
+//		}
+//		dumpIntoMongo(data);
+//
+//	});
 };
 
 function dumpIntoMongo(data) {
@@ -131,7 +127,19 @@ function dumpIntoMongo(data) {
 		});
 	});
 }
-
+fetchOutageRecords = function(db, callback) {
+	   var cursor = db.collection('power_outages').find( );
+	   cursor.each(function(err, doc) {
+	      assert.equal(err, null);
+	      if (doc != null) {
+	         console.dir(doc);
+	      } else {
+	         callback();
+	      }
+	   });
+	};
+	
+exports.fetchOutageRecords = fetchOutageRecords;
 exports.getFutureWeather = getFutureWeather;
 
 exports.powerStatus = powerStatus; 
