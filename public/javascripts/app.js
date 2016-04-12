@@ -25,7 +25,7 @@ var wfms = angular.module("wfms", [ 'ngRoute', 'ui.bootstrap','highcharts-ng' ])
 	});
 
 })
-.run(['$rootScope','$window' ,'$location', 'DataService',function($rootScope,$window, $location,DataService) {
+.run(['$rootScope','$window' ,'$location',  'DataService',function($rootScope,$window, $location,DataService) {
 	$rootScope.$on('$routeChangeStart', function(event) {
 	});
 

@@ -16,20 +16,30 @@
 				</ol>
 			</div>
 		</div>
-		
-		<!-- High Chart for temerature variation -->
-		<!-- <div id="container" style="width:100%; height:400px;"></div> -->
- 		<!-- <input ng-model="highchartsNG.title.text">
-        <button ng-click="addSeries()">Add Series</button>
-        <button ng-click="addPoints()">Add Points to Random Series</button>
-        <button ng-click="removeRandomSeries()">Remove Random Series</button>
-        <button ng-click="swapChartType()">Line/Bar</button>
-		<highchart id="container1" config="chart2"></highchart>
-		
-		<highchart id="container" config="chart1" style="min-width: 310px; height: 400px; max-width: 600px; margin: 0 auto">
-		</highchart> -->
 
-		<!-- page start-->
-		
+		<table st-table="allEvents" class="table table-striped">
+			<thead>
+				<tr>
+					<th>Date</th>
+					<th>Time</th>
+					<th>Name</th>
+					<th>Address</th>
+					<th>City</th>
+					<th>Predicted Head Count</th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr ng-repeat="row in allEvents">
+					<td>{{row.date | date}}</td>
+					<td>{{row.time }}</td>
+					<td>{{row.name }}</td>
+					<td>{{row.address }}</td>
+					<td>{{row.city }}</td>
+					<td>{{row.predictedHeadCount }}</td>
+					
+				</tr>
+			</tbody>
+		</table>
+
 	</section>
 	<!--main content end-->

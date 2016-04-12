@@ -3,14 +3,14 @@ wfms.controller("ClientDashboard", function($scope, $rootScope, $modal,
 		$location, DataService) {
 
 	$rootScope.userType = "Hospital";
-	
+
 	$scope.getData = function() {
-		
+
 		clientInfo();
-		getFutureData();
-		
+		//getFutureData();
+
 	};
-	
+
 	$scope.addPoints = function () {
         var seriesArray = $scope.chart2.series
         var rndIdx = Math.floor(Math.random() * seriesArray.length);
@@ -37,7 +37,7 @@ wfms.controller("ClientDashboard", function($scope, $rootScope, $modal,
         type: 'line'
     }
 
-    
+
     $scope.swapChartType = function () {
         if (this.chart2.options.chart.type === 'line') {
             this.chart2.options.chart.type = 'bar'
@@ -45,7 +45,7 @@ wfms.controller("ClientDashboard", function($scope, $rootScope, $modal,
             this.chart2.options.chart.type = 'line'
         }
     }
-    
+
     $scope.chart1={
     		 options: {
                  chart: {
@@ -101,6 +101,7 @@ wfms.controller("ClientDashboard", function($scope, $rootScope, $modal,
              loading: false
 
     }
+    
     $scope.chart2 = {
         options: { 
             chart: {
@@ -150,21 +151,21 @@ wfms.controller("ClientDashboard", function($scope, $rootScope, $modal,
 			console.log(err.message);
 		});
 		//$scope.clientPowerStatus = response.data[0];
-		
 	}
 	
 	function clientInfo(){
-		
-		//var uri = urlConstants.GET_USER_DETAILS+$rootScope.userId;
-		DataService.getData("/api/getClientInfo/7",[]).success(function(response){
-			
-			console.log("Response" + response.data[0]);
+
+        //"/api/getClientInfo/7"
+		var uri = "/api/getClientInfo/" + $rootScope.idperson;
+		DataService.getData(uri,[]).success(function(response){
+            var data = response.data[0];
+			console.log(JSON.stringify(response,null, " "));
 			$scope.clientProperties = response.data[0];
 			$rootScope.userId = response.data[0].email;
 			$rootScope.userName = response.data[0].name;
 			$rootScope.userLastLogin = response.data[0].lastLogin;
 			$rootScope.city = response.data[0].city;
-			console.log("City: " + $rootScope.city);
+            $rootScope.postal = response.data[0].zipcode;
 		}).error(function(err){
 			console.log(err.message);
 		});
