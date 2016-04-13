@@ -1,5 +1,5 @@
 'use strict';
-var wfms = angular.module("wfms", [ 'ngRoute', 'ui.bootstrap','highcharts-ng' ])
+var wfms = angular.module("wfms", [ 'ngRoute', 'ui.bootstrap','highcharts-ng','nvd3' ])
 .config(function($routeProvider, $locationProvider) {
 	$routeProvider.when('/', {
 		templateUrl : 'templates/index.ejs',
