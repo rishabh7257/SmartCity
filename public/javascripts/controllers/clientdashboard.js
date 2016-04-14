@@ -7,7 +7,6 @@ wfms.controller("ClientDashboard", function($scope, $rootScope, $modal,
 	$scope.getData = function() {
 
 		clientInfo();
-<<<<<<< HEAD
 		getFutureData();
 
 	};
@@ -23,13 +22,11 @@ wfms.controller("ClientDashboard", function($scope, $rootScope, $modal,
         dp.setTransactionMode("POST", false);
     }
     	$scope.addPoints = function () {
-=======
 		//getFutureData();
 
 	};
 
 	$scope.addPoints = function () {
->>>>>>> 5e38244cb7a8ac265abfc94765dd2a97112df20d
         var seriesArray = $scope.chart2.series
         var rndIdx = Math.floor(Math.random() * seriesArray.length);
         seriesArray[rndIdx].data = seriesArray[rndIdx].data.concat([1, 10, 20])
@@ -63,8 +60,7 @@ wfms.controller("ClientDashboard", function($scope, $rootScope, $modal,
             this.chart2.options.chart.type = 'line'
         }
     }
-<<<<<<< HEAD
-=======
+
 
     $scope.chart1={
     		 options: {
@@ -148,7 +144,6 @@ wfms.controller("ClientDashboard", function($scope, $rootScope, $modal,
         },
         loading: false
     }
->>>>>>> 5e38244cb7a8ac265abfc94765dd2a97112df20d
 
    
     $scope.clientPowerStatus = function(){

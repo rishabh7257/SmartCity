@@ -21,9 +21,7 @@ module.exports = function (app, passport) {
     // Client
     app.get('/api/getClient/:idperson', ensureAuthenticated, clientController.getClient);
     app.get('/api/getClientInfo/:idperson', clientController.getClientInfo);
-    app.post('/api/getfutureWeather', clientController.getFutureWeather);
     app.get('/api/getClientInfo/:idperson', ensureAuthenticated, clientController.getClientInfo);
-    app.get('/api/t', clientController.powerStatus);
 
     app.get('/front', function(req,res){ res.render("front"); });
     //Modifying
