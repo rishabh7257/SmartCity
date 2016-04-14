@@ -7,6 +7,21 @@ wfms.controller("ClientDashboard", function($scope, $rootScope, $modal,
 	$scope.getData = function() {
 
 		clientInfo();
+		getFutureData();
+
+	};
+
+    $scope.initCal = function() {
+        scheduler.init('scheduler_here',new Date(2016,3,16),"month");
+
+        scheduler.templates.xml_date = function(value){ return new Date(value); };
+        scheduler.load("/data", "json");
+
+        var dp = new dataProcessor("/data");
+        dp.init(scheduler);
+        dp.setTransactionMode("POST", false);
+    }
+    	$scope.addPoints = function () {
 		//getFutureData();
 
 	};
@@ -45,6 +60,7 @@ wfms.controller("ClientDashboard", function($scope, $rootScope, $modal,
             this.chart2.options.chart.type = 'line'
         }
     }
+
 
     $scope.chart1={
     		 options: {
@@ -129,29 +145,28 @@ wfms.controller("ClientDashboard", function($scope, $rootScope, $modal,
         loading: false
     }
 
-    
-  //   $scope.clientPowerStatus = function(){
-		// //alert("Power controller called");
-		// DataService.getData("/api/t",[]).success(function(response){
-		// 	//alert("User Type" + $rootScope.userType);
-		// //c	alert("Data is"+response.data.length);
-		// 	for (var i = 0; i < response.data.length; i++) {
-		// 		if(($rootScope.userType=="Hospital" && response.data[i].thresholdLevel >1) ||
-		// 				($rootScope.userType=="Commercial" && response.data[i].thresholdLevel >5) ||
-		// 				($rootScope.userType=="Residential" && response.data[i].thresholdLevel >10))
-		// 				{
-		// 			$scope.powerStatus ="Red";
-		// 		}
-		// 		else {
-		// 			$scope.powerStatus ="Green";
-		// 		}
-		// 	}
-		// 	//$scope.powerStatus = response.data;
-		// }).error(function(err){
-		// 	console.log(err.message);
-		// });
-		// //$scope.clientPowerStatus = response.data[0];
-	//}
+
+    $scope.clientPowerStatus = function(){
+		DataService.getData("/api/t",[]).success(function(response){
+			//alert("User Type" + $rootScope.userType);
+		//c	alert("Data is"+response.data.length);
+			for (var i = 0; i < response.data.length; i++) {
+				if(($rootScope.userType=="Hospital" && response.data[i].thresholdLevel >1) ||
+						($rootScope.userType=="Commercial" && response.data[i].thresholdLevel >5) ||
+						($rootScope.userType=="Residential" && response.data[i].thresholdLevel >10))
+						{
+					$scope.powerStatus ="Red";
+				}
+				else {
+					$scope.powerStatus ="Green";
+				}
+			}
+			//$scope.powerStatus = response.data;
+		}).error(function(err){
+			console.log(err.message);
+		});
+		//$scope.clientPowerStatus = response.data[0];
+	}
 	
 	function clientInfo(){
 
@@ -204,6 +219,10 @@ wfms.controller("ClientDashboard", function($scope, $rootScope, $modal,
 		}, function() {
 		});
 	};
+	
+
+		
+		
 	
 	$scope.getWeatherData = function () { // On DOM ready...
             console.log("getWeatherData()");

@@ -6,14 +6,13 @@ wfms.controller("eventsController", function($scope, $rootScope, $modal,
 	$scope.getData = function() {
 
 		$scope.configureDynamicView();
-		//extractEvent();
 
 	};
 
 	$scope.configureDynamicView = function configureDynamicView() {
 
-		var url = "/api/getEventsByPostal/" + $rootScope.postal
-		//var url = "/api/getEventsByPostal/95126"
+		//var url = "/api/getEventsByPostal/" + $rootScope.postal
+		var url = "/api/getEventsByPostal/95126"
 		DataService.getData(url ,[]).success(function(response){
 			//$scope.events = response;
 			$scope.extractEvent(response);
@@ -44,7 +43,11 @@ wfms.controller("eventsController", function($scope, $rootScope, $modal,
 		}
 
 		$scope.allEvents = eventArray
+		$scope.series();
 		console.log(JSON.stringify($scope.allEvents));
+		if (Number.isNaN(100)) {
+			console.log("Number");
+		}
 
 	}
 
@@ -70,23 +73,78 @@ wfms.controller("eventsController", function($scope, $rootScope, $modal,
 	}
 
 	$scope.getDate = function getDate(dateTime) {
-		return dateTime.slice(0,10)
-
+		return dateTime.slice(0,10);
 	}
-
-//		return $filter('date')(dateTime,'dd/MM/yyyy')
 
 	$scope.getTime = function getTime(dateTime) {
 		return dateTime.slice(11,16)
 	}
 
+	$scope.series = function series() {
+		var allData = $scope.allEvents;
+		var seriesData = []
+		allData.forEach(
+    		function(e){
+    			if(!seriesData[e.date]) {
+    				if (e.predictedHeadCount > 0) {
+    					seriesData[e.date] = e.predictedHeadCount	
+    				}
+    			} else {
+    				if (e.predictedHeadCount > 0) {
+    					seriesData[e.date] = seriesData[e.date] + e.predictedHeadCount	
+    				}
+    			}
+    		}
+		);	
+		var final = [];
+		for (var eventNew in seriesData) {
+			var temp = {
+				key : eventNew,
+				y : seriesData[eventNew]
+			}
+		final.push(temp)
+		}
 	
+		$scope.seriesData = final
+		
+		 $scope.options = {
 
-    $scope.removeRow = function removeRow(row) {
-        var index = scope.rowCollection.indexOf(row);
-        if (index !== -1) {
-            scope.rowCollection.splice(index, 1);
-        }
-    }
+		 	title: {
+        		enable: true,
+        		text: 'Electricity usage for next one Week'
+    		},
+
+		    // subtitle options
+		    subtitle: {
+		        enable: true,
+		        text: 'Depicts Electricity consumption for next week',
+		        css: {
+		            'text-align': 'center',
+		            'margin': '10px 13px 0px 7px'
+		        }
+		    },
+            chart: {
+                type: 'pieChart',
+                height: 500,
+                x: function(d){return d.key;},
+                y: function(d){return d.y;},
+                showLabels: true,
+                duration: 500,
+                labelThreshold: 0.01,
+                labelType : 'percent',
+                labelSunbeamLayout: true,
+                // legend: {
+                //     margin: {
+                //         top: 5,
+                //         right: 35,
+                //         bottom: 5,
+                //         left: 0
+                //     }
+                // }
+            }
+        };
+        $scope.data = $scope.seriesData
+	}
 
 });
+

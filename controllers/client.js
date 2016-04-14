@@ -38,12 +38,43 @@ createClient = function(req,res){
 	}
 };
 
+
+createUserEvents = function(req,res) {
+	var db = mongo.getMongoConnection();
+
+	db.open(function (err, db) {
+		db.authenticate('username', 'password', function (err) {
+			if (err) {
+				throw err;
+			} else {
+				db.collection('user_events', function (err, collection) {
+
+					collection.insert(({
+						text:"My test event A",
+						start_date: new Date(2016,4,4),
+						end_date:   new Date(2016,4,4)
+					}), function (err, res) {
+						if (err) {
+							throw err;
+						} else {
+							console.log('inserted into user events');
+						}
+						db.close();
+					});
+				});
+			}
+		});
+	});
+
+}
 powerStatus = function(req,res) {
+
 	mysql.queryDb("select alertinfo.thresholdLevel, alertinfo.date from alertinfo WHERE date between date_sub(CURDATE(), INTERVAL 7 day) and CURDATE()",function(err,rows){
 
 		if (err) {
 			res.status(500).json({ status : 500, message : "Error while retrieving data" });
 		} else {
+			console.log(rows);
 			res.status(200).json({ status : 200, data: rows });
 			}
 		});
@@ -69,7 +100,7 @@ getClient=function(req,res){
 
 getClientInfo=function(req,res){
 	idperson = req.params.idperson;
-mysql.queryDb('SELECT * FROM person WHERE ?',[{idperson:idperson}],function(err,rows){
+    mysql.queryDb('SELECT * FROM person WHERE ?',[{idperson:idperson}],function(err,rows){
 	if (err) {
 		console.log("Error while listing all the client details !!!"  + err);
 		res.status(500).json({ status : 500, message : "Error while listing client details !!!" });
@@ -86,47 +117,69 @@ getWeatherForecast = function(req,res) {
 }
 
 
-getFutureWeather = function(req, res){
 
-//	var options = {
-//			APIKey: "d6fc86674f86842ceb0a9b550a0e8f28",
-//			timeout: 1000
-//	},
-//	forecast = new Forecast(options);
-//
-//	forecast.get(37.766602,-122.45108, function (err, res, data) {
-//		if (err) {
-//			throw err;
-//		}
-//		dumpIntoMongo(data);
-//
-//	});
-};
-
-function dumpIntoMongo(data) {
+getUserEvents = function(req,res) {
 	var db = mongo.getMongoConnection();
-	db.open(function(err, db) {
-		db.authenticate('username', 'password', function(err) {
+	//console.log(customerImpacted);
+	db.open(function (err, db) {
+		db.authenticate('username', 'password', function (err, result) {
+			var docs = "INTIAL DOCS";
 			if (err) {
 				throw err;
 			} else {
-				db.collection('future_weather', function(err, collection) {
-					collection.insert(data, function(err, res) {
-						if (err) {
-							throw err;
-						} else {
-							console.log('inserted');
-						}
-						db.close();
-					});
+				db.collection('user_events').find().toArray(function(err, data){
+					//set id property for all records
+					for (var i = 0; i < data.length; i++)
+						data[i].id = data[i]._id;
+
+					console.log("Events found" +data);
+					res.send(data);
 				});
 			}
+
 		});
+
 	});
+
 }
 
-exports.getFutureWeather = getFutureWeather;
 
-exports.powerStatus = powerStatus;
+addUserEvents = function(req,res) {
+	var data = req.body;
+	var mode = data["!nativeeditor_status"];
+	var sid = data.id;
+	var tid = sid;
+
+	delete data.id;
+	delete data.gr_id;
+	delete data["!nativeeditor_status"];
+
+
+	function update_response(err, result){
+		if (err)
+			mode = "error";
+		else if (mode == "inserted")
+			tid = data._id;
+
+		res.setHeader("Content-Type","text/xml");
+		res.send("<data><action type='"+mode+"' sid='"+sid+"' tid='"+tid+"'/></data>");
+	}
+
+	if (mode == "updated")
+		db.user_events.updateById( sid, data, update_response);
+	else if (mode == "inserted")
+		db.user_events.insert(data, update_response);
+	else if (mode == "deleted")
+		db.user_events.removeById( sid, update_response);
+	else
+		res.send("Not supported operation");
+}
+
+
+
 exports.getClient = getClient;
 exports.getClientInfo=getClientInfo;
+exports.createUserEvents=createUserEvents;
+exports.getUserEvents = getUserEvents;
+exports.addUserEvents = addUserEvents;
+exports.powerStatus = powerStatus;

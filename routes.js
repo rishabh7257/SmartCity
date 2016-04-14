@@ -2,6 +2,8 @@ var loginController = require('./controllers/login');
 var clientController = require('./controllers/client');
 var utilController = require('./controllers/util');
 var eventsController = require('./controllers/events');
+var historyController = require('./controllers/tibco');
+var calendarController = require('./controllers/calendar');
 
 module.exports = function (app, passport) {
 
@@ -19,9 +21,21 @@ module.exports = function (app, passport) {
     // Client
     app.get('/api/getClient/:idperson', ensureAuthenticated, clientController.getClient);
     app.get('/api/getClientInfo/:idperson', clientController.getClientInfo);
-    app.post('/api/getfutureWeather', clientController.getFutureWeather);
+    app.get('/api/t/', clientController.powerStatus);
+
     app.get('/api/getClientInfo/:idperson', ensureAuthenticated, clientController.getClientInfo);
-    app.get('/api/t', clientController.powerStatus);
+
+    app.get('/front', function(req,res){ res.render("front"); });
+    //Modifying
+    app.get('/api/getPowerOutage',historyController.getPowerOutage);
+    app.get('/api/getOutagesByArea',historyController.getOutagesByArea);
+
+    app.get('/api/getOutagesByCause',historyController.getOutagesByCause);
+
+    app.get('/api/createUserEvents',calendarController.createUserEvents);
+    app.get('/data',calendarController.getUserEvents);
+    app.post('/data',calendarController.addUserEvents)
+
     app.get('/graph', function(req,res){ res.render("googleCharts"); });
 
     //Util
@@ -105,7 +119,7 @@ module.exports = function (app, passport) {
         var file = req.params.file;
         res.render('templates/index/' + file);
     });
-
+ 
     //Auth Middleware
 
     function ensureAuthenticated(req, res, next) {
