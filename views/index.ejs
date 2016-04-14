@@ -30,12 +30,17 @@
 
 <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>  
  <script type="text/javascript"
-	src="javascripts/weatherData.js"></script> 
+	src="javascripts/weatherData.js"></script>
+    <script src="https://d3js.org/d3.v3.min.js" charset="utf-8"></script>
+    <!-- For Calendar-->
+    <script src="codebase/dhtmlxscheduler.js" type="text/javascript" charset="utf-8"></script>
 <!--Socket IO JS-->
 <!-- <script src='http://localhost:3000/socket.io/socket.io.js'></script>
 <script type="text/javascript" src="http://pubnub.github.io/eon/v/eon/0.0.9/eon.js"></script>
 <link type="text/css" rel="stylesheet" href="http://pubnub.github.io/eon/v/eon/0.0.9/eon.css" /> -->
-
+<!-- <meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="http://www.w3schools.com/lib/w3.css">
+ -->
 
 
 <!-- Bootstrap CSS -->    
@@ -66,7 +71,11 @@
 <link href='http://fonts.googleapis.com/css?family=Lato:300,400,700,900' rel='stylesheet' type='text/css'>
 <link href="css/style1.css" rel="stylesheet" type="text/css" media="all"/>
     <link href="https://netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.css" rel="stylesheet">
- <!-- -->
+ <link rel="stylesheet" href="http://www.w3schools.com/lib/w3.css">
+
+    <link rel="stylesheet" href="codebase/dhtmlxscheduler.css" type="text/css" media="screen" title="no title" charset="utf-8">
+
+    <!-- -->
 <!--Application CSS-->
  <!--  <link rel="stylesheet" type="text/css" href="css/main.css">-->
 
@@ -92,6 +101,10 @@
 <script type="text/javascript"
   src="javascripts/controllers/clientdashboard.js"></script>
 
+    <script type="text/javascript"
+            src="javascripts/controllers/historyAnalysis.js"></script>
+    <script type="text/javascript"
+            src="javascripts/controllers/userEvents.js"></script>
 <script type="text/javascript"
   src="javascripts/controllers/eventsController.js"></script>
 
@@ -155,11 +168,18 @@
 	<script src="js/charts.js"></script>
 	<script src="js/jquery.slimscroll.min.js"></script>
     
-    <!-- High Chart-->
-    <script src="http://code.highcharts.com/highcharts.src.js"></script>
-    <script src="https://rawgit.com/pablojim/highcharts-ng/master/dist/highcharts-ng.js"></script>
 
+  <!-- High Chart-->
+  <script src="http://code.highcharts.com/highcharts.src.js"></script>
+  <script src="https://rawgit.com/pablojim/highcharts-ng/master/dist/highcharts-ng.js"></script>
+    <script src="https://code.highcharts.com/modules/exporting.js"></script>
 
+    <!--NVD3 Chart-->
+  <meta charset="utf-8">  <!-- it's important for d3.js -->
+  <script src="bower_components/d3/d3.js"></script>
+  <script src="bower_components/nvd3/build/nv.d3.js"></script> <!-- or use another assembly -->
+  <script src="bower_components/angular-nvd3/dist/angular-nvd3.js"></script>
+  <link rel="stylesheet" href="bower_components/nvd3/nv.d3.css">
   <script>
 
       //knob

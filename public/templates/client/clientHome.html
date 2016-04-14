@@ -16,6 +16,144 @@
 					<li><i class="fa fa-user-md"></i>Profile</li>
 				</ol>
 			</div>
+
+              <div class="row">
+                <!-- profile-widget -->
+                <div class="col-lg-12">
+                    <div class="profile-widget profile-widget-info">
+                          <div class="panel-body">
+                            <div class="col-lg-2 col-sm-2">
+                                           
+                              <div class="follow-ava">
+                                  <img src="img/clientlogo.jpeg" alt="">
+                              </div>
+                              <h6>Client</h6>
+                            </div>
+                            <div class="col-lg-4 col-sm-4 follow-info">
+                                <p>{{clientProperties.fname}} {{clientProperties.lname}}</p>
+								<p><i class="fa fa-twitter">{{clientProperties.email}}</i></p>
+                                <h6>
+                                    <span><i class="icon_clock_alt"></i>Last Login: 11:05 AM {{lastlogin}}</span>
+                                   
+                                </h6>
+                            </div>
+                            <div class="col-lg-2 col-sm-6 follow-info weather-category">
+                                      <ul>
+                                          <li class="active">
+                                              
+                                              <i class="fa fa-comments fa-2x"> </i><br>
+											  
+										Number of Building
+                                          </li>
+										   
+                                      </ul>
+                            </div>
+							<div class="col-lg-2 col-sm-6 follow-info weather-category">
+                                      <ul>
+                                          <li class="active">
+                                              
+                                              <i class="fa fa-bell fa-2x"> </i><br>
+											  
+											 Number of Guards 
+                                          </li>
+										   
+                                      </ul>
+                            </div>
+							<div class="col-lg-2 col-sm-6 follow-info weather-category">
+                                      <ul>
+                                          <li class="active">
+                                              
+                                              <i class="fa fa-tachometer fa-2x"> </i><br>
+											  
+											Balance Due $
+                                          </li>
+										   
+                                      </ul>
+                            </div>
+                          </div>
+                    </div>
+                </div>
+              </div>
+           <!--   <div id="container" style="width: 800px; height: 310px; margin: 0 auto">
+ -->     
+  <div id ="chartsDiv" ng-controller= "ClientDashboard" ><div style="margin-top: 100px; text-align: center" id="loading">
+   
+        <button ng-click="getWeatherData()">Get Weather Data</button> 
+    </div> </div> 
+              <!-- page start-->
+              <div class="row">
+                 <div class="col-lg-12">
+                    <section class="panel">
+                       
+                     
+						
+						
+						<!--  I have added here -->
+						                                           <!-- profile -->
+                                  <div id="profile" class="tab-pane">
+                                    <section class="panel">
+                                    <!--   <div class="bio-graph-heading">
+                                              Your Information
+                                      </div> -->
+                                      <div class="panel-body bio-graph-info">
+                                          <h1>Bio Graph</h1>
+                                          <div class="row">
+                                              <div class="bio-row">
+                                                  <p><span>First Name </span>: {{clientProperties.fname}} </p>
+                                              </div>
+                                              <div class="bio-row">
+                                                  <p><span>Last Name </span>: {{clientProperties.lname}} </p>
+                                              </div>                                              
+                                              <div class="bio-row">
+                                                  <p><span>Address</span>: {{clientProperties.address}}</p>
+                                              </div>
+                                             
+                                              <div class="bio-row">
+                                                  <p><span>ZipCode </span>: {{clientProperties.zipcode}} </p>
+                                              </div>
+                                               <div class="bio-row">
+                                                  <p><span>City </span>:  {{clientProperties.city}}</p>
+                                              </div>
+                                              
+                                              <div class="bio-row">
+                                                  <p><span>Mobile </span>: {{clientProperties.phonenumber}} </p>
+                                              </div>
+                                             
+                                             <div class="bio-row">
+                                                  <p><span>Email </span>:{{clientProperties.email}} </p>
+                                              </div>
+                                          </div>
+                                      </div>
+							            <div ng-controller = "ClientDashboard" ng-init="clientPowerStatus()">
+							            
+							            Power Outage Status:
+							           {{powerStatus}}
+							            <div ng-if="powerStatus=='Red'">
+							           <div class="w3-card-24 w3-red" style ="width: 150px;
+  height: 100px;
+  margin: 16px;
+  padding: 16px"><p>Power Outage predicted in next week</p></div></div>
+   <div ng-if="powerStatus=='Yellow'">
+   <div class="w3-card-24 w3-yellow" style ="width: 150px;
+  height: 100px;
+  margin: 16px;
+  padding: 16px"><p>Maintenance in Progres </p></div></div>
+   <div ng-if="{{powerStatus}}=='Green'">
+   <div class="w3-card-24 w3-green" style ="width: 150px;
+  height: 100px;
+  margin: 16px;
+  padding: 16px"><p>No Outages and maintenance needed</p></div></div>
+
+</div>
+							            </div>
+						                     </section>
+                                      <section>
+                                          <div class="row">                                              
+                                          </div>
+                                      </section>
+                                      <div class="panel-footer text-center">
+							<button class="btn btn-primary" ng-click="modifyClientInfo()">Edit Information</button>
+
 		</div>
 		
 
@@ -49,11 +187,14 @@
 								<img src="img/clientlogo.jpeg" alt="">
 							</div>
 							<h6>Client</h6>
+
 						</div>
 					</div>
 				</div>
 			</div>
 		</div>
+
+		
 
 		<!-- page start-->
 		<div class="row">
@@ -129,6 +270,7 @@
 		
 		<highchart id="container" config="chart1" style="min-width: 310px; height: 400px; max-width: 600px; margin: 0 auto">
 		</highchart>
+
 
 				</section>
 	</section>

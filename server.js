@@ -45,3 +45,13 @@ mysql.createConnPool();
 app.listen(app.get('port'), function() {
     console.log('%s: Node server started on %d ...', Date(Date.now()), app.get('port'));
 });
+
+//Test code...will move in separate JS -- Pooja
+
+
+
+    /*... skipping similar code for other test events...*/
+
+
+
+
