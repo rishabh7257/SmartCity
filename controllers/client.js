@@ -68,11 +68,13 @@ createUserEvents = function(req,res) {
 
 }
 powerStatus = function(req,res) {
+
 	mysql.queryDb("select alertinfo.thresholdLevel, alertinfo.date from alertinfo WHERE date between date_sub(CURDATE(), INTERVAL 7 day) and CURDATE()",function(err,rows){
 
 		if (err) {
 			res.status(500).json({ status : 500, message : "Error while retrieving data" });
 		} else {
+			console.log(rows);
 			res.status(200).json({ status : 200, data: rows });
 			}
 		});
@@ -180,4 +182,4 @@ exports.getClientInfo=getClientInfo;
 exports.createUserEvents=createUserEvents;
 exports.getUserEvents = getUserEvents;
 exports.addUserEvents = addUserEvents;
-
+exports.powerStatus = powerStatus;
