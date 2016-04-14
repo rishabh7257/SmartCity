@@ -5,6 +5,7 @@
 	ng-init="getData()">
 
 	<section class="wrapper">
+		
 		<div class="row">
 			<div class="col-lg-12">
 				<h3 class="page-header">
@@ -16,7 +17,28 @@
 				</ol>
 			</div>
 		</div>
-		<div class="row">
+		
+
+<div class="row">
+			<div class="col-lg-12">
+				<h3 class="page-header">
+					<i class="fa fa-user-md"></i> Weather Summary
+				</h3>
+				
+					<div id="chartsDiv" ng-controller="ClientDashboard" ng-init= "getWeatherData()">
+								<div style="margin-top: 100px; text-align: center" id="loading">
+									<i class="fa fa-spinner fa-spin"></i>
+
+								<div>Load Data !!! 	</div>
+
+							</div>
+						</div>
+					
+			</div>
+		</div>
+
+
+<div class="row">
 			<!-- profile-widget -->
 			<div class="col-lg-12">
 				<div class="profile-widget profile-widget-info">
@@ -32,17 +54,6 @@
 				</div>
 			</div>
 		</div>
-		<!-- High Chart for temerature variation -->
-		<!-- <div id="container" style="width:100%; height:400px;"></div> -->
- 		<input ng-model="highchartsNG.title.text">
-        <button ng-click="addSeries()">Add Series</button>
-        <button ng-click="addPoints()">Add Points to Random Series</button>
-        <button ng-click="removeRandomSeries()">Remove Random Series</button>
-        <button ng-click="swapChartType()">Line/Bar</button>
-		<highchart id="container1" config="chart2"></highchart>
-		
-		<highchart id="container" config="chart1" style="min-width: 310px; height: 400px; max-width: 600px; margin: 0 auto">
-		</highchart>
 
 		<!-- page start-->
 		<div class="row">
@@ -96,24 +107,29 @@
 									</div>
 								</div>
 							</div>
-							<div ng-controller="ClientDashboard"
-								ng-init="clientPowerStatus()">Power Outage Status:
-								{{powerStatus}}</div>
 						</section>
 						<section>
 							<div class="row"></div>
 						</section>
+
+
 						<div class="panel-footer text-center">
 							<button class="btn btn-primary" ng-click="modifyClientInfo()">Edit
 								Information</button>
-
-							<div id="chartsDiv" ng-controller="ClientDashboard">
-								<div style="margin-top: 100px; text-align: center" id="loading">
-									<i class="fa fa-spinner fa-spin"></i>
-									<button ng-click="getWeatherData()"></button>
-									Loading data from external source
-								</div>
 							</div>
+
+						<!-- High Chart for temerature variation -->
+		<!-- <div id="container" style="width:100%; height:400px;"></div> -->
+ 		<input ng-model="highchartsNG.title.text">
+        <button ng-click="addSeries()">Add Series</button>
+        <button ng-click="addPoints()">Add Points to Random Series</button>
+        <button ng-click="removeRandomSeries()">Remove Random Series</button>
+        <button ng-click="swapChartType()">Line/Bar</button>
+		<highchart id="container1" config="chart2"></highchart>
+		
+		<highchart id="container" config="chart1" style="min-width: 310px; height: 400px; max-width: 600px; margin: 0 auto">
+		</highchart>
+
 				</section>
 	</section>
 	<!--main content end-->

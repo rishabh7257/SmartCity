@@ -42,6 +42,8 @@ wfms.controller("ShowClientRegisController", function($scope, $rootScope, $modal
 					$rootScope.email = response.email;
 					$rootScope.lastLogin = response.lastLogin;
 
+
+
 					console.log("window element:" + $window.sessionStorage.idperson);
 										console.log("ziocdeo:" + response.zipcode);
 
@@ -54,7 +56,13 @@ wfms.controller("ShowClientRegisController", function($scope, $rootScope, $modal
 					$window.sessionStorage.lname = response.lname;
 					$window.sessionStorage.email = response.email;
 					$window.sessionStorage.lastLogin = response.lastLogin;
-					
+					$window.sessionStorage.city = response.city;
+					$window.sessionStorage.state = response.state;
+					$window.sessionStorage.country = response.country;
+
+					console.log("city: "+$window.sessionStorage.city);
+					console.log("state: "+$window.sessionStorage.state);
+
 					$rootScope.type = $window.sessionStorage.type;
 					$rootScope.lastLogin = $window.sessionStorage.lastLogin;
 					$rootScope.idclient = $window.sessionStorage.idclient;
@@ -63,6 +71,8 @@ wfms.controller("ShowClientRegisController", function($scope, $rootScope, $modal
 					$rootScope.fname = $window.sessionStorage.fname;
 					$rootScope.email = $window.sessionStorage.email;
 					$rootScope.postal = response.zipcode;
+					$rootScope.city = response.city;
+					$rootScope.state = response.state;
 					console.log("idperson:" + $rootScope.idperson );
 					console.log("zipcode:" + $rootScope.postal );
 

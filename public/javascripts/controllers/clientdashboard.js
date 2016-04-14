@@ -1,6 +1,6 @@
 'use strict';
 wfms.controller("ClientDashboard", function($scope, $rootScope, $modal,
-		$location, DataService) {
+		$location, DataService, $window) {
 
 	$rootScope.userType = "Hospital";
 
@@ -130,28 +130,28 @@ wfms.controller("ClientDashboard", function($scope, $rootScope, $modal,
     }
 
     
-    $scope.clientPowerStatus = function(){
-		//alert("Power controller called");
-		DataService.getData("/api/t",[]).success(function(response){
-			//alert("User Type" + $rootScope.userType);
-		//c	alert("Data is"+response.data.length);
-			for (var i = 0; i < response.data.length; i++) {
-				if(($rootScope.userType=="Hospital" && response.data[i].thresholdLevel >1) ||
-						($rootScope.userType=="Commercial" && response.data[i].thresholdLevel >5) ||
-						($rootScope.userType=="Residential" && response.data[i].thresholdLevel >10))
-						{
-					$scope.powerStatus ="Red";
-				}
-				else {
-					$scope.powerStatus ="Green";
-				}
-			}
-			//$scope.powerStatus = response.data;
-		}).error(function(err){
-			console.log(err.message);
-		});
-		//$scope.clientPowerStatus = response.data[0];
-	}
+  //   $scope.clientPowerStatus = function(){
+		// //alert("Power controller called");
+		// DataService.getData("/api/t",[]).success(function(response){
+		// 	//alert("User Type" + $rootScope.userType);
+		// //c	alert("Data is"+response.data.length);
+		// 	for (var i = 0; i < response.data.length; i++) {
+		// 		if(($rootScope.userType=="Hospital" && response.data[i].thresholdLevel >1) ||
+		// 				($rootScope.userType=="Commercial" && response.data[i].thresholdLevel >5) ||
+		// 				($rootScope.userType=="Residential" && response.data[i].thresholdLevel >10))
+		// 				{
+		// 			$scope.powerStatus ="Red";
+		// 		}
+		// 		else {
+		// 			$scope.powerStatus ="Green";
+		// 		}
+		// 	}
+		// 	//$scope.powerStatus = response.data;
+		// }).error(function(err){
+		// 	console.log(err.message);
+		// });
+		// //$scope.clientPowerStatus = response.data[0];
+	//}
 	
 	function clientInfo(){
 
@@ -164,6 +164,7 @@ wfms.controller("ClientDashboard", function($scope, $rootScope, $modal,
 			$rootScope.userId = response.data[0].email;
 			$rootScope.userName = response.data[0].name;
 			$rootScope.userLastLogin = response.data[0].lastLogin;
+           // $rootScope.city = response.data[0].address;
 			$rootScope.city = response.data[0].city;
             $rootScope.postal = response.data[0].zipcode;
 		}).error(function(err){
@@ -186,11 +187,11 @@ wfms.controller("ClientDashboard", function($scope, $rootScope, $modal,
 
 		var modalInstance = $modal.open({
 			templateUrl : 'templates/client/editClientInformation.html',
-			controller : 'EditBuildingCtrl',
+			controller : 'EditClientProfileCtrl',
 			size : 'lg',
 			resolve : {
 				isEdit : function(){
-					return data;
+					return  $scope.clientProperties
 				}
 		
 			}
@@ -198,19 +199,34 @@ wfms.controller("ClientDashboard", function($scope, $rootScope, $modal,
 
 		modalInstance.result.then(function(isValid) {
 			if (isValid) {
-				getBuilding();
+                clientInfo();
 			}
 		}, function() {
 		});
 	};
 	
 	$scope.getWeatherData = function () { // On DOM ready...
+            console.log("getWeatherData()");
+            var country = $window.sessionStorage.country.replace(/ /g, '_');;
+            // var city = $rootScope.city;
+            // var state = $rootScope.state;
+            var state = $window.sessionStorage.state.replace(/ /g, '_');
+            var city = $window.sessionStorage.city.replace(/ /g, '_');
 
-	        var place = 'United_States/California/San_Francisco';
-	        location.hash = 'https://www.yr.no/place/' + place + '/forecast_hour_by_hour.xml';
+            console.log("state: "+state);
+            console.log("city: "+city);
+            console.log("country: "+country);
+
+	        //var place = 'United_States/'+state+city;
+            //location.hash = 'https://www.yr.no/place/' + place + '/forecast_hour_by_hour.xml';
+            //var location = 'https:%2F%2Fwww.yr.no%2Fplace%2FUnited_States%2FCalifornia%2FSan_Jose%2Fforecast_hour_by_hour.xml' ; 
+//https:%2F%2Fwww.yr.no%2Fplace%2FNew_York%2FNew_York County%2FManhattan%2Fforecast_hour_by_hour.xml
+            var location = 'https:%2F%2Fwww.yr.no%2Fplace%2F'+country+'%2F'+state+'%2F'+city+'%2F'+'forecast_hour_by_hour.xml' ; 
+            console.log("location.hash: "+location);
+           // console.log("location.hash.substr(1): "+ location.hash.substr(1));
 
 	    $.getJSON(
-	        'https://www.highcharts.com/samples/data/jsonp.php?url=' + location.hash.substr(1) + '&callback=?',
+	        'https://www.highcharts.com/samples/data/jsonp.php?url=' + location + '&callback=?',
 	        function (xml) {
 	            window.meteogram = new Meteogram(xml, 'container');
 	        }
