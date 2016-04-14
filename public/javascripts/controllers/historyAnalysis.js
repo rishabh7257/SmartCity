@@ -14,7 +14,6 @@ wfms.controller("HistoryAnalysis", function($scope, $rootScope, $modal,
 
     $scope.outagesByArea = function () {
 
-        alert("Inside OutagesByArea");
         DataService.getData("/api/getOutagesByArea", []).success(function (response) {
             //alert("User Type" + $rootScope.userType);
             //c	alert("Data is"+response.data.length);
@@ -85,7 +84,6 @@ wfms.controller("HistoryAnalysis", function($scope, $rootScope, $modal,
 
     $scope.outagesByCause = function () {
 
-        alert("Inside OutagesByArea");
         DataService.getData("/api/getOutagesByCause", []).success(function (response) {
             
             $scope.pieChart2 = {
@@ -171,7 +169,6 @@ wfms.controller("HistoryAnalysis", function($scope, $rootScope, $modal,
              var xAxis =[];
              xAxis.push($scope.chartData[i].name);
              }*/
-            alert("X Axis array" + $scope.xAxis);
             $scope.chart2 = {
                 options: {
                     chart: {

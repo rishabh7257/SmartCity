@@ -147,7 +147,6 @@ wfms.controller("ClientDashboard", function($scope, $rootScope, $modal,
 
    
     $scope.clientPowerStatus = function(){
-		//alert("Power controller called");
 		DataService.getData("/api/t",[]).success(function(response){
 			//alert("User Type" + $rootScope.userType);
 		//c	alert("Data is"+response.data.length);
