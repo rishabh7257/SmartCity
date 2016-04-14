@@ -109,12 +109,13 @@ exports.checkLogin = function(req, res, next) {
             }
           });
             
-            mysql.queryDb("select fname, lname from person where ?",[{idperson:user.idperson}],function(err,result){
+            mysql.queryDb("select fname, lname, zipcode from person where ?",[{idperson:user.idperson}],function(err,result){
                 if(err) {
                     console.log(err);
                     res.status(500).json({status:500,message : "Please try again later"});
                 } else {
-                    res.status(200).json({status:200, idperson:user.idperson, email:user.username, name : result[0].fname  + ' ' + result[0].lname, lastLogin:last_login});
+                  console.log(result[0].zipcode);
+                    res.status(200).json({status:200, zipcode : result[0].zipcode, idperson:user.idperson, email:user.username, name : result[0].fname  + ' ' + result[0].lname, lastLogin:last_login});
                 }
             });            
         });

@@ -69,7 +69,7 @@ createUserEvents = function(req,res) {
 }
 powerStatus = function(req,res) {
 	mysql.queryDb("select alertinfo.thresholdLevel, alertinfo.date from alertinfo WHERE date between date_sub(CURDATE(), INTERVAL 7 day) and CURDATE()",function(err,rows){
-	
+
 		if (err) {
 			res.status(500).json({ status : 500, message : "Error while retrieving data" });
 		} else {
@@ -109,29 +109,13 @@ getClientInfo=function(req,res){
 };
 
 getWeatherForecast = function(req,res) {
-	
+
 	var cityName = req.params.city;
-	
-	
+
 }
 
 
-getFutureWeather = function(req, res){
 
-	var options = {
-			APIKey: "d6fc86674f86842ceb0a9b550a0e8f28",
-			timeout: 1000
-	},
-	forecast = new Forecast(options);
-
-	forecast.get(37.766602,-122.45108, function (err, res, data) {
-		if (err) {
-			throw err;
-		}
-		dumpIntoMongo(data);
-
-	});
-};
 getUserEvents = function(req,res) {
 	var db = mongo.getMongoConnection();
 	//console.log(customerImpacted);
@@ -190,31 +174,7 @@ addUserEvents = function(req,res) {
 }
 
 
-function dumpIntoMongo(data) {
-	var db = mongo.getMongoConnection();
-	db.open(function (err, db) {
-		db.authenticate('username', 'password', function (err) {
-			if (err) {
-				throw err;
-			} else {
-			  	db.collection('future_weather', function (err, collection) {
 
-					collection.insert(data, function (err, res) {
-						if (err) {
-							throw err;
-						} else {
-							console.log('inserted');
-						}
-						db.close();
-					});
-				});
-			}
-		});
-	});
-}
-	
-exports.getFutureWeather  = getFutureWeather;
-exports.powerStatus = powerStatus; 
 exports.getClient = getClient;
 exports.getClientInfo=getClientInfo;
 exports.createUserEvents=createUserEvents;

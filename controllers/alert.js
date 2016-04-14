@@ -27,8 +27,8 @@ createAlert = function(req,res){
 			}
 		});
 	}
-	
-	
+
+
 }
 
 alertPerBuilding = function(req,res){
@@ -71,7 +71,7 @@ seenByClient = function(req,res){
 
 	console.log(JSON.stringify(req.body));
 	console.log("This Api will be for changing the status of seenBy client");
-	
+
 	if(!req.body.idalertInfo || !req.body.seenByClient){
 		res.status(400).json({status : 400, message : "Bad Request"});
 	} else {
@@ -87,7 +87,7 @@ seenByClient = function(req,res){
 };
 
 alertPerDay = function(req,res){
-	
+
 	console.log("This Api is for creating report based on date");
 	if(!req.params.date){
 		res.status(400).json({status : 400, message : "Bad Request"});
@@ -97,18 +97,18 @@ alertPerDay = function(req,res){
 		console
 		var untilDate = String(req.params.date);
 		untilDate = untilDate + " 23:59:59";
-		
+
 		mysql.queryDb("SELECT * FROM wfms.alertinfo where ?? LIKE '"+date+"%'",['date'], function(err, resultAlert) {
 			if (err) {
 				console.log("Error while perfoming query !!!");
 				res.status(500).json({ status : 500, message : "Please try again later" });
 			} else {
-				
+
 				res.status(200).json({ status : 200, message : "Report for Patrol", resultAlert:resultAlert});
 			}
 		});
 	}
-	
+
 }
 
 
@@ -122,14 +122,14 @@ activeAdminAlerts= function(req,res){
 		} else {
 			res.status(200).json({ status : 200, data : rows});
 		}
-	});
+			});
 };
 
 seenByAdmin = function(req,res){
 
 	console.log(JSON.stringify(req.body));
 	console.log("This Api will be for changing the status alert when seen by admin");
-	
+
 	if(!req.body.idalertInfo){
 		res.status(400).json({status : 400, message : "Bad Request"});
 	} else {

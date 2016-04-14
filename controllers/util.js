@@ -30,4 +30,30 @@ getLongLat = function(req, res){
 	});
 };
 
+getTime = function(req,res) {
+
+	var time = moment(req.params.dateTime).format('H:m');
+	console.log("Date" + time);
+	if (time) {
+		res.status(200).json({ status : 200, data : time});	
+	} else {
+		res.status(500).json({ status : 500, message : "Error Message " });
+	}
+}
+
+getDate = function(req,res) {
+
+	var date = moment(req.params.dateTime).format('YYYY MM DD');
+	console.log("Date" + date);
+	if (moment(date).isValid()) {
+		res.status(200).json({ status : 200, data : date});
+
+	} else {
+		res.status(500).json({ status : 500, message : "Error Message "});
+	}
+
+}
+
+exports.getTime = getTime;
+exports.getDate = getDate;
 exports.getLongLat = getLongLat;
