@@ -68,7 +68,33 @@ getUserEvents = function(req,res) {
 
 }
 
+function inserEvent(data) {
+    var db = mongo.getMongoConnection();
 
+    db.open(function (err, db) {
+        db.authenticate('username', 'password', function (err) {
+            if (err) {
+                throw err;
+            } else {
+                db.collection('user_events', function (err, collection) {
+
+                    collection.insert(({
+                        text: data.text,
+                        start_date: data.start_date,
+                        end_date: data.end_date
+                    }), function (err, res) {
+                        if (err) {
+                            throw err;
+                        } else {
+                            console.log('inserted into user events');
+                        }
+                        db.close();
+                    });
+                });
+            }
+        });
+    });
+}
 addUserEvents = function(req,res) {
     var data = req.body;
     var mode = data["!nativeeditor_status"];
@@ -92,15 +118,21 @@ addUserEvents = function(req,res) {
 
     if (mode == "updated")
         db.user_events.updateById( sid, data, update_response);
-    else if (mode == "inserted")
-        db.user_events.insert(data, update_response);
+    else if (mode == "inserted"){
+        inserEvent(data);
+        // db.user_events.insert(data, update_response);
+        console.log("Data is"+data);
+
+    }
+
+
     else if (mode == "deleted")
         db.user_events.removeById( sid, update_response);
     else
         res.send("Not supported operation");
-}
 
 
+};
 
 exports.createUserEvents=createUserEvents;
 exports.getUserEvents = getUserEvents;
