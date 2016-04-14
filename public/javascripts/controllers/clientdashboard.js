@@ -3,15 +3,25 @@ wfms.controller("ClientDashboard", function($scope, $rootScope, $modal,
 		$location, DataService) {
 
 	$rootScope.userType = "Hospital";
-	
+
 	$scope.getData = function() {
-		
+
 		clientInfo();
 		getFutureData();
-		
+
 	};
-	
-	$scope.addPoints = function () {
+
+    $scope.initCal = function() {
+        scheduler.init('scheduler_here',new Date(2016,3,16),"month");
+
+        scheduler.templates.xml_date = function(value){ return new Date(value); };
+        scheduler.load("/data", "json");
+
+        var dp = new dataProcessor("/data");
+        dp.init(scheduler);
+        dp.setTransactionMode("POST", false);
+    }
+    	$scope.addPoints = function () {
         var seriesArray = $scope.chart2.series
         var rndIdx = Math.floor(Math.random() * seriesArray.length);
         seriesArray[rndIdx].data = seriesArray[rndIdx].data.concat([1, 10, 20])
@@ -37,7 +47,7 @@ wfms.controller("ClientDashboard", function($scope, $rootScope, $modal,
         type: 'line'
     }
 
-    
+
     $scope.swapChartType = function () {
         if (this.chart2.options.chart.type === 'line') {
             this.chart2.options.chart.type = 'bar'
@@ -45,118 +55,8 @@ wfms.controller("ClientDashboard", function($scope, $rootScope, $modal,
             this.chart2.options.chart.type = 'line'
         }
     }
-    
-    $scope.chart1={
-    		 options: {
-                 chart: {
-                     type: 'pie',
-                     plotBackgroundColor: null,
-                     plotBorderWidth: null,
-                     plotShadow: false
 
-                 },
-                 title: {
-                     text: 'Status Counts in the Current Stage.'
-                 },
-                 tooltip: {
-                     pointFormat: '{series.name}: <b>{point.percentage:.1f}%</b>'
-                 },
-                 plotOptions: {
-                     pie: {
-                    	 allowPointSelect: true,
-                         cursor: 'pointer',
-                         dataLabels: {
-                             enabled: true,
-                             format: '<b>{point.name}</b>: {point.percentage:.1f} %'
-                         },
-                         showInLegend: true
-                     }
-                 }
-             },
-             series: [{       
-                     name: 'Brands',
-                     colorByPoint: true,
-                     data: [{
-                         name: 'Microsoft Internet Explorer',
-                         y: 56.33
-                     }, {
-                         name: 'Chrome',
-                         y: 24.03
-                         
-                     }, {
-                         name: 'Firefox',
-                         y: 10.38
-                     }, {
-                         name: 'Safari',
-                         y: 4.77
-                     }, {
-                         name: 'Opera',
-                         y: 0.91
-                     }, {
-                         name: 'Proprietary or Undetectable',
-                         y: 0.2
-                     }]
-                 }],
-
-             loading: false
-
-    }
-    $scope.chart2 = {
-        options: { 
-            chart: {
-                type: 'bar'
-            }
-        },
-        xAxis: {
-            categories: ['Apples', 'Bananas', 'Oranges']
-        },
-        yAxis: {
-            title: {
-                text: 'Fruit eaten'
-            }
-        },
-        series: [{
-            name: 'Jane',
-            data: [1, 0, 4]
-        }, {
-            name: 'John',
-            data: [5, 7, 3]
-        }],
-        title: {
-            text: 'Hello'
-        },
-        loading: false
-    }
-
-    
-
-    $scope.getOutageBarChart = {
-            options: { 
-                chart: {
-                    type: 'bar'
-                }
-            },
-            xAxis: {
-                categories: ['Apples', 'Bananas', 'Oranges']
-            },
-            yAxis: {
-                title: {
-                    text: 'Fruit eaten'
-                }
-            },
-            series: [{
-                name: 'Jane',
-                data: [1, 0, 4]
-            }, {
-                name: 'John',
-                data: [5, 7, 3]
-            }],
-            title: {
-                text: 'Hello'
-            },
-            loading: false
-        }
-
+   
     $scope.clientPowerStatus = function(){
 		//alert("Power controller called");
 		DataService.getData("/api/t",[]).success(function(response){
@@ -231,25 +131,9 @@ wfms.controller("ClientDashboard", function($scope, $rootScope, $modal,
 		});
 	};
 	
-	var findRestaurants = function(db, callback) {
-		   var cursor =db.collection('restaurants').find( );
-		   cursor.each(function(err, doc) {
-		      assert.equal(err, null);
-		      if (doc != null) {
-		         console.dir(doc);
-		      } else {
-		         callback();
-		      }
-		   });
-		};
+
 		
 		
-		MongoClient.connect(url, function(err, db) {
-			  assert.equal(null, err);
-			  findRestaurants(db, function() {
-			      db.close();
-			  });
-			});
 	
 	$scope.getWeatherData = function () { // On DOM ready...
 

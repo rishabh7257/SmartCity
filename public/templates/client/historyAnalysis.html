@@ -1,10 +1,19 @@
- <section id="main-content"><section id="main-content" ng-controller="ClientDashboard">
+<section id="main-content" ng-controller="HistoryAnalysis">
       <section class="wrapper">
+<div ng-init="getOutageData()">
 
-	<highchart id="container1" config="getOutageBarChart"></highchart>
-		
-		<highchart id="container" config="chart1" style="min-width: 310px; height: 400px; max-width: 600px; margin: 0 auto">
-		</highchart>
+	<highchart id="container1" config="chart2"></highchart>
+</div><br/><br/><br/>
+		  <div ng-init="outagesByArea()">
+	<highchart id="container2" config="pieChart"></highchart>
+
+</div>
+		  <br/><br/><br/>
+		  <div ng-init="outagesByCause()">
+			  <highchart id="container2" config="pieChart2"></highchart>
+
+		  </div>
+
 	
 		</section>
-		</section>
+	</section>

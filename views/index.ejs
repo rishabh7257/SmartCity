@@ -8,8 +8,10 @@
 <!-- 
 <link rel="stylesheet" type="text/css" href="css/bootstrap.min.css">
 <link rel="stylesheet" type="text/css" href="css/bootstrap-theme.min.css"> -->
+<!--
 <script src="https://code.highcharts.com/highcharts.js"></script>
-<script src="https://code.highcharts.com/modules/exporting.js"></script>
+-->
+
 <!--Angular JS-->
 <script type="text/javascript" src="library/angular/angular.min.js"></script>
 
@@ -31,7 +33,10 @@
 
 <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>  
  <script type="text/javascript"
-	src="javascripts/weatherData.js"></script> 
+	src="javascripts/weatherData.js"></script>
+    <script src="https://d3js.org/d3.v3.min.js" charset="utf-8"></script>
+    <!-- For Calendar-->
+    <script src="codebase/dhtmlxscheduler.js" type="text/javascript" charset="utf-8"></script>
 <!--Socket IO JS-->
 <!-- <script src='http://localhost:3000/socket.io/socket.io.js'></script>
 <script type="text/javascript" src="http://pubnub.github.io/eon/v/eon/0.0.9/eon.js"></script>
@@ -70,7 +75,10 @@
 <link href="css/style1.css" rel="stylesheet" type="text/css" media="all"/>
     <link href="https://netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.css" rel="stylesheet">
  <link rel="stylesheet" href="http://www.w3schools.com/lib/w3.css">
- <!-- -->
+
+    <link rel="stylesheet" href="codebase/dhtmlxscheduler.css" type="text/css" media="screen" title="no title" charset="utf-8">
+
+    <!-- -->
 <!--Application CSS-->
  <!--  <link rel="stylesheet" type="text/css" href="css/main.css">-->
 
@@ -117,6 +125,10 @@
 <script type="text/javascript"
   src="javascripts/controllers/clientdashboard.js"></script>
 
+    <script type="text/javascript"
+            src="javascripts/controllers/historyAnalysis.js"></script>
+    <script type="text/javascript"
+            src="javascripts/controllers/userEvents .js"></script>
 <script type="text/javascript"
   src="javascripts/controllers/eventsController.js"></script>
 
@@ -180,6 +192,7 @@
     <!-- High Chart-->
     <script src="http://code.highcharts.com/highcharts.src.js"></script>
     <script src="https://rawgit.com/pablojim/highcharts-ng/master/dist/highcharts-ng.js"></script>
+    <script src="https://code.highcharts.com/modules/exporting.js"></script>
 
 
   <script>

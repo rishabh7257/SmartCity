@@ -2,6 +2,8 @@ var loginController = require('./controllers/login');
 var clientController = require('./controllers/client');
 var utilController = require('./controllers/util');
 var eventsController = require('./controllers/events');
+var historyController = require('./controllers/tibco');
+var calendarController = require('./controllers/calendar');
 
 module.exports = function (app, passport) {
 
@@ -22,8 +24,16 @@ module.exports = function (app, passport) {
     app.post('/api/getfutureWeather', clientController.getFutureWeather);
     app.get('/api/getClientInfo/:idperson', ensureAuthenticated, clientController.getClientInfo);
     app.get('/api/t', clientController.powerStatus);
-    app.get('/graph', function(req,res){ res.render("googleCharts"); });
-    
+    app.get('/front', function(req,res){ res.render("front"); });
+    //Modifying
+    app.get('/api/getPowerOutage',historyController.getPowerOutage);
+    app.get('/api/getOutagesByArea',historyController.getOutagesByArea);
+
+    app.get('/api/getOutagesByCause',historyController.getOutagesByCause);
+
+    app.get('/api/createUserEvents',calendarController.createUserEvents);
+    app.get('/data',calendarController.getUserEvents);
+    app.post('/data',calendarController.addUserEvents)
     //Util
     app.get('/api/getLongLat/:city', ensureAuthenticated, utilController.getLongLat);
     
