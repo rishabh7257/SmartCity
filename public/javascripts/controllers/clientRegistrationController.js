@@ -111,6 +111,7 @@ $scope.register = function() {
 			var zipcode;
 			var country;
 			var city;
+			console.log($scope.address);
 			$scope.address.address_components.forEach(function(entry){
 		    console.log(entry["long_name"]);
 		    entry["types"].forEach(function(type) {
@@ -127,7 +128,7 @@ $scope.register = function() {
 		        		state_long = entry["long_name"];
 		   				console.log("State: " + entry["long_name"])
 		        	}
-		        	else if(type == "administrative_area_level_2"){
+		        	else if(type == "locality"){
 		   				city = entry["long_name"];
 		   				console.log("City: " + entry["long_name"])
 		        	}

@@ -220,7 +220,7 @@ wfms.controller("ClientDashboard", function($scope, $rootScope, $modal,
 	        //var place = 'United_States/'+state+city;
             //location.hash = 'https://www.yr.no/place/' + place + '/forecast_hour_by_hour.xml';
             //var location = 'https:%2F%2Fwww.yr.no%2Fplace%2FUnited_States%2FCalifornia%2FSan_Jose%2Fforecast_hour_by_hour.xml' ; 
-//https:%2F%2Fwww.yr.no%2Fplace%2FNew_York%2FNew_York County%2FManhattan%2Fforecast_hour_by_hour.xml
+            //https:%2F%2Fwww.yr.no%2Fplace%2FNew_York%2FNew_York County%2FManhattan%2Fforecast_hour_by_hour.xml
             var location = 'https:%2F%2Fwww.yr.no%2Fplace%2F'+country+'%2F'+state+'%2F'+city+'%2F'+'forecast_hour_by_hour.xml' ; 
             console.log("location.hash: "+location);
            // console.log("location.hash.substr(1): "+ location.hash.substr(1));

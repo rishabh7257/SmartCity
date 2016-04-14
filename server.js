@@ -16,32 +16,6 @@ var io=require('socket.io');
 
 var eventful = require('eventful-node');
 
-//Weather
-var Forecast = require('forecast');
-
-//Initialize 
-var forecast = new Forecast({
-  service: 'forecast.io',
-  key: '0f5451632f4990d7998a6a5b5bb2acbc',
-  units: 'celcius', // Only the first letter is parsed 
-  cache: true,      // Cache API requests? 
-  ttl: {            // How long to cache requests. Uses syntax from moment.js: http://momentjs.com/docs/#/durations/creating/ 
-    minutes: 27,
-    seconds: 45
-    }
-});
-
-forecast.get([-33.8683, 151.2086], function(err, weather) {
-	  if(err) return console.dir(err);
-	  console.dir(weather);
-	});
-	 
-	// Retrieve weather information, ignoring the cache 
-	forecast.get([-33.8683, 151.2086], true, function(err, weather) {
-	  if(err) return console.dir(err);
-	  console.dir(weather);
-	});
-
 app.set('port', process.env.PORT || 3000);
 app.use(cookieParser());
 app.use(bodyParser.json()); // to support JSON-encoded bodies
