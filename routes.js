@@ -24,7 +24,7 @@ module.exports = function (app, passport) {
     app.post('/api/getfutureWeather', clientController.getFutureWeather);
     app.get('/api/getClientInfo/:idperson', ensureAuthenticated, clientController.getClientInfo);
     app.get('/api/t', clientController.powerStatus);
-<<<<<<< HEAD
+
     app.get('/front', function(req,res){ res.render("front"); });
     //Modifying
     app.get('/api/getPowerOutage',historyController.getPowerOutage);
@@ -35,10 +35,9 @@ module.exports = function (app, passport) {
     app.get('/api/createUserEvents',calendarController.createUserEvents);
     app.get('/data',calendarController.getUserEvents);
     app.post('/data',calendarController.addUserEvents)
-=======
+
     app.get('/graph', function(req,res){ res.render("googleCharts"); });
 
->>>>>>> 5e38244cb7a8ac265abfc94765dd2a97112df20d
     //Util
     app.get('/api/getLongLat/:city', ensureAuthenticated, utilController.getLongLat);
     app.get('/api/getDate/:dateTime', ensureAuthenticated, utilController.getDate);
