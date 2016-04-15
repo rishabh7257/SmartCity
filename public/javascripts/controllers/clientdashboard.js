@@ -3,7 +3,9 @@ wfms.controller("ClientDashboard", function($scope, $rootScope, $modal, $locatio
     $rootScope.userType = "Hospital";
     $scope.getData = function() {
         clientInfo();
-        getFutureData();
+        //getFutureData();
+        $scope.getWeatherData();
+
     };
     $scope.initCal = function() {
         scheduler.init('scheduler_here', new Date(2016, 3, 16), "month");

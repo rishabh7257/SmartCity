@@ -1,94 +1,153 @@
- <div class="row">
-                  <div class="col-lg-12">
-                      <section class="panel">
-                          <header class="panel-heading">
-                             Registration Form
-                          </header>
-                          <div class="panel-body">
-                              <div class="form">
-                                  <form class="form-validate form-horizontal" id="feedback_form">
-                                      <div class="form-group ">
-                                          <label for="cname" class="control-label col-lg-2">First Name <span class="required">*</span></label>
-                                          <div class="col-lg-10">
-                                              <input class="form-control" ng-model="firstname" id="firstname" name="firstname" minlength="5" type="text" required />
-                                          </div>
-                                      </div>
-                                       <div class="form-group ">
-                                          <label for="cname" class="control-label col-lg-2">Last Name <span class="required">*</span></label>
-                                          <div class="col-lg-10">
-                                              <input class="form-control" ng-model="lastname" id="lastname" name="lastname" minlength="5" type="text" required />
-                                          </div>
-                                      </div>
-                                       <div class="form-group ">
-                                          <label for="cname" class="control-label col-lg-2">Tenant Type <span class="required">*</span></label>
-                                          <div class="col-lg-10">
-                                             <select class="form-control" ng-model="usertype">
-                                                  <option value="Hospital">Hospital</option>
-                                                  <option value="Residential">Residential</option>
-                                                  <option value="Commercial">Commercial</option>
-                                                </select>
-
-                                            </div>
-                                      </div>
-                          
-                                      <div class="form-group ">
-                                        <label for="address" class="control-label col-lg-2">Address<span class="required">*</span></label>
-                                          <div class="col-lg-10">
-                                               <input type="text" ng-model="address" 
-                                         typeahead="address as address.formatted_address for address in getLocation($viewValue)" typeahead-loading="loadingLocations" class="form-control"> 
-                                          </div>
-                                      </div>                                       
-
-                                      <div class="form-group ">
-                                          <label for="cname" class="control-label col-lg-2">City<span class="required">*</span></label>
-                                          <div class="col-lg-10">
-                                              <input class="form-control" ng-model="city" id="city" name="city" minlength="5" type="text" required />
-                                          </div>
-                                      </div>
-                                       <div class="form-group ">
-                                          <label for="city" class="control-label col-lg-2">State<span class="required">*</span></label>
-                                          <div class="col-lg-10">
-                                              <select ng-model="state">
-                                          <option value="">-- Select a State --</option>
-                                            <option ng-repeat="state in states" value="{{state.name}}" ng-model="state">{{state.name}}</option>
-                                        </select>
-                                          </div>
-                                      </div>
-                                     
-                                      <div class="form-group ">
-                                          <label for="cname" class="control-label col-lg-2">Zipcode<span class="required">*</span></label>
-                                          <div class="col-lg-10">
-                                              <input class="form-control" ng-model="zipcode" id="zipcode" name="zipcode" minlength="5" maxlength="5" type="number" required />
-                                          </div>
-                                      </div>
-                                      <div class="form-group ">
-                                          <label for="cemail" class="control-label col-lg-2">E-Mail <span class="required">*</span></label>
-                                          <div class="col-lg-10">
-                                              <input class="form-control" ng-model="email" id="email" type="email" name="email" required />
-                                          </div>
-                                      </div>
-                                      <div class="form-group ">
-                                          <label for="cemail" class="control-label col-lg-2">Password<span class="required">*</span></label>
-                                          <div class="col-lg-10">
-                                              <input class="form-control" ng-model="password" id="password" type="password" name="password" required />
-                                          </div>
-                                      </div>
-                                      <div class="form-group ">
-                                          <label for="cemail" class="control-label col-lg-2">Phone Number<span class="required">*</span></label>
-                                          <div class="col-lg-10">
-                                              <input class="form-control" ng-model="number" id="number" type="number" name="number" minlength="10" maxlength="10" required />
-                                          </div>
-                                      </div>
-                                      <div class="form-group">
-                                          <div class="col-lg-offset-2 col-lg-10">
-                                              <button class="btn btn-primary" ng-click="register()">Register</button>
-                                              <button class="btn btn-default" ng-click="cancel()">Cancel</button>
-                                          </div>
-                                      </div>
-                                  </form>
-                              </div>
-
-                          </div>
-                      </section>
-                  </div>
-              </div>
+<div class="row">
+    <div class="col-lg-12">
+        <section class="panel">
+            <header class="panel-heading">
+                Registration Form
+            </header>
+            <div class="panel-body">
+                <div class="form">
+                    <form class="form-validate form-horizontal" id="feedback_form">
+                        <div class="form-group ">
+                            <label class="control-label col-lg-2" for="cname">
+                                First Name
+                                <span class="required">
+                                    *
+                                </span>
+                            </label>
+                            <div class="col-lg-10">
+                                <input class="form-control" id="firstname" minlength="5" name="firstname" ng-model="firstname" required="" type="text"/>
+                            </div>
+                        </div>
+                        <div class="form-group ">
+                            <label class="control-label col-lg-2" for="cname">
+                                Last Name
+                                <span class="required">
+                                    *
+                                </span>
+                            </label>
+                            <div class="col-lg-10">
+                                <input class="form-control" id="lastname" minlength="5" name="lastname" ng-model="lastname" required="" type="text"/>
+                            </div>
+                        </div>
+                        <div class="form-group ">
+                            <label class="control-label col-lg-2" for="cname">
+                                Tenant Type
+                                <span class="required">
+                                    *
+                                </span>
+                            </label>
+                            <div class="col-lg-10">
+                                <select class="form-control" ng-model="usertype">
+                                    <option value="Hospital">
+                                        Hospital
+                                    </option>
+                                    <option value="Residential">
+                                        Residential
+                                    </option>
+                                    <option value="Commercial">
+                                        Commercial
+                                    </option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="form-group ">
+                            <label class="control-label col-lg-2" for="address">
+                                Address
+                                <span class="required">
+                                    *
+                                </span>
+                            </label>
+                            <div class="col-lg-10">
+                                <input class="form-control" ng-model="address" type="text" typeahead="address as address.formatted_address for address in getLocation($viewValue)" typeahead-loading="loadingLocations">
+                                </input>
+                            </div>
+                        </div>
+                        <div class="form-group ">
+                            <label class="control-label col-lg-2" for="cname">
+                                City
+                                <span class="required">
+                                    *
+                                </span>
+                            </label>
+                            <div class="col-lg-10">
+                                <input class="form-control" id="city" minlength="5" name="city" ng-model="city" required="" type="text"/>
+                            </div>
+                        </div>
+                        <div class="form-group ">
+                            <label class="control-label col-lg-2" for="city">
+                                State
+                                <span class="required">
+                                    *
+                                </span>
+                            </label>
+                            <div class="col-lg-10">
+                                <select ng-model="state">
+                                    <option value="">
+                                        -- Select a State --
+                                    </option>
+                                    <option ng-model="state" ng-repeat="state in states" value="{{state.name}}">
+                                        {{state.name}}
+                                    </option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="form-group ">
+                            <label class="control-label col-lg-2" for="cname">
+                                Zipcode
+                                <span class="required">
+                                    *
+                                </span>
+                            </label>
+                            <div class="col-lg-10">
+                                <input class="form-control" id="zipcode" maxlength="5" minlength="5" name="zipcode" ng-model="zipcode" required="" type="number"/>
+                            </div>
+                        </div>
+                        <div class="form-group ">
+                            <label class="control-label col-lg-2" for="cemail">
+                                E-Mail
+                                <span class="required">
+                                    *
+                                </span>
+                            </label>
+                            <div class="col-lg-10">
+                                <input class="form-control" id="email" name="email" ng-model="email" required="" type="email"/>
+                            </div>
+                        </div>
+                        <div class="form-group ">
+                            <label class="control-label col-lg-2" for="cemail">
+                                Password
+                                <span class="required">
+                                    *
+                                </span>
+                            </label>
+                            <div class="col-lg-10">
+                                <input class="form-control" id="password" name="password" ng-model="password" required="" type="password"/>
+                            </div>
+                        </div>
+                        <div class="form-group ">
+                            <label class="control-label col-lg-2" for="cemail">
+                                Phone Number
+                                <span class="required">
+                                    *
+                                </span>
+                            </label>
+                            <div class="col-lg-10">
+                                <input class="form-control" id="number" maxlength="10" minlength="10" name="number" ng-model="number" required="" type="number"/>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <div class="col-lg-offset-2 col-lg-10">
+                                <button class="btn btn-primary" ng-click="register()">
+                                    Register
+                                </button>
+                                <button class="btn btn-default" ng-click="cancel()">
+                                    Cancel
+                                </button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </section>
+    </div>
+</div>
