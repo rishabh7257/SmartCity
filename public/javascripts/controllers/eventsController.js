@@ -16,7 +16,6 @@ wfms.controller("eventsController", function($scope, $rootScope, $modal,
 		DataService.getData(url ,[]).success(function(response){
 			//$scope.events = response;
 			$scope.extractEvent(response);
-			console.log("Got the Data");
 		}).error(function(err){
 			console.log(err.message);
 		});
@@ -144,7 +143,45 @@ wfms.controller("eventsController", function($scope, $rootScope, $modal,
             }
         };
         $scope.data = $scope.seriesData
-	}
+	
+
+	$scope.chart2={
+    		 options: {
+                 chart: {
+                     type: 'pie',
+                     plotBackgroundColor: null,
+                     plotBorderWidth: null,
+                     plotShadow: false
+
+                 },
+                 title: {
+                     text: 'Status Counts in the Current Stage.'
+                 },
+                 tooltip: {
+                     pointFormat: '{series.name}: <b>{point.percentage:.1f}%</b>'
+                 },
+                 plotOptions: {
+                     pie: {
+                    	 allowPointSelect: true,
+                         cursor: 'pointer',
+                         dataLabels: {
+                             enabled: true,
+                             format: '<b>{point.name}</b>: {point.percentage:.1f} %'
+                         },
+                         showInLegend: true
+                     }
+                 }
+             },
+             series: [{       
+                     name: 'Brands',
+                     colorByPoint: true,
+                     data: $scope.seriesData
+                 }],
+
+             loading: false
+
+    }
+}
 
 });
 

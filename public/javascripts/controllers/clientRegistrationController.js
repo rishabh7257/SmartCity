@@ -190,17 +190,12 @@ $scope.register = function() {
 				$scope.formError=response.message;
 				$modalInstance.dismiss(false);
 			});
-		
-
-		
 	}
 		else{
 			$scope.formError = "Form Invalid !!!";
 				
 			}
 		};
-
-
 };
 
 $scope.cancel = function() {
