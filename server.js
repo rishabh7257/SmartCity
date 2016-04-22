@@ -14,6 +14,10 @@ var mongo = require('./models/mongo');
 var app = express();
 var io=require('socket.io');
 
+//R connectiviity
+var exec = require('child_process').exec;
+
+
 var eventful = require('eventful-node');
 
 app.set('port', process.env.PORT || 3000);
