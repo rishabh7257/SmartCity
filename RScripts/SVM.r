@@ -8,7 +8,10 @@ pkgTest <- function(x)
 }
 
 pkgTest("e1071")
-final <- read.csv("final.csv")
+wd <- getwd()
+location <- "/final.csv"
+
+final <- read.csv(paste(wd,location, sep= ""))
 train<-final[1:1080,]
 test<-final[1081:1350,]
 library('e1071')
