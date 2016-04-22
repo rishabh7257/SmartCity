@@ -57,7 +57,7 @@ module.exports = function(app, passport) {
             console.log('stdout: ' + stdout);
             console.log('stderr: ' + stderr);
             console.log('Error: ' + error);
-            res.send(200);
+            res.sendStatus(200);
         });
         console.log(__dirname);
         // let child = exec('script', {
