@@ -52,7 +52,7 @@ module.exports = function(app, passport) {
     //RScripts
     // app.get('/api/runRScripts',nodeRBridge.runRScripts);
     app.get('/api/runRScripts', function(req, res) {
-        var rScript = 'R CMD BATCH ' + __dirname + '/RScripts/SVM.R ' + __dirname + '/RScripts/output.txt'
+        var rScript = 'R CMD BATCH ' + __dirname + '/RScripts/SVM.r ' + __dirname + '/RScripts/output.txt'
         child = exec(rScript, function(error, stdout, stderr) {
             console.log('stdout: ' + stdout);
             console.log('stderr: ' + stderr);
