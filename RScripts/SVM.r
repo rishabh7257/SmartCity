@@ -9,7 +9,7 @@ pkgTest <- function(x)
 
 pkgTest("e1071")
 wd <- getwd()
-location <- "/final.csv"
+location <- "/RScripts/final.csv"
 
 final <- read.csv(paste(wd,location, sep= ""))
 train<-final[1:1080,]
