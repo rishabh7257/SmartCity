@@ -38,21 +38,48 @@
                                 </h6>
                             </div>
                             <div class="col-lg-2 col-sm-6 follow-info weather-category">
-                                <ul>
-                                    <li class="active">
-                                        <i class="fa fa-tachometer fa-2x">
-                                        </i>
-                                        <br>
-                                            Alerts & Notification
-                                        </br>
-                                    </li>
-                                </ul>
+                                 <div ng-controller="ClientDashboard" ng-init="clientPowerStatus()" align="center">
+                                        Power Outage Status:
+                                       Critical
+                                        <div ng-if="powerStatus=='Red'">
+                                            <div class="w3-card-24 w3-red" style="width: 150px;
+  height: 100px;
+  margin: 16px;
+  padding: 16px">
+                                                <p>
+                                                    Power Outage predicted in next week
+                                                </p>
+                                            </div>
+                                        </div>
+                                        <div ng-if="powerStatus=='Yellow'">
+                                            <div class="w3-card-24 w3-yellow" style="width: 150px;
+  height: 100px;
+  margin: 16px;
+  padding: 16px">
+                                                <p>
+                                                    Maintenance in Progres
+                                                </p>
+                                            </div>
+                                        </div>
+                                        <div ng-if="{{powerStatus}}=='Green'">
+                                            <div class="w3-card-24 w3-green" style="width: 150px;
+  height: 100px;
+  margin: 16px;
+  padding: 16px">
+                                                <p>
+                                                    No Outages and maintenance needed
+                                                </p>
+                                            </div>
+                                        </div>
+                                        <div align = "center"><button type="button" class="btn btn-primary" ng-click="sendMail()">Send Notifications</button></div>
+
+                                    </div>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
-            <div class="col-lg-12">
+            <div class="col-lg-12" align = "center">
                 <h3 class="page-header">
                     <i class="fa fa-user-md">
                     </i>
@@ -139,40 +166,8 @@
                                             </div>
                                         </div>
                                     </div>
-                                    <div ng-controller="ClientDashboard" ng-init="clientPowerStatus()">
-                                        Power Outage Status:
-							           Critical
-                                        <div ng-if="powerStatus=='Red'">
-                                            <div class="w3-card-24 w3-red" style="width: 150px;
-  height: 100px;
-  margin: 16px;
-  padding: 16px">
-                                                <p>
-                                                    Power Outage predicted in next week
-                                                </p>
-                                            </div>
-                                        </div>
-                                        <div ng-if="powerStatus=='Yellow'">
-                                            <div class="w3-card-24 w3-yellow" style="width: 150px;
-  height: 100px;
-  margin: 16px;
-  padding: 16px">
-                                                <p>
-                                                    Maintenance in Progres
-                                                </p>
-                                            </div>
-                                        </div>
-                                        <div ng-if="{{powerStatus}}=='Green'">
-                                            <div class="w3-card-24 w3-green" style="width: 150px;
-  height: 100px;
-  margin: 16px;
-  padding: 16px">
-                                                <p>
-                                                    No Outages and maintenance needed
-                                                </p>
-                                            </div>
-                                        </div>
-                                    </div>
+                                   
+                                    
                                 </section>
                             </div>
                         </section>

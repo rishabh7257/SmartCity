@@ -7,6 +7,7 @@ var calendarController = require('./controllers/calendar');
 var nodeRBridge = require('./controllers/nodeRBridge');
 var exec = require('child_process').exec;
 var spawn = require('child_process').spawn;
+var child;
 module.exports = function(app, passport) {
     // Home
     app.get('/', function(req, res) {
@@ -51,14 +52,14 @@ module.exports = function(app, passport) {
     //RScripts
     // app.get('/api/runRScripts',nodeRBridge.runRScripts);
     app.get('/api/runRScripts', function(req, res) {
-        // require('child_process').exec('~/./script.sh', function(error, stdout, stderr) {
-        //     console.log('stdout: ' + stdout);
-        //     console.log('stderr: ' + stderr);
-        //     console.log('Error: ' + error);
-        //     if (error !== null) {
-        //         console.log('exec error: ' + error);
-        //     }
-        // });
+        var rScript = 'R CMD BATCH ' + __dirname + '/RScripts/SVM.R ' + __dirname + '/RScripts/output.txt'
+        child = exec(rScript, function(error, stdout, stderr) {
+            console.log('stdout: ' + stdout);
+            console.log('stderr: ' + stderr);
+            console.log('Error: ' + error);
+            res.send(200);
+        });
+        console.log(__dirname);
         // let child = exec('script', {
         //     shell: '/bin/bash'
         // }, (err, stdout, stderr) => {

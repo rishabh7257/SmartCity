@@ -46,29 +46,28 @@ createUserEvents = function(req,res) {
 getUserEvents = function(req,res) {
     var db = mongo.getMongoConnection();
     //console.log(customerImpacted);
+    var userId = req.session.idperson;
     db.open(function (err, db) {
         db.authenticate('username', 'password', function (err, result) {
             var docs = "INTIAL DOCS";
             if (err) {
                 throw err;
             } else {
-                db.collection('user_events').find().toArray(function(err, data){
+                db.collection('user_events').find({ $where: "this.userId == "+userId } ).toArray(function(err, data){
                     //set id property for all records
                     for (var i = 0; i < data.length; i++)
                         data[i].id = data[i]._id;
 
-                    console.log("Events found" +data);
                     res.send(data);
                 });
             }
-
         });
 
     });
 
 }
 
-function inserEvent(data) {
+function inserEvent(data, userId) {
     var db = mongo.getMongoConnection();
 
     db.open(function (err, db) {
@@ -81,7 +80,8 @@ function inserEvent(data) {
                     collection.insert(({
                         text: data.text,
                         start_date: data.start_date,
-                        end_date: data.end_date
+                        end_date: data.end_date,
+                        userId : userId
                     }), function (err, res) {
                         if (err) {
                             throw err;
@@ -100,7 +100,7 @@ addUserEvents = function(req,res) {
     var mode = data["!nativeeditor_status"];
     var sid = data.id;
     var tid = sid;
-
+    var userId = req.session.idperson;
     delete data.id;
     delete data.gr_id;
     delete data["!nativeeditor_status"];
@@ -119,15 +119,26 @@ addUserEvents = function(req,res) {
     if (mode == "updated")
         db.user_events.updateById( sid, data, update_response);
     else if (mode == "inserted"){
-        inserEvent(data);
+        inserEvent(data, userId);
         // db.user_events.insert(data, update_response);
         console.log("Data is"+data);
 
     }
-
-
     else if (mode == "deleted")
-        db.user_events.removeById( sid, update_response);
+    {
+        var db = mongo.getMongoConnection();
+
+        db.open(function (err, db) {
+            db.authenticate('username', 'password', function (err) {
+                if (err) {
+                    throw err;
+                } else {
+                    console.log("To be removed is "+data.text);
+                    db.collection('user_events').remove({ text : data.text});
+                }
+            });
+        });
+    }
     else
         res.send("Not supported operation");
 

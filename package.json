@@ -1,7 +1,9 @@
 {
   "name": "SmartCity",
-  "description": "Smart City",
   "version": "0.0.2",
+  "name": "sinch-auth",
+  "version": "0.0.7",
+  "description": "Smart City",
   "private": true,
   "engines": {
     "node": "0.10.x",
@@ -19,14 +21,20 @@
     "crypto": "latest",
     "ejs": "latest",
     "express": "4.x",
+    "assert-plus": "^0.1.5",
+    "q": "^1.4.1",
+    "sinch-request": "0.0.1",
     "express-validator": "latest",
     "highcharts": "^4.2.3",
     "moment": "^2.9.0",
     "mongodb": "latest",
     "morgan": "^1.5.2",
     "mysql": "latest",
+    "nodemailer": "1.0.0",
     "passport": "latest",
     "passport-local": "latest",
-    "redis": "latest"
+    "redis": "latest",
+    "sinch-sms": "0.0.8",
+    "textbelt": "0.0.3"
   }
 }

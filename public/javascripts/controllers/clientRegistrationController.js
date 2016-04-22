@@ -192,7 +192,7 @@ wfms.controller("ClientRegistrationController", function($scope, $modalInstance,
                     address_components: item.address_components
                 }
             });
-        });
+        }); 
     };
     $scope.open = function($event) {
         $event.preventDefault();
