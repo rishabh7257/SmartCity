@@ -2,8 +2,19 @@ var dateutil = require('../util/dateutil'),
 	moment = require('moment'),
 	Forecast = require('forecast.io');
 var mongo = require('../models/mongo');
-
-
+var nodemailer = require('nodemailer');
+var smtpTransport = nodemailer.createTransport({
+	service: 'gmail',
+	auth: {
+		user: 'notificationsforpoweroutage@gmail.com',
+		pass: 'smartcity'
+	}
+});
+var sinchSms = require('sinch-sms')({
+	key: '54c1af62-92cc-4ea4-9001-ddbc9b7e01b0',
+	secret: 'rM2QyCXbv0S8EqcOYhEpPg=='
+});
+var client = require('twilio')('ACe10877080547b663607bc260a5497f96','e881954b0748ab08c1521ec487155af6');
 
 var mongodb = require('mongodb');
 var db = new mongodb.Db('smartcity', new mongodb.Server(
@@ -39,7 +50,7 @@ createClient = function(req,res){
 };
 
 
-createUserEvents = function(req,res) {
+/*createUserEvents = function(req,res) {
 	var db = mongo.getMongoConnection();
 
 	db.open(function (err, db) {
@@ -48,11 +59,12 @@ createUserEvents = function(req,res) {
 				throw err;
 			} else {
 				db.collection('user_events', function (err, collection) {
-
+					console.log("User id is"+$rootScope.userId);
 					collection.insert(({
 						text:"My test event A",
 						start_date: new Date(2016,4,4),
-						end_date:   new Date(2016,4,4)
+						end_date:   new Date(2016,4,4),
+						user_id: 01
 					}), function (err, res) {
 						if (err) {
 							throw err;
@@ -66,7 +78,7 @@ createUserEvents = function(req,res) {
 		});
 	});
 
-}
+}*/
 powerStatus = function(req,res) {
 
 	mysql.queryDb("select alertinfo.thresholdLevel, alertinfo.date from alertinfo WHERE date between date_sub(CURDATE(), INTERVAL 7 day) and CURDATE()",function(err,rows){
@@ -110,6 +122,42 @@ getClientInfo=function(req,res){
 });
 };
 
+sendMail = function(req,res){
+	console.log("Inside sendMail");
+	var maillist = [
+		'er.poojashukla07@gmail.com',
+		'pooja.shukla@sjsu.edu'
+	];
+	sinchSms.send('+16692219847', 'Alert !! Power Outage predicted in your area tomorrow!').then(function(response) {
+		//All good, response contains messageId
+		console.log(response);
+	}).fail(function(error) {
+		// Some type of error, see error object
+		console.log(error);
+	});
+	var msg = {
+		subject: "Alert - Power Outage",
+		text: "There is an outage predicted in your area tomorrow!"
+	}
+	 console.log(msg);
+
+	maillist.forEach(function (to, i, array) {
+		msg.to = to;
+
+		smtpTransport.sendMail(msg, function (err) {
+			if (err) {
+				console.log('Sending to ' + to + ' failed: ' + err);
+				return;
+			} else {
+				console.log('Sent to ' + to);
+
+			}
+			//res.render('index');
+		});
+
+	});
+};
+
 getWeatherForecast = function(req,res) {
 
 	var cityName = req.params.city;
@@ -117,6 +165,17 @@ getWeatherForecast = function(req,res) {
 }
 
 
+sendSms = function(req,res){
+	client.sendMessage({
+		to: '+16692219847',
+		from: '4693314288',
+		body: 'Hello from Twilio'
+	},function(err, data){
+		if(err)
+			console.log(err);
+		console.log(data);
+	});
+};
 
 getUserEvents = function(req,res) {
 	var db = mongo.getMongoConnection();
@@ -179,7 +238,8 @@ addUserEvents = function(req,res) {
 
 exports.getClient = getClient;
 exports.getClientInfo=getClientInfo;
-exports.createUserEvents=createUserEvents;
+//exports.createUserEvents=createUserEvents;
 exports.getUserEvents = getUserEvents;
 exports.addUserEvents = addUserEvents;
 exports.powerStatus = powerStatus;
+exports.sendMail = sendMail;

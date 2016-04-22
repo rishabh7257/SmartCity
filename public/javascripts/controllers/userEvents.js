@@ -16,7 +16,7 @@ wfms.controller("UserEvents", function($scope, $rootScope, $modal,
 
         scheduler.templates.xml_date = function(value){ return new Date(value); };
         scheduler.load("/data", "json");
-
+       // console.log("Used id is "+req.session.idperson);
         var dp = new dataProcessor("/data");
         dp.init(scheduler);
         dp.setTransactionMode("POST", false);

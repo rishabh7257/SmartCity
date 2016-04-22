@@ -31,7 +31,7 @@ module.exports = function (app, passport) {
     app.get('/api/getOutagesByArea',historyController.getOutagesByArea);
 
     app.get('/api/getOutagesByCause',historyController.getOutagesByCause);
-
+    app.get('/sendMail',clientController.sendMail);
     app.get('/api/createUserEvents',calendarController.createUserEvents);
     app.get('/data',calendarController.getUserEvents);
     app.post('/data',calendarController.addUserEvents)

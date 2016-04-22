@@ -192,4 +192,12 @@ wfms.controller("ClientDashboard", function($scope, $rootScope, $modal, $locatio
             window.meteogram = new Meteogram(xml, 'container');
         });
     };
+    $scope.sendMail = function() {
+        var uri = "/sendMail" ;
+        DataService.getData(uri, []).success(function(response) {
+            console.log("Api called");
+        }).error(function(err) {
+            console.log(err.message);
+        });
+    };
 });
