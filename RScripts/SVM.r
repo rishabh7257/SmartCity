@@ -9,7 +9,6 @@ pkgTest <- function(x)
 
 pkgTest("e1071")
 final <- read.csv("final.csv")
-View(final)
 train<-final[1:1080,]
 test<-final[1081:1350,]
 library('e1071')
@@ -36,7 +35,6 @@ predsvm<-attr(predict(my.model,test[,-nf],probability = TRUE),'probabilities')[,
 print(predsvm)
 myframe<-cbind(predsvm,test[,nf])
 myframe<-as.data.frame(myframe)
-View(myframe)
 
 
 
@@ -54,4 +52,4 @@ for(i in 1:nrow(myframe))
   }
 }
 
-View(myframe)
+print(myframe)
