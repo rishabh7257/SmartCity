@@ -28,8 +28,8 @@ pkgTest("e1071")
 
 wd <- getwd()
 location <- "/RScripts/final.csv"
-testLocation <- "/RScripts/test.csv""
-
+testLocation <- "/RScripts/test.csv"
+print(paste(wd,location, sep= ""))
 #final <- read.csv(paste(wd,location, sep= ""))
 #train<-final[1:1080,]
 train <- read.csv(paste(wd,location, sep= ""))

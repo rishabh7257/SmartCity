@@ -3,9 +3,8 @@ wfms.controller("ClientDashboard", function($scope, $rootScope, $modal, $locatio
     $rootScope.userType = "Hospital";
     $scope.getData = function() {
         clientInfo();
-        //getFutureData();
         $scope.getWeatherData();
-
+        $scope.predictNextWeekOutage()
     };
     $scope.initCal = function() {
         scheduler.init('scheduler_here', new Date(2016, 3, 16), "month");
@@ -17,9 +16,26 @@ wfms.controller("ClientDashboard", function($scope, $rootScope, $modal, $locatio
         dp.init(scheduler);
         dp.setTransactionMode("POST", false);
     }
-    $scope.addPoints = function() {
-        //getFutureData();
-    };
+    $scope.predictNextWeekOutage = function() {
+        var params = {
+            city: "San Jose",
+            country: "US"
+        };
+        DataService.postData("/api/getFutureWeather", params).success(function(response) {
+            DataService.getData("/api/runRScripts", []).success(function(response) {
+                console.log("get the response from R Script" + response)
+                DataService.getData("/api/readTextFile/newOutput", []).success(function(response) {
+                    console.log("Final ouput" + JSON.stringify(response.message))
+                }).error(function(err) {
+                    console.log(err.message);
+                });
+            }).error(function(err) {
+                console.log(err.message);
+            });
+        }).error(function(err) {
+            console.log(err.message);
+        });
+    }
     $scope.addPoints = function() {
         var seriesArray = $scope.chart2.series
         var rndIdx = Math.floor(Math.random() * seriesArray.length);
@@ -100,32 +116,6 @@ wfms.controller("ClientDashboard", function($scope, $rootScope, $modal, $locatio
         }],
         loading: false
     }
-    $scope.chart2 = {
-        options: {
-            chart: {
-                type: 'bar'
-            }
-        },
-        xAxis: {
-            categories: ['Apples', 'Bananas', 'Oranges']
-        },
-        yAxis: {
-            title: {
-                text: 'Fruit eaten'
-            }
-        },
-        series: [{
-            name: 'Jane',
-            data: [1, 0, 4]
-        }, {
-            name: 'John',
-            data: [5, 7, 3]
-        }],
-        title: {
-            text: 'Hello'
-        },
-        loading: false
-    }
     $scope.clientPowerStatus = function() {
         DataService.getData("/api/t", []).success(function(response) {
             for (var i = 0; i < response.data.length; i++) {
@@ -138,7 +128,6 @@ wfms.controller("ClientDashboard", function($scope, $rootScope, $modal, $locatio
         }).error(function(err) {
             console.log(err.message);
         });
-        
     }
 
     function clientInfo() {
@@ -182,7 +171,7 @@ wfms.controller("ClientDashboard", function($scope, $rootScope, $modal, $locatio
             }
         }, function() {});
     };
-    $scope.getWeatherData = function() { 
+    $scope.getWeatherData = function() {
         console.log("getWeatherData()");
         var country = $window.sessionStorage.country.replace(/ /g, '_');;
         var state = $window.sessionStorage.state.replace(/ /g, '_');
@@ -193,7 +182,7 @@ wfms.controller("ClientDashboard", function($scope, $rootScope, $modal, $locatio
         });
     };
     $scope.sendMail = function() {
-        var uri = "/sendMail" ;
+        var uri = "/sendMail";
         DataService.getData(uri, []).success(function(response) {
             console.log("Api called");
         }).error(function(err) {

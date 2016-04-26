@@ -1,38 +1,38 @@
 'use strict';
-wfms.controller( "ShowClientRegisController", function( $scope, $rootScope, $modal, $location, DataService, $window ) {
+wfms.controller("ShowClientRegisController", function($scope, $rootScope, $modal, $location, DataService, $window) {
     $scope.registerClient = function() {
-        console.log( "inside register Client" );
-        var modalInstance = $modal.open( {
+        console.log("inside register Client");
+        var modalInstance = $modal.open({
             templateUrl: 'templates/index/register.html',
             controller: 'ClientRegistrationController',
             size: 'lg',
-        } );
-        modalInstance.result.then( function( isValid ) {
-            if ( isValid ) {
+        });
+        modalInstance.result.then(function(isValid) {
+            if (isValid) {
                 getData();
             }
-        }, function() {} );
+        }, function() {});
     };
     $scope.loginClient = function() {
-        console.log( "Inside login client Funct" );
-        if ( $scope.email === "" || $scope.password === "" ) {
+        console.log("Inside login client Funct");
+        if ($scope.email === "" || $scope.password === "") {
             $scope.formError = "Form Invalid !!!";
         } else {
             var params = {
                 email: $scope.email,
                 password: $scope.password
             };
-            DataService.postData( "/api/login", params ).success( function( response ) {
-                console.log( "Login Successful" );
+            DataService.postData("/api/login", params).success(function(response) {
+                console.log("Login Successful");
                 $rootScope.idclient = response.idclient;
                 $rootScope.idperson = response.idperson;
                 $rootScope.fname = response.fname;
                 $rootScope.lname = response.lname;
                 $rootScope.email = response.email;
                 $rootScope.lastLogin = response.lastLogin;
-                console.log( "window element:" + $window.sessionStorage.idperson );
-                console.log( "ziocdeo:" + response.zipcode );
-                console.log( "idperson:" + response.idperson );
+                console.log("window element:" + $window.sessionStorage.idperson);
+                console.log("ziocdeo:" + response.zipcode);
+                console.log("idperson:" + response.idperson);
                 $window.sessionStorage.type = response.type;
                 $window.sessionStorage.idclient = response.idclient;
                 $window.sessionStorage.idperson = response.idperson;
@@ -43,8 +43,8 @@ wfms.controller( "ShowClientRegisController", function( $scope, $rootScope, $mod
                 $window.sessionStorage.city = response.city;
                 $window.sessionStorage.state = response.state;
                 $window.sessionStorage.country = response.country;
-                console.log( "city: " + $window.sessionStorage.city );
-                console.log( "state: " + $window.sessionStorage.state );
+                console.log("city: " + $window.sessionStorage.city);
+                console.log("state: " + $window.sessionStorage.state);
                 $rootScope.type = $window.sessionStorage.type;
                 $rootScope.lastLogin = $window.sessionStorage.lastLogin;
                 $rootScope.idclient = $window.sessionStorage.idclient;
@@ -55,12 +55,12 @@ wfms.controller( "ShowClientRegisController", function( $scope, $rootScope, $mod
                 $rootScope.postal = response.zipcode;
                 $rootScope.city = response.city;
                 $rootScope.state = response.state;
-                console.log( "idperson:" + $rootScope.idperson );
-                console.log( "zipcode:" + $rootScope.postal );
-                $location.path( '/client' );
-            } ).error( function( err ) {
-                console.log( "Error while fetching data" );
-            } );
+                console.log("idperson:" + $rootScope.idperson);
+                console.log("zipcode:" + $rootScope.postal);
+                $location.path('/client');
+            }).error(function(err) {
+                console.log("Error while fetching data");
+            });
         }
     };
-} );
+});
