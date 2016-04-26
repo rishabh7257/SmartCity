@@ -110,14 +110,28 @@ exports.checkLogin = function(req, res, next) {
             req.session.last_login = last_login;
             req.session.idperson = user.idperson;
             req.session.email = user.username;
+           // req.session.type = user.type;
             console.log(moment(user.last_login).format('LLL'));
             //Async Query
-            mysql.queryDb('update login set ? where ?', [{
-                last_login: new Date()
-            }, {
-                idperson: user.idperson
-            }], function(err, result) {
-                if (err) {
+
+            mysql.queryDb('update login set ? where ?',[{last_login:new Date()},{idperson:user.idperson}],function(err,result){
+            if(err) {
+              console.log(err);
+            }
+          });
+            mysql.queryDb("select type from login where ?",[{idperson:user.idperson}],function(err,result){
+                if(err) {
+                    console.log(err);
+                    res.status(500).json({status:500,message : "Please try again later"});
+                } else {
+                    console.log("User type"+result[0].type);
+                   // res.status(200).json({status:200, zipcode : result[0].zipcode, idperson:user.idperson, email:user.username, name : result[0].fname  + ' ' + result[0].lname,state : result[0].state, city : result[0].city,country : result[0].country, lastLogin:last_login});
+                    req.session.type = result[0].type;
+                }
+            });
+            mysql.queryDb("select fname, lname, zipcode , state , city, country from person where ?",[{idperson:user.idperson}],function(err,result){
+                if(err) {
+
                     console.log(err);
                 }
             });

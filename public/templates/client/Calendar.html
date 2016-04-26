@@ -1,7 +1,7 @@
-<section id="main-content" ng-controller="UserEvents">
-    <section class="wrapper">
+<section id="main-content" >
+    <section class="wrapper" ng-controller="eventsController" ng-init="configureDynamicView()">
 
-        <div ng-init="initCal()" style="height:350px;width:650px;">
+        <div ng-init="initCal()" style="height:350px;width:1050px;" ng-controller="UserEvents" align = "center">
         <div id="scheduler_here" class="dhx_cal_container" style='width:100%; height:100%;'>
             <div class="dhx_cal_navline">
                 <div class="dhx_cal_prev_button">&nbsp;</div>
@@ -17,6 +17,11 @@
             <div class="dhx_cal_data">
             </div>
         </div>
+        </div>
+        <div >
+
+            <div ng-init="EventsCloseToUserEvents()">	<highchart id="container2" config="eventsChart"></highchart>
+            </div>
         </div>
         </section>
     </section>

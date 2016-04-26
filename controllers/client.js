@@ -80,13 +80,14 @@ createClient = function(req,res){
 
 }*/
 powerStatus = function(req,res) {
+	console.log("User type in client"+req.session.type);
 
 	mysql.queryDb("select alertinfo.thresholdLevel, alertinfo.date from alertinfo WHERE date between date_sub(CURDATE(), INTERVAL 7 day) and CURDATE()",function(err,rows){
 
 		if (err) {
 			res.status(500).json({ status : 500, message : "Error while retrieving data" });
 		} else {
-			console.log(rows);
+			//console.log(rows);
 			res.status(200).json({ status : 200, data: rows });
 			}
 		});
@@ -98,7 +99,6 @@ getClient=function(req,res){
 		res.status(400).json({ status : 400, message : "Bad Request" });
 	}else{ 
 		mysql.queryDb('SELECT * FROM client WHERE ?',[{idperson:req.params.idperson}],function(err,rows){
-
 			if (err) {
 				res.status(500).json({ status : 500, message : "Error while retrieving data" });
 			} else {
@@ -124,24 +124,52 @@ getClientInfo=function(req,res){
 
 sendMail = function(req,res){
 	console.log("Inside sendMail");
-	var maillist = [
+	/*var maillist = [
 		'er.poojashukla07@gmail.com',
 		'pooja.shukla@sjsu.edu'
 	];
-	sinchSms.send('+16692219847', 'Alert !! Power Outage predicted in your area tomorrow!').then(function(response) {
-		//All good, response contains messageId
-		console.log(response);
-	}).fail(function(error) {
-		// Some type of error, see error object
-		console.log(error);
+	var msgList = [
+		'+16692219847',
+		'+14083345829'
+	];*/
+	//elect select phonenumber,p.email from login l join person p where l.type ="Residential"
+	mysql.queryDb('SELECT DISTINCT phonenumber from login l join person p WHERE ?',[{type:req.session.type}],function(err,rows){
+	if (err) {
+			console.log("Error while listing all the client details !!!"  + err);
+			//res.status(500).json({ status : 500, message : "Error while listing client details !!!" });
+		} else {
+			//console.log(" send mail to"+ rows.toString());
+		var msgList = [];
+
+		// msgList.push(rows[0].phonenumber);
+		// var mailList = [rows[0].email];
+		// msgList.forEach(function(t){
+		// 	console.log("msg"+t);
+		// });
+		//console.log("msgList"+ msgList[0]+" "+msgList[1]+msgList[2]+msgList[3]);
+		//console.log("maillist"+ mailList[0]+mailList[1]);
+			//res.status(200).json({ status : 200, data : rows});
+		rows.forEach(function(t,j, array){
+			sinchSms.send(t.phonenumber, 'Alert !! Power Outage predicted in your area tomorrow!').then(function(response) {
+				//All good, response contains messageId
+				console.log(response);
+			}).fail(function(error) {
+				// Some type of error, see error object
+				console.log(error);
+			});
+		});
+		}
 	});
+
+	//var txt = 'Alert !! Power Outage predicted in your area tomorrow!';
+	//sinchSms.send('+14088096757', 'Alert !! Power Outage predicted in your area tomorrow!')
 	var msg = {
 		subject: "Alert - Power Outage",
 		text: "There is an outage predicted in your area tomorrow!"
 	}
 	 console.log(msg);
 
-	maillist.forEach(function (to, i, array) {
+	/*maillist.forEach(function (to, i, array) {
 		msg.to = to;
 
 		smtpTransport.sendMail(msg, function (err) {
@@ -155,7 +183,7 @@ sendMail = function(req,res){
 			//res.render('index');
 		});
 
-	});
+	});*/
 };
 
 getWeatherForecast = function(req,res) {

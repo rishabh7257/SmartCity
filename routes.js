@@ -4,11 +4,13 @@ var utilController = require('./controllers/util');
 var eventsController = require('./controllers/events');
 var historyController = require('./controllers/tibco');
 var calendarController = require('./controllers/calendar');
+
 var nodeRBridge = require('./controllers/nodeRBridge');
 var exec = require('child_process').exec;
 var spawn = require('child_process').spawn;
 var child;
 module.exports = function(app, passport) {
+
     // Home
     app.get('/', function(req, res) {
         res.render("index");
@@ -33,15 +35,20 @@ module.exports = function(app, passport) {
         res.render("front");
     });
     //Modifying
-    app.get('/api/getPowerOutage', historyController.getPowerOutage);
-    app.get('/api/getOutagesByArea', historyController.getOutagesByArea);
-    app.get('/api/getOutagesByCause', historyController.getOutagesByCause);
-    app.get('/api/createUserEvents', calendarController.createUserEvents);
-    app.get('/data', calendarController.getUserEvents);
-    app.post('/data', calendarController.addUserEvents)
-    app.get('/graph', function(req, res) {
-        res.render("googleCharts");
-    });
+
+    app.get('/api/getPowerOutage',historyController.getPowerOutage);
+    app.get('/api/getOutagesByArea',historyController.getOutagesByArea);
+
+    app.get('/api/getOutagesByCause',historyController.getOutagesByCause);
+    app.get('/sendMail',clientController.sendMail);
+    app.get('/api/createUserEvents',calendarController.createUserEvents);
+    app.get('/data',calendarController.getUserEvents);
+    app.post('/data',calendarController.addUserEvents);
+    app.get('/api/comingEvents',eventsController.getEventsAroundUserEvents);
+
+    app.get('/graph', function(req,res){ res.render("googleCharts"); });
+
+
     //Util
     app.get('/api/getLongLat/:city', ensureAuthenticated, utilController.getLongLat);
     app.get('/api/getDate/:dateTime', ensureAuthenticated, utilController.getDate);

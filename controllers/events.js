@@ -4,6 +4,31 @@ var mongo = require('../models/mongo');
 var eventful = require('eventful-node');
 var client = new eventful.Client("v7Hh8fbDtq7S7C52");
 
+
+
+getEventsAroundUserEvents = function(req,res){
+	var userID = req.session.idperson;
+	var db = mongo.getMongoConnection();
+	db.open(function(err,db) {
+		db.authenticate('username', 'password', function (err, result) {
+			if (err) {
+				throw err;
+			} else
+
+			//var temp = db.collection('power_outage').find().toArray(function(err, documents){
+
+
+			var temp =  db.collection('user_events').find({userId:userID}, {start_date:1}).toArray(function(err,documents){
+
+				for (var j = 0; j < documents.length; j++) {
+					console.log("Event Date"+ documents[j].start_date);
+				}
+				res.send(documents);
+			});
+
+		});
+	});
+};
 getEventsByCity = function(req, res){
 
 	client.searchEvents({
@@ -40,3 +65,4 @@ getEventsByPostal = function(req,res) {
 
 exports.getEventsByPostal = getEventsByPostal;
 exports.getEventsByCity = getEventsByCity;
+exports.getEventsAroundUserEvents = getEventsAroundUserEvents;
