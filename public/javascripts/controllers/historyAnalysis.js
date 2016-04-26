@@ -5,6 +5,18 @@ wfms.controller( "HistoryAnalysis", function( $scope, $rootScope, $modal, $locat
         clientInfo();
         getFutureData();
     };
+    $scope.showPieChart1 = function() {
+    var modalInstance = $modal.open( {
+        templateUrl: 'templates/client/chart1.html',
+        controller: 'ClientRegistrationController',
+        size: 'lg',
+    } );
+    modalInstance.result.then( function( isValid ) {
+        if ( isValid ) {
+            getData();
+        }
+    }, function() {} );
+};
     $scope.outagesByArea = function() {
         DataService.getData( "/api/getOutagesByArea", [] ).success( function( response ) {
             $scope.area = response.Area;
@@ -120,6 +132,72 @@ wfms.controller( "HistoryAnalysis", function( $scope, $rootScope, $modal, $locat
             console.log( err.message );
         } );
     }
+    $scope.recommendations = function() {
+        alert("Inside recommendation");
+        $scope.prediction = {
+            options: {
+                chart: {
+                    type: 'bar'
+                }
+            },
+            chart: {
+                type: 'column'
+            },
+            title: {
+                text: 'Power Outages in the next week'
+            },
+            subtitle: {
+                text: 'Source: <a href="http://en.wikipedia.org/wiki/List_of_cities_proper_by_population">Wikipedia</a>'
+            },
+            xAxis: {
+                type: 'category',
+                labels: {
+                    rotation: -45,
+                    style: {
+                        fontSize: '13px',
+                        fontFamily: 'Verdana, sans-serif'
+                    }
+                }
+            },
+            yAxis: {
+                min: 0,
+                title: {
+                    text: 'Population (millions)'
+                }
+            },
+            legend: {
+                enabled: false
+            },
+            tooltip: {
+                pointFormat: 'Population in 2008: <b>{point.y:.1f} millions</b>'
+            },
+            series: [{
+                name: 'Population',
+                data: [
+                    ['Shanghai', 23.7],
+                    ['Lagos', 16.1],
+                    ['Istanbul', 14.2],
+                    ['Karachi', 14.0],
+                    ['Mumbai', 12.5],
+                    ['Moscow', 12.1],
+
+                ],
+                dataLabels: {
+                    enabled: true,
+                    rotation: 90,
+                    color: '#FFFFFF',
+                    align: 'right',
+                    format: '{point.y:.1f}', // one decimal
+                    y: 10, // 10 pixels down from the top
+                    style: {
+                        fontSize: '13px',
+                        fontFamily: 'Verdana, sans-serif'
+                    }
+                }
+            }]
+        }
+
+    };
     $scope.getOutageData = function() {
         DataService.getData( "/api/getPowerOutage", [] ).success( function( response ) {
             $scope.xAxis = response.x;
