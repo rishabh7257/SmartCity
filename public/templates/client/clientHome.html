@@ -152,6 +152,16 @@
                                                 </p>
                                             </div>
                                         </div>
+                                        <div ng-if="powerStatus=='Green'">
+                                            <div class="w3-card-24 w3-green" style="width: 150px;
+  height: 100px;
+  margin: 16px;
+  padding: 16px">
+                                                <p>
+                                                    No Power Outages
+                                                </p>
+                                            </div>
+                                        </div>
                                         <div ng-if="powerStatus=='Yellow'">
                                             <div class="w3-card-24 w3-yellow" style="width: 150px;
   height: 100px;
@@ -162,7 +172,7 @@
                                                 </p>
                                             </div>
                                         </div>
-                                        <div ng-if="{{powerStatus}}=='Green'">
+                                      <!--  <div ng-if="{{powerStatus}}=='Green'">
                                             <div class="w3-card-24 w3-green" style="width: 150px;
   height: 100px;
   margin: 16px;
@@ -171,7 +181,7 @@
                                                     No Outages and maintenance needed
                                                 </p>
                                             </div>
-                                        </div>
+                                        </div>-->
 
                                     </div>
                                     <div align = "center"><button type="button" class="btn btn-primary" ng-click="sendMail()">Send Notifications</button></div>
