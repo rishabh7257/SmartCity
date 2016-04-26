@@ -5,22 +5,30 @@ var request = require('request');
 var json2csv = require('json2csv');
 var fs = require('fs');
 runRScripts = function(req, res) {
-    var rScript = "R CMD BATCH '--args a=1 b=c(2,5,6)' " + __dirname + "/RScripts/SVM.r " + __dirname + "/RScripts/output.txt"
+    var rScript = "R CMD BATCH " + __dirname + "/../RScripts/CrossValidation_Script.r " + __dirname + "/../RScripts/output.txt"
     child = exec(rScript, function(error, stdout, stderr) {
-        var filename = __dirname + "/RScripts/output.txt"
-        fs.readFile(filename, 'utf8', function(err, data) {
-            if (err) {
-                res.sendStatus(500)
-            };
-            console.log('OK: ' + filename);
-            console.log(data)
-            res.sendStatus(200);
-        });
-        console.log('Error: ' + error);
-        res.status(500).json({
-            status: 500,
-            message: error
-        });
+        if (error) {
+            res.status(500).json({
+                status: 500,
+                message: error
+            });
+        } else {
+            var filename = __dirname + "/../RScripts/newOutput.txt"
+            fs.readFile(filename, 'utf8', function(err, data) {
+                if (err) {
+                    res.status(500).json({
+                        status: 500,
+                        message: error
+                    });
+                } else {
+                    console.log('OK: ' + filename + 'Read Successfully from R CMD');
+                    res.status(200).json({
+                        status: 200,
+                        message: data
+                    });
+                }
+            });
+        }
     });
 }
 readTextFile = function(req, res) {
@@ -36,6 +44,7 @@ readTextFile = function(req, res) {
             var result = data.split('\n').map(function(n) {
                 return Number(n);
             });
+            console.log(result);
             res.status(200).json({
                 status: 200,
                 message: result
@@ -114,6 +123,7 @@ getFutureWeather = function(req, res) {
                 futureWeekData.push(futureData);
             }
         }
+        //Dumping Into CSV file.
         var fields = ["temp", "dew_pot", "humidity", "pressure", "visibility", "windspeedslow", "windspeedcalm", "windspeedhigh", "windspeedveryhigh", "lightrain", "mostlycloudy", "heavyrain", "scatteredclouds", "clearclouds", "equipment_failure", "power_outage"];
         json2csv({
             data: futureWeekData,
