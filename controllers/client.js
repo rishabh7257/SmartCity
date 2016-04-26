@@ -238,7 +238,6 @@ addUserEvents = function(req,res) {
 
 exports.getClient = getClient;
 exports.getClientInfo=getClientInfo;
-//exports.createUserEvents=createUserEvents;
 exports.getUserEvents = getUserEvents;
 exports.addUserEvents = addUserEvents;
 exports.powerStatus = powerStatus;
