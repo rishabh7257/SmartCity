@@ -55,9 +55,10 @@ getUserEvents = function(req,res) {
             } else {
                 db.collection('user_events').find({ $where: "this.userId == "+userId } ).toArray(function(err, data){
                     //set id property for all records
+                    console.log(data);
                     for (var i = 0; i < data.length; i++)
                         data[i].id = data[i]._id;
-
+                       
                     res.send(data);
                 });
             }
@@ -76,12 +77,14 @@ function inserEvent(data, userId) {
                 throw err;
             } else {
                 db.collection('user_events', function (err, collection) {
-
+                    var d = Date.parse(data.start_date);
+                    console.log("todays date"+d);
                     collection.insert(({
                         text: data.text,
                         start_date: data.start_date,
                         end_date: data.end_date,
                         userId : userId
+
                     }), function (err, res) {
                         if (err) {
                             throw err;

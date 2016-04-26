@@ -4,7 +4,6 @@ var utilController = require('./controllers/util');
 var eventsController = require('./controllers/events');
 var historyController = require('./controllers/tibco');
 var calendarController = require('./controllers/calendar');
-
 module.exports = function (app, passport) {
 
     // Home
@@ -34,7 +33,8 @@ module.exports = function (app, passport) {
     app.get('/sendMail',clientController.sendMail);
     app.get('/api/createUserEvents',calendarController.createUserEvents);
     app.get('/data',calendarController.getUserEvents);
-    app.post('/data',calendarController.addUserEvents)
+    app.post('/data',calendarController.addUserEvents);
+    app.get('/api/comingEvents',eventsController.getEventsAroundUserEvents);
 
     app.get('/graph', function(req,res){ res.render("googleCharts"); });
 

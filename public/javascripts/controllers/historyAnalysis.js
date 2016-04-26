@@ -32,7 +32,7 @@ wfms.controller( "HistoryAnalysis", function( $scope, $rootScope, $modal, $locat
                             },
                             showInLegend: true
                         }
-                    }
+                      }
                 },
                 series: [ {
                     name: "Outages By Area",
