@@ -50,23 +50,9 @@ module.exports = function(app, passport) {
     app.get('/api/getEventsByCity/:city', ensureAuthenticated, eventsController.getEventsByCity);
     app.get('/api/getEventsByPostal/:postal', ensureAuthenticated, eventsController.getEventsByPostal);
     //RScripts
-    // app.get('/api/runRScripts',nodeRBridge.runRScripts);
-    app.get('/api/runRScripts', function(req, res) {
-        var rScript = 'R CMD BATCH ' + __dirname + '/RScripts/SVM.r ' + __dirname + '/RScripts/output.txt'
-        child = exec(rScript, function(error, stdout, stderr) {
-            console.log('stdout: ' + stdout);
-            console.log('stderr: ' + stderr);
-            console.log('Error: ' + error);
-            res.sendStatus(200);
-        });
-        console.log(__dirname);
-        // let child = exec('script', {
-        //     shell: '/bin/bash'
-        // }, (err, stdout, stderr) => {
-        //     console.log('this is with bash', stdout, stderr)
-        // })
-        console.log("" + process.execPath);
-    });
+    app.get('/api/runRScripts', nodeRBridge.runRScripts);
+    app.post('/api/getFutureWeather', nodeRBridge.getFutureWeather);
+    app.get('/api/readTextFile/:filename', nodeRBridge.readTextFile);
     //Elastick beanstalk healthcheck
     app.get('/health', function(req, res) {
         res.send(200);
