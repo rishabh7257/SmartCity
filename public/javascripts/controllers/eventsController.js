@@ -94,9 +94,12 @@ wfms.controller("eventsController", function($scope, $rootScope, $modal, $locati
                                 // console.log("To be pushed start time "+$rootScope.eventData[i].start_time);
                                 eventsStartDate.push($rootScope.eventData[i].start_time);
 
+                                var value = m+":"+d+":"+y+" at "+$rootScope.eventData[j].venue_name;
+
+
                                 var final = [];
                                 var temp = {
-                                    name: $rootScope.eventData[j].start_time,
+                                    name: value,
                                     y: $scope.getPredictedHeadCount($rootScope.eventData[j].price)
 
                                 }
