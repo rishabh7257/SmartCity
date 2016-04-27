@@ -3,87 +3,66 @@
     <section class="wrapper">
         <div class="row">
             <div class="col-lg-12">
-                <h3 class="page-header">
-                    <i class="fa fa-user-md">
-                    </i>
-                    Dashboard
-                </h3>
-                <ol class="breadcrumb">
-                    <li>
-                        <i class="fa fa-home">
-                        </i>
-                        <a href="index.html">
-                            Home
-                        </a>
-                    </li>
-                    <li>
-                        <i class="fa fa-user-md">
-                        </i>
-                        Dashboard
-                    </li>
-                </ol>
-            </div>
-            <div class="row">
-                <!-- profile-widget -->
-                <div class="col-lg-12">
-                    <div class="profile-widget profile-widget-info">
-                        <div class="panel-body">
-                            <div class="col-lg-2 col-sm-2">
-                                <div class="follow-ava">
-                                    <img alt="" src="img/clientlogo.jpeg">
-                                    </img>
-                                </div>
-                                <h6>
-                                    Hello {{clientProperties.fname}}
-                                </h6>
-                            </div>
-                            <div class="col-lg-2 col-sm-6 follow-info weather-category">
-                                 <div ng-controller="ClientDashboard" ng-init="clientPowerStatus()" align="center">
-                                        Power Outage Status:
-                                       Critical
-                                        <div ng-if="powerStatus=='Red'">
-                                            <div class="w3-card-24 w3-red" style="width: 150px;
-  height: 100px;
-  margin: 16px;
-  padding: 16px">
-                                                <p>
-                                                    Power Outage predicted in next week
-                                                </p>
-                                            </div>
-                                        </div>
-                                     <div ng-if="powerStatus=='Green'">
-                                         <div class="w3-card-24 w3-green" style="width: 150px;
-  height: 100px;
-  margin: 16px;
-  padding: 16px">
-                                             <p>
-                                                No Outages in this area
-                                             </p>
-                                         </div>
-                                     </div>
-                                        <div ng-if="powerStatus=='Yellow'">
-                                            <div class="w3-card-24 w3-yellow" style="width: 150px;
-  height: 100px;
-  margin: 16px;
-  padding: 16px">
-                                                <p>
-                                                    Maintenance in Progres
-                                                </p>
-                                            </div>
-                                        </div>
-
-                                        <div align = "center"><button type="button" class="btn btn-primary" ng-click="sendMail()">Send Notifications</button></div>
-
-                                    </div>
-                            </div>
-                        </div>
+                <div ng-controller="ClientDashboard" ng-init="clientPowerStatus()" align="center">
+                <div ng-if="powerStatus=='Green'">
+                <div class="alert alert-success">
+                    <strong>No Outages Predicted!</strong>
+                </div>
+                </div>
+                <div ng-if="powerStatus=='Yellow'">
+                <div class="alert alert-info">
+                    <strong>Warning!</strong> Maintenance in Progress
+                </div>
+                </div>
+                <div ng-if="powerStatus=='Red'">
+                    <div class="alert alert-danger">
+                        <strong>Alert!</strong> Power Outage predicted this week
                     </div>
                 </div>
+                    </div>
+
             </div>
+          <!--  <div ng-controller="ClientDashboard" ng-init="clientPowerStatus()" align="center">
+                Power Outage Status:
+                Critical
+                <div ng-if="powerStatus=='Red'">
+                    <div class="w3-card-24 w3-red" style="width: 150px;
+  height: 100px;
+  margin: 16px;
+  padding: 16px">
+                        <p>
+                            Power Outage predicted in next week
+                        </p>
+                    </div>
+                </div>
+                <div ng-if="powerStatus=='Green'">
+                    <div class="w3-card-24 w3-green" style="width: 150px;
+  height: 100px;
+  margin: 16px;
+  padding: 16px">
+                        <p>
+                            No Outages in this area
+                        </p>
+                    </div>
+                </div>
+                <div ng-if="powerStatus=='Yellow'">
+                    <div class="w3-card-24 w3-yellow" style="width: 150px;
+  height: 100px;
+  margin: 16px;
+  padding: 16px">
+                        <p>
+                            Maintenance in Progres
+                        </p>
+                    </div>
+                </div>
+
+                <div align = "center"><button type="button" class="btn btn-primary" ng-click="sendMail()">Send Notifications</button></div>
+
+            </div>-->
+
             <div class="col-lg-12" align = "center">
                 <h3 class="page-header">
-                    <i class="fa fa-user-md">
-                    </i>
+
                     Weather Summary
                 </h3>
                 <div id="chartsDiv" ng-controller="ClientDashboard">
@@ -168,56 +147,60 @@
                                         </div>
                                     </div>
 
-                                    <div ng-controller="ClientDashboard" ng-init="clientPowerStatus()" align="center">
-                                        Power Outage Status:
-							           Critical
-                                        <div ng-if="powerStatus=='Red'">
-                                            <div class="w3-card-24 w3-red" style="width: 150px;
-  height: 100px;
-  margin: 16px;
-  padding: 16px">
-                                                <p>
-                                                    Power Outage predicted in next week
-                                                </p>
-                                            </div>
-                                        </div>
-                                        <div ng-if="powerStatus=='Green'">
-                                            <div class="w3-card-24 w3-green" style="width: 150px;
-  height: 100px;
-  margin: 16px;
-  padding: 16px">
-                                                <p>
-                                                    No Power Outages
-                                                </p>
-                                            </div>
-                                        </div>
-                                        <div ng-if="powerStatus=='Yellow'">
-                                            <div class="w3-card-24 w3-yellow" style="width: 150px;
-  height: 100px;
-  margin: 16px;
-  padding: 16px">
-                                                <p>
-                                                    Maintenance in Progres
-                                                </p>
-                                            </div>
-                                        </div>
-                                      <!--  <div ng-if="{{powerStatus}}=='Green'">
-                                            <div class="w3-card-24 w3-green" style="width: 150px;
-  height: 100px;
-  margin: 16px;
-  padding: 16px">
-                                                <p>
-                                                    No Outages and maintenance needed
-                                                </p>
-                                            </div>
-                                        </div>-->
-
-                                    </div>
+                                <div ng-controller="HistoryAnalysis" ng-init="recommendations()">
+                                   <highchart id="container3" config="prediction"></highchart>
                                     <div align = "center"><button type="button" class="btn btn-primary" ng-click="sendMail()">Send Notifications</button></div>
+                                    <div class="w3-card-24 w3-green" style="width: 150px;
+  height: 100px;
+  margin: 16px;
+  padding: 16px">
+                                      
+                                        Send Notification
+                                    </div>
+                                    <!--  <div id ="prediction"></div>-->
+                                </div>
+                                   <!-- <div class="col-lg-2 col-sm-6 follow-info weather-category">
+                                        <div ng-controller="ClientDashboard" ng-init="clientPowerStatus()" align="center">
+                                            Power Outage Status:
+                                            Critical
+                                            <div ng-if="powerStatus=='Red'">
+                                                <div class="w3-card-24 w3-red" style="width: 150px;
+  height: 100px;
+  margin: 16px;
+  padding: 16px">
+                                                    <p>
+                                                        Power Outage predicted in next week
+                                                    </p>
+                                                </div>
+                                            </div>
+                                            <div ng-if="powerStatus=='Green'">
+                                                <div class="w3-card-24 w3-green" style="width: 150px;
+  height: 100px;
+  margin: 16px;
+  padding: 16px">
+                                                    <p>
+                                                        No Outages in this area
+                                                    </p>
+                                                </div>
+                                            </div>
+                                            <div ng-if="powerStatus=='Yellow'">
+                                                <div class="w3-card-24 w3-yellow" style="width: 150px;
+  height: 100px;
+  margin: 16px;
+  padding: 16px">
+                                                    <p>
+                                                        Maintenance in Progres
+                                                    </p>
+                                                </div>
+                                            </div>
 
+                                            <div align = "center"><button type="button" class="btn btn-primary" ng-click="sendMail()">Send Notifications</button></div>
+
+                                        </div>
+                                    </div>-->
                                 </section>
                             </div>
-                            <highchart id="predictedGraph" config="predictedGraph"></highchart>
+
                         </section>
                     </div>
                 </div>
