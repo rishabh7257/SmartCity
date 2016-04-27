@@ -85,8 +85,10 @@ for(i in 1:nrow(myPredictedFrame))
 }
 
 #Writing actual values in the table
-write.table(myResultFrame, "~/Documents/SmartCity/RScripts/newOutput.txt",sep="\t",append=F,row.names=FALSE, col.names=FALSE)
+newOutput <-paste(wd,'/RScripts/newOutput.txt', sep= "")
+write.table(myResultFrame, newOutput,sep="\t",append=F,row.names=FALSE, col.names=FALSE)
 
 #Writing the rounded off values in the table
-write.table(myPredictedFrame, "~/Documents/SmartCity/RScripts/newOutputRounded.txt",sep="\n",append=F,row.names=FALSE, col.names=FALSE)
+newOutputRounded<-paste(wd,'/RScripts/newOutputRounded.txt', sep= "")
+write.table(myPredictedFrame, newOutputRounded, sep="\n",append=F,row.names=FALSE, col.names=FALSE)
 

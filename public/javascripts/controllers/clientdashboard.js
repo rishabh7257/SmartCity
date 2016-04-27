@@ -34,10 +34,10 @@ wfms.controller("ClientDashboard", function($scope, $rootScope, $modal, $locatio
                     $scope.predictedGraph = {
                         options: {
                             chart: {
-                                type: 'line',
+                                type: 'bar',
                             },
                             plotOptions: {
-                                line: {
+                                bar: {
                                     dataLabels: {
                                         enabled: true
                                     },

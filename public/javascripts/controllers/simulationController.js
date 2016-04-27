@@ -40,7 +40,7 @@ wfms.controller("SimulationController", function($scope, $rootScope, DataService
                     $scope.predictedGraph = {
                         options: {
                             chart: {
-                                type: 'line',
+                                type: 'bar',
                             },
                             plotOptions: {
                                 line: {

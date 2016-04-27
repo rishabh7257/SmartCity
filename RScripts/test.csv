@@ -1,8 +1,2 @@
-temp,dew_pot,humidity,pressure,visibility,windspeedslow,windspeedcalm,windspeedhigh,windspeedveryhigh,lightrain,mostlycloudy,heavyrain,scatteredclouds,clearclouds,equipment_failure,power_outage
-10.86,57,69,29.89,10,1,0,0,0,0,0,0,0,0,0.5,0
-10.65,57,71,29.89,10,1,0,0,0,0,0,0,0,0,0.5,0
-12.71,57,79,29.89,10,1,0,0,0,0,0,0,0,0,0.5,0
-16.4,57,73,29.89,10,1,0,0,0,0,0,0,0,0,0.5,0
-18.4,57,63,29.89,10,0,1,0,0,0,0,0,0,0,0.5,0
-15.39,57,51,29.89,10,0,1,0,0,0,0,0,0,0,0.5,0
-11.53,57,63,29.89,10,0,1,0,0,0,0,0,0,0,0.5,0
+"temp","dew_pot","humidity","pressure","visibility","windspeedslow","windspeedcalm","windspeedhigh","windspeedveryhigh","lightrain","mostlycloudy","heavyrain","scatteredclouds","clearclouds","equipment_failure","power_outage"
+16.41,57,96,29.89,10,1,0,0,0,0,0,0,0,0,0,0
