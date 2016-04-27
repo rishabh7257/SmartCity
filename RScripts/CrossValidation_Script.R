@@ -55,6 +55,38 @@ randomforest<-function(train,test)
 }
 
 myResultFrame<-do_cv_class(final,5,randomforest)
-write.table(myResultFrame, "~/Documents/SmartCity/RScripts/newOutput.txt",sep="\t",append=F,row.names=FALSE, col.names=FALSE)
 
+#Rounding off the predicted values
+myPredictedFrame<- data.frame(myResultFrame)
+
+cutofflow <- 0.2
+cutoffmid <- 0.4
+cutoffhigh <- 0.6
+
+#Check the threshold
+for(i in 1:nrow(myPredictedFrame))
+{
+  if(myPredictedFrame[i,1]<cutofflow)
+  {
+    myPredictedFrame[i,1]<-0.25
+  }
+  else if((myPredictedFrame[i,1]>=cutofflow) && (myPredictedFrame[i,1]<cutoffmid))
+  {
+    myPredictedFrame[i,1]<-0.50
+  }
+  else if((myPredictedFrame[i,1]>=cutoffmid) && (myPredictedFrame[i,1]<cutoffhigh))
+  {
+    myPredictedFrame[i,1]<-0.75
+    
+  }
+  else{
+    myPredictedFrame[i,1]<-1.00
+  }
+}
+
+#Writing actual values in the table
+write.table(myResultFrame, "~/SmartCity/RScripts/newOutput.txt",sep="\t",append=F,row.names=FALSE, col.names=FALSE)
+
+#Writing the rounded off values in the table
+write.table(myPredictedFrame, "~/Documents/SmartCity/RScripts/newOutputRounded.txt",sep="\n",append=F,row.names=FALSE, col.names=FALSE)
 
