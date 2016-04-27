@@ -17,15 +17,50 @@ wfms.controller("ClientDashboard", function($scope, $rootScope, $modal, $locatio
         dp.setTransactionMode("POST", false);
     }
     $scope.predictNextWeekOutage = function() {
+        var city;
+        if ($rootScope.city) {
+            city = $rootScope.city;
+        } else {
+            city = "San Jose"
+        }
         var params = {
-            city: "San Jose",
+            city: city,
             country: "US"
         };
         DataService.postData("/api/getFutureWeather", params).success(function(response) {
             DataService.getData("/api/runRScripts", []).success(function(response) {
                 console.log("get the response from R Script" + response)
                 DataService.getData("/api/readTextFile/newOutput", []).success(function(response) {
-                    console.log("Final ouput" + JSON.stringify(response.message))
+                    $scope.predictedGraph = {
+                        options: {
+                            chart: {
+                                type: 'line',
+                            },
+                            plotOptions: {
+                                line: {
+                                    dataLabels: {
+                                        enabled: true
+                                    },
+                                    enableMouseTracking: false
+                                }
+                            },
+                        },
+                        yAxis: {
+                            title: {
+                                text: 'Probablity of Power Outage'
+                            }
+                        },
+                        xAxis: {
+                            categories: ['First', 'Second', 'Third', 'Fourth', 'Fifth', 'Sixth', 'Seventh']
+                        },
+                        title: {
+                            text: 'Power Outages in the next week'
+                        },
+                        series: [{
+                            name: 'Probablistic distribution of power outage',
+                            data: response.message
+                        }]
+                    }
                 }).error(function(err) {
                     console.log(err.message);
                 });

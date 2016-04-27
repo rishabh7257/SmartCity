@@ -54,6 +54,7 @@ randomforest<-function(train,test)
   return(predicted) 
 }
 
+#Making the actual prediction
 myResultFrame<-do_cv_class(final,5,randomforest)
 
 #Rounding off the predicted values
@@ -85,7 +86,7 @@ for(i in 1:nrow(myPredictedFrame))
 }
 
 #Writing actual values in the table
-write.table(myResultFrame, "~/SmartCity/RScripts/newOutput.txt",sep="\t",append=F,row.names=FALSE, col.names=FALSE)
+write.table(myResultFrame, "~/Documents/SmartCity/RScripts/newOutput.txt",sep="\t",append=F,row.names=FALSE, col.names=FALSE)
 
 #Writing the rounded off values in the table
 write.table(myPredictedFrame, "~/Documents/SmartCity/RScripts/newOutputRounded.txt",sep="\n",append=F,row.names=FALSE, col.names=FALSE)

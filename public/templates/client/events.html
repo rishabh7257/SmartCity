@@ -36,15 +36,17 @@
 					<td>{{row.address }}</td>
 					<td>{{row.city }}</td>
 					<td>{{row.predictedHeadCount }}</td>
-					
+
 				</tr>
 			</tbody>
 		</table>
+		</section>
+		
 		<div class = "row">
 			<div class="col-lg-6">
-			<nvd3 options="options" data="data"></nvd3>
-			<highchart id="container" config="chart2" style="min-width: 310px; height: 400px; max-width: 600px; margin: 0 auto">
-		</highchart>
+			<div align="center">
+				<nvd3 options="options" data="data"></nvd3>
+			</div>
 
 			</div>
 		</div>
