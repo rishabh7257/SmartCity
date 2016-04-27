@@ -1,0 +1,46 @@
+section id="main-content" ng-controller="SimulationController">
+    <section class="wrapper">
+
+        <div class="modal-body">
+            <form>
+                <div class="row">
+                    <div class="col-xs-12">
+                        <div class="col-xs-6">
+                            <h5>
+                                <strong>Simulate Equipment Failure</strong>
+                            </h5>
+                        </div>
+                </div><br/>
+
+                <div class="row" style="padding-top: 2%;">
+                    <div class="col-xs-6">
+                        <div class="col-xs-3">
+                            <h5>
+                                <strong>Value</strong>
+                            </h5>
+                        </div>
+                        <div class="col-xs-4">
+                            <select ng-model="equipfailureval">
+                                    <option value="">
+                                        -- Select a value --
+                                    </option>
+                                    <option ng-model="equipfailureval" ng-repeat="equipfailureval in equipfailure" value ="{{equipfailureval.val}}">
+                                        {{equipfailureval.val}}
+                                    </option>
+                                </select>
+                        </div>
+                    </div>
+
+                </div>
+
+                  <div class="form-group">
+                            <div class="col-lg-offset-2 col-lg-5">
+                                <button class="btn btn-primary" ng-click="predict()">
+                                    Predict
+                                </button>
+                            </div>
+
+            </form>
+        </div>
+</section>
+    </section>
