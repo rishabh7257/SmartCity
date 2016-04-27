@@ -1,13 +1,12 @@
+
 pkgTest <- function(x)
-{
-  if (!require(x,character.only = TRUE))
-  {
-    install.packages(x,dep=TRUE)
-    if(!require(x,character.only = TRUE)) stop("Package not found")
-  }
-}
-pkgTest("e1071")
-pkgTest("rpart")
+ {
+       if (!require(x,character.only = TRUE))
+       {
+           install.packages(x, repos="http://cran.cnr.berkeley.edu")
+             if(!require(x,character.only = TRUE)) stop("Package not found")
+           }
+     }
 pkgTest("randomForest")
 library(randomForest)
 
