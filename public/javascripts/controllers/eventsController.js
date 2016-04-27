@@ -5,19 +5,14 @@ wfms.controller("eventsController", function($scope, $rootScope, $modal, $locati
     };
     $scope.configureDynamicView = function configureDynamicView() {
         var url = "/api/getEventsByPostal/" + $rootScope.postal
-            //		var url = "/api/getEventsByPostal/95126"
+            //      var url = "/api/getEventsByPostal/95126"
         DataService.getData(url, []).success(function(response) {
             $scope.extractEvent(response);
         }).error(function(err) {
             console.log(err.message);
         });
     }
-
-
-
-
     $scope.extractEvent = function extractEvent(data) {
-        alert("inside extract Events");
         var events = data.data.search.events.event;
         console.log(events);
         var tableRow = events.length;
@@ -33,10 +28,9 @@ wfms.controller("eventsController", function($scope, $rootScope, $modal, $locati
                 'predictedHeadCount': $scope.getPredictedHeadCount(events[i].price)
             }
             eventArray.push(eachEvent);
-            arr.push(events[i]) ;
+            arr.push(events[i]);
             $rootScope.eventData = arr;
-          //  console.log("Event Date is " + $rootScope.eventData);
-
+            //  console.log("Event Date is " + $rootScope.eventData);
             $scope.allEvents = eventArray
             $scope.series();
             console.log(JSON.stringify($scope.allEvents));
@@ -44,10 +38,8 @@ wfms.controller("eventsController", function($scope, $rootScope, $modal, $locati
                 console.log("Number");
             }
         }
-
     }
     $scope.getPredictedHeadCount = function getPredictedHeadCount(price) {
-        //alert("Inside pridecited head count" + $rootScope.eventData);
         if (price) {
             var predictedHeadCount = "";
             if (price[0] == '$') {
@@ -65,119 +57,104 @@ wfms.controller("eventsController", function($scope, $rootScope, $modal, $locati
             return 0;
         }
     }
-
-    $scope.EventsCloseToUserEvents = function EventsCloseToUserEvents(){
-        var url = "/api/comingEvents";
-        DataService.getData(url, []).success(function(response) {
-           // console.log("Inside eventsController"+response);
-            //$scope.extractEvent(response);
-            var eventData = $rootScope.eventData;
-          //  console.log("dates"+eventDates[0]);
-            var eventsHeadCount = [];
-            var eventsStartDate = [];
-            //console.log("Year - live  "+year+"  user"+d.getFullYear());
-            var final = [];
-            var todaysDate = new Date();
-            for(var i =0; i < response.length; i++) {
-                var day = parseInt(response[i].start_date.split("/")[1]);
-                var month = parseInt(response[i].start_date.split("/")[0]);
-                var year = parseInt(response[i].start_date.split("/")[2]);
-                if( (day == todaysDate.getDate()) && (month == todaysDate.getMonth()+1) && (year = todaysDate.getFullYear())) {
-                    for (var j = 0; j < $rootScope.eventData.length; j++) {
-                        var d = new Date($rootScope.eventData[j].start_time).getDate();
-                        var m = new Date($rootScope.eventData[j].start_time).getMonth() + 1;
-                        var y = new Date($rootScope.eventData[j].start_time).getFullYear();
-                        if (y == year && m == month) {
-                            if ((d - day) <= 3) {
-                                console.log("To be pushed HC " + $scope.getPredictedHeadCount($rootScope.eventData[i].price));
-                                eventsHeadCount.push($scope.getPredictedHeadCount($rootScope.eventData[i].price));
-                                // console.log("To be pushed start time "+$rootScope.eventData[i].start_time);
-                                eventsStartDate.push($rootScope.eventData[i].start_time);
-
-                                var value = m+":"+d+":"+y+" at "+$rootScope.eventData[j].venue_name;
-
-
-                                var final = [];
-                                var temp = {
-                                    name: value,
-                                    y: $scope.getPredictedHeadCount($rootScope.eventData[j].price)
-
+    $scope.EventsCloseToUserEvents = function EventsCloseToUserEvents() {
+            var url = "/api/comingEvents";
+            DataService.getData(url, []).success(function(response) {
+                var eventData = $rootScope.eventData;
+                var eventsHeadCount = [];
+                var eventsStartDate = [];
+                var final = [];
+                var todaysDate = new Date();
+                for (var i = 0; i < response.length; i++) {
+                    var day = parseInt(response[i].start_date.split("/")[1]);
+                    var month = parseInt(response[i].start_date.split("/")[0]);
+                    var year = parseInt(response[i].start_date.split("/")[2]);
+                    if ((day == todaysDate.getDate()) && (month == todaysDate.getMonth() + 1) && (year = todaysDate.getFullYear())) {
+                        for (var j = 0; j < $rootScope.eventData.length; j++) {
+                            var d = new Date($rootScope.eventData[j].start_time).getDate();
+                            var m = new Date($rootScope.eventData[j].start_time).getMonth() + 1;
+                            var y = new Date($rootScope.eventData[j].start_time).getFullYear();
+                            if (y == year && m == month) {
+                                if ((d - day) <= 3) {
+                                    console.log("To be pushed HC " + $scope.getPredictedHeadCount($rootScope.eventData[i].price));
+                                    eventsHeadCount.push($scope.getPredictedHeadCount($rootScope.eventData[i].price));
+                                    eventsStartDate.push($rootScope.eventData[i].start_time);
+                                    var value = m + ":" + d + ":" + y + " at " + $rootScope.eventData[j].venue_name;
+                                    var final = [];
+                                    var temp = {
+                                        name: value,
+                                        y: $scope.getPredictedHeadCount($rootScope.eventData[j].price)
+                                    }
+                                    final.push(temp)
+                                    $scope.chartsData = final;
+                                    console.log("After pushed" + eventsStartDate + " Head Count " + eventsHeadCount);
                                 }
-                                final.push(temp)
-
-
-                                $scope.chartsData = final;
-
-                                console.log("After pushed" + eventsStartDate + " Head Count " + eventsHeadCount);
                             }
                         }
                     }
                 }
-            }
-
-            $scope.eventsChart = {
-                options: {
-                    chart: {
-                        type: 'pie',
-                        plotBackgroundColor: null,
-                        plotBorderWidth: null,
-                        plotShadow: false
-                    },
-                    title: {
-                        text: 'Power Consumption by events nearby'
-                    },
-                    tooltip: {
-                        pointFormat: '{series.name}: <b>{point.percentage:.1f}%</b>'
-                    },
-                    plotOptions: {
-                        pie: {
-                            allowPointSelect: true,
-                            cursor: 'pointer',
-                            dataLabels: {
-                                enabled: true,
-                                format: '<b>{point.name}</b>: {point.percentage:.1f} %'
-                            },
-                            showInLegend: true
+                $scope.eventsChart = {
+                    options: {
+                        chart: {
+                            type: 'pie',
+                            plotBackgroundColor: null,
+                            plotBorderWidth: null,
+                            plotShadow: false
+                        },
+                        title: {
+                            text: 'Power Consumption by events nearby'
+                        },
+                        tooltip: {
+                            pointFormat: '{series.name}: <b>{point.percentage:.1f}%</b>'
+                        },
+                        plotOptions: {
+                            pie: {
+                                allowPointSelect: true,
+                                cursor: 'pointer',
+                                dataLabels: {
+                                    enabled: true,
+                                    format: '<b>{point.name}</b>: {point.percentage:.1f} %'
+                                },
+                                showInLegend: true
+                            }
                         }
-                    }
-                },
-                series: [ {
-                    name: "Average power consumption",
-                    colorByPoint: true,
-                    data: $scope.chartsData,
-                    loading: false
-                } ]
-            }
-        }).error(function(err) {
-            console.log(err.message);
-        });
-    }
-   /* $scope.extractEvent = function extractEvent(data) {
-        var events = data.data.search.events.event;
-        console.log(events);
-        var tableRow = events.length;
-        var eventArray = [];
-        for (var i = 0; i < tableRow; i++) {
-            var eachEvent = {
-                'date': $scope.getDate(events[i].start_time),
-                'time': $scope.getTime(events[i].start_time),
-                'address': events[i].venue_address,
-                'city': events[i].city_name,
-                'name': events[i].venue_name,
-                'predictedHeadCount': $scope.getPredictedHeadCount(events[i].price)
-            }
-            eventArray.push(eachEvent);
-            console.log("Event Date is "+$scope.getDate(events[i].start_time));
-
-
-        $scope.allEvents = eventArray
-        $scope.series();
-        console.log(JSON.stringify($scope.allEvents));
-        if (Number.isNaN(100)) {
-            console.log("Number");
+                    },
+                    series: [{
+                        name: "Average power consumption",
+                        colorByPoint: true,
+                        data: $scope.chartsData,
+                        loading: false
+                    }]
+                }
+            }).error(function(err) {
+                console.log(err.message);
+            });
         }
-    }*/
+        /* $scope.extractEvent = function extractEvent(data) {
+             var events = data.data.search.events.event;
+             console.log(events);
+             var tableRow = events.length;
+             var eventArray = [];
+             for (var i = 0; i < tableRow; i++) {
+                 var eachEvent = {
+                     'date': $scope.getDate(events[i].start_time),
+                     'time': $scope.getTime(events[i].start_time),
+                     'address': events[i].venue_address,
+                     'city': events[i].city_name,
+                     'name': events[i].venue_name,
+                     'predictedHeadCount': $scope.getPredictedHeadCount(events[i].price)
+                 }
+                 eventArray.push(eachEvent);
+                 console.log("Event Date is "+$scope.getDate(events[i].start_time));
 
+
+             $scope.allEvents = eventArray
+             $scope.series();
+             console.log(JSON.stringify($scope.allEvents));
+             if (Number.isNaN(100)) {
+                 console.log("Number");
+             }
+         }*/
     $scope.getDate = function getDate(dateTime) {
         return dateTime.slice(0, 10);
     }
@@ -185,7 +162,6 @@ wfms.controller("eventsController", function($scope, $rootScope, $modal, $locati
         return dateTime.slice(11, 16)
     }
     $scope.series = function series() {
-
         var allData = $scope.allEvents;
         var seriesData = []
         allData.forEach(function(e) {
