@@ -44,7 +44,7 @@ function getMeanValue(data) {
 }
 
 getPowerOutage = function(req,res) {
-    console.log("Mean Value is "+ r);
+    //console.log("Mean Value is "+ r);
     var db = mongo.getMongoConnection();
     //console.log(customerImpacted);
     db.open(function (err, db) {

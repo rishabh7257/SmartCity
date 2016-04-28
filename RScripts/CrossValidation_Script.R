@@ -1,13 +1,12 @@
+
 pkgTest <- function(x)
-{
-  if (!require(x,character.only = TRUE))
-  {
-    install.packages(x,dep=TRUE)
-    if(!require(x,character.only = TRUE)) stop("Package not found")
-  }
-}
-pkgTest("e1071")
-pkgTest("rpart")
+ {
+       if (!require(x,character.only = TRUE))
+       {
+           install.packages(x, repos="http://cran.cnr.berkeley.edu")
+             if(!require(x,character.only = TRUE)) stop("Package not found")
+           }
+     }
 pkgTest("randomForest")
 library(randomForest)
 
@@ -54,7 +53,42 @@ randomforest<-function(train,test)
   return(predicted) 
 }
 
+#Making the actual prediction
 myResultFrame<-do_cv_class(final,5,randomforest)
-write.table(myResultFrame, "~/Documents/SmartCity/RScripts/newOutput.txt",sep="\t",append=F,row.names=FALSE, col.names=FALSE)
 
+#Rounding off the predicted values
+myPredictedFrame<- data.frame(myResultFrame)
+
+cutofflow <- 0.2
+cutoffmid <- 0.4
+cutoffhigh <- 0.6
+
+#Check the threshold
+for(i in 1:nrow(myPredictedFrame))
+{
+  if(myPredictedFrame[i,1]<cutofflow)
+  {
+    myPredictedFrame[i,1]<-0.25
+  }
+  else if((myPredictedFrame[i,1]>=cutofflow) && (myPredictedFrame[i,1]<cutoffmid))
+  {
+    myPredictedFrame[i,1]<-0.50
+  }
+  else if((myPredictedFrame[i,1]>=cutoffmid) && (myPredictedFrame[i,1]<cutoffhigh))
+  {
+    myPredictedFrame[i,1]<-0.75
+    
+  }
+  else{
+    myPredictedFrame[i,1]<-1.00
+  }
+}
+
+#Writing actual values in the table
+newOutput <-paste(wd,'/RScripts/newOutput.txt', sep= "")
+write.table(myResultFrame, newOutput,sep="\t",append=F,row.names=FALSE, col.names=FALSE)
+
+#Writing the rounded off values in the table
+newOutputRounded<-paste(wd,'/RScripts/newOutputRounded.txt', sep= "")
+write.table(myPredictedFrame, newOutputRounded, sep="\n",append=F,row.names=FALSE, col.names=FALSE)
 

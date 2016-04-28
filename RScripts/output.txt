@@ -19,18 +19,15 @@ Type 'q()' to quit R.
 
 [Previously saved workspace restored]
 
+> 
 > pkgTest <- function(x)
-+ {
-+   if (!require(x,character.only = TRUE))
-+   {
-+     install.packages(x,dep=TRUE)
-+     if(!require(x,character.only = TRUE)) stop("Package not found")
-+   }
-+ }
-> pkgTest("e1071")
-Loading required package: e1071
-> pkgTest("rpart")
-Loading required package: rpart
++  {
++        if (!require(x,character.only = TRUE))
++        {
++            install.packages(x, repos="http://cran.cnr.berkeley.edu")
++              if(!require(x,character.only = TRUE)) stop("Package not found")
++            }
++      }
 > pkgTest("randomForest")
 Loading required package: randomForest
 randomForest 4.6-12
@@ -42,6 +39,9 @@ Type rfNews() to see new features/changes/bug fixes.
 > testLocation <- "/RScripts/test.csv"
 > final <- read.csv(paste(wd,location, sep= ""))
 > predict<-read.csv(paste(wd,testLocation, sep= ""))
+Warning message:
+In read.table(file = file, header = header, sep = sep, quote = quote,  :
+  incomplete final line found by readTableHeader on '/Users/rsangvhi/Documents/SmartCity/RScripts/test.csv'
 > 
 > do_cv_class<-function(df,num_folds,model_name)
 + {
@@ -80,14 +80,49 @@ Type rfNews() to see new features/changes/bug fixes.
 +   return(predicted) 
 + }
 > 
+> #Making the actual prediction
 > myResultFrame<-do_cv_class(final,5,randomforest)
 Warning message:
 In randomForest.default(m, y, ...) :
   The response has five or fewer unique values.  Are you sure you want to do regression?
-> write.table(myResultFrame, "~/Documents/SmartCity/RScripts/newOutput.txt",sep="\t",append=F,row.names=FALSE, col.names=FALSE)
 > 
+> #Rounding off the predicted values
+> myPredictedFrame<- data.frame(myResultFrame)
+> 
+> cutofflow <- 0.2
+> cutoffmid <- 0.4
+> cutoffhigh <- 0.6
+> 
+> #Check the threshold
+> for(i in 1:nrow(myPredictedFrame))
++ {
++   if(myPredictedFrame[i,1]<cutofflow)
++   {
++     myPredictedFrame[i,1]<-0.25
++   }
++   else if((myPredictedFrame[i,1]>=cutofflow) && (myPredictedFrame[i,1]<cutoffmid))
++   {
++     myPredictedFrame[i,1]<-0.50
++   }
++   else if((myPredictedFrame[i,1]>=cutoffmid) && (myPredictedFrame[i,1]<cutoffhigh))
++   {
++     myPredictedFrame[i,1]<-0.75
++     
++   }
++   else{
++     myPredictedFrame[i,1]<-1.00
++   }
++ }
+> 
+> #Writing actual values in the table
+> newOutput <-paste(wd,'/RScripts/newOutput.txt', sep= "")
+> write.table(myResultFrame, newOutput,sep="\t",append=F,row.names=FALSE, col.names=FALSE)
+> 
+> #Writing the rounded off values in the table
+> newOutputRounded<-paste(wd,'/RScripts/newOutputRounded.txt', sep= "")
+> write.table(myPredictedFrame, newOutputRounded, sep="\n",append=F,row.names=FALSE, col.names=FALSE)
 > 
 > 
 > proc.time()
    user  system elapsed 
-  1.281   0.060   1.400 
+  1.261   0.049   1.319 

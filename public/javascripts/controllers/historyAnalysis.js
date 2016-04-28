@@ -1,22 +1,23 @@
 'use strict';
 wfms.controller("HistoryAnalysis", function($scope, $rootScope, $modal, $location, DataService) {
     $rootScope.userType = "Hospital";
+          
     $scope.getData = function() {
         clientInfo();
         getFutureData();
     };
     $scope.showPieChart1 = function() {
-    var modalInstance = $modal.open( {
-        templateUrl: 'templates/client/chart1.html',
-        controller: 'ClientRegistrationController',
-        size: 'lg',
-    } );
-    modalInstance.result.then( function( isValid ) {
-        if ( isValid ) {
-            getData();
-        }
-    }, function() {} );
-};
+        var modalInstance = $modal.open({
+            templateUrl: 'templates/client/chart1.html',
+            controller: 'ClientRegistrationController',
+            size: 'lg',
+        });
+        modalInstance.result.then(function(isValid) {
+            if (isValid) {
+                getData();
+            }
+        }, function() {});
+    };
     $scope.outagesByArea = function() {
         DataService.getData("/api/getOutagesByArea", []).success(function(response) {
             $scope.area = response.Area;
@@ -44,7 +45,7 @@ wfms.controller("HistoryAnalysis", function($scope, $rootScope, $modal, $locatio
                             },
                             showInLegend: true
                         }
-                      }
+                    }
                 },
                 series: [{
                     name: "Outages By Area",
@@ -133,7 +134,6 @@ wfms.controller("HistoryAnalysis", function($scope, $rootScope, $modal, $locatio
         });
     }
     $scope.recommendations = function() {
-        alert("Inside recommendation");
         $scope.prediction = {
             options: {
                 chart: {
@@ -180,7 +180,6 @@ wfms.controller("HistoryAnalysis", function($scope, $rootScope, $modal, $locatio
                     ['Karachi', 14.0],
                     ['Mumbai', 12.5],
                     ['Moscow', 12.1],
-
                 ],
                 dataLabels: {
                     enabled: true,
@@ -196,7 +195,6 @@ wfms.controller("HistoryAnalysis", function($scope, $rootScope, $modal, $locatio
                 }
             }]
         }
-
     };
     $scope.getOutageData = function() {
         DataService.getData("/api/getPowerOutage", []).success(function(response) {
@@ -233,3 +231,4 @@ wfms.controller("HistoryAnalysis", function($scope, $rootScope, $modal, $locatio
         });
     }
 });
+

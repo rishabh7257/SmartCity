@@ -1,26 +1,25 @@
 <section id="main-content" ng-controller="HistoryAnalysis">
-      <section class="wrapper">
-		<!--  <body ng-app="routedTabs" class="container">
 
-		  <div ui-view></div>
+    <section class="wrapper">
+      
+        <div ng-init="getOutageData()">
+            <highchart id="container1" config="chart2">
+            </highchart>
+        </div>
+        <br/>
+        <br/>
+        <br/>
+        <div ng-init="outagesByArea()">
+            <highchart id="container2" config="pieChart">
+            </highchart>
+        </div>
+        <br/>
+        <br/>
+        <br/>
+        <div ng-init="outagesByCause()">
+            <highchart id="container2" config="pieChart2">
+            </highchart>
+        </div>
+    </section>
+</section>
 
-		  </body>-->
-
-     
-<div ng-init="getOutageData()">
-
-	<highchart id="container1" config="chart2"></highchart>
-</div><br/><br/><br/>
-		  <div ng-init="outagesByArea()">
-	<highchart id="container2" config="pieChart"></highchart>
-
-</div>
-		  <br/><br/><br/>
-		  <div ng-init="outagesByCause()">
-			  <highchart id="container2" config="pieChart2"></highchart>
-
-		  </div>
-
-	
-		</section>
-	</section>

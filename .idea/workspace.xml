@@ -2,20 +2,29 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="bdfdf69f-710a-4c04-b8d3-2d6982b6dcc0" name="Default" comment="">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/images/notification-solid.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/RScripts/newOutputRounded.txt" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/templates/client/simulation.html" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/public/templates/client/payment.html" afterPath="" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.RData" afterPath="$PROJECT_DIR$/.RData" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/RScripts/CrossValidation_Script.R" afterPath="$PROJECT_DIR$/RScripts/CrossValidation_Script.R" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/RScripts/newOutput.txt" afterPath="$PROJECT_DIR$/RScripts/newOutput.txt" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/RScripts/output.txt" afterPath="$PROJECT_DIR$/RScripts/output.txt" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/RScripts/test.csv" afterPath="$PROJECT_DIR$/RScripts/test.csv" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/controllers/calendar.js" afterPath="$PROJECT_DIR$/controllers/calendar.js" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/controllers/client.js" afterPath="$PROJECT_DIR$/controllers/client.js" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/controllers/nodeRBridge.js" afterPath="$PROJECT_DIR$/controllers/nodeRBridge.js" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/controllers/tibco.js" afterPath="$PROJECT_DIR$/controllers/tibco.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public/css/style.css" afterPath="$PROJECT_DIR$/public/css/style.css" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public/javascripts/controllers/TabsController.js" afterPath="$PROJECT_DIR$/public/javascripts/controllers/TabsController.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public/javascripts/app.js" afterPath="$PROJECT_DIR$/public/javascripts/app.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public/javascripts/controllers/clientdashboard.js" afterPath="$PROJECT_DIR$/public/javascripts/controllers/clientdashboard.js" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public/javascripts/controllers/eventsController.js" afterPath="$PROJECT_DIR$/public/javascripts/controllers/eventsController.js" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public/javascripts/controllers/historyAnalysis.js" afterPath="$PROJECT_DIR$/public/javascripts/controllers/historyAnalysis.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public/javascripts/controllers/simulationController.js" afterPath="$PROJECT_DIR$/public/javascripts/controllers/simulationController.js" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public/templates/client/clientHome.html" afterPath="$PROJECT_DIR$/public/templates/client/clientHome.html" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public/templates/client/events.html" afterPath="$PROJECT_DIR$/public/templates/client/events.html" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public/templates/client/historyAnalysis.html" afterPath="$PROJECT_DIR$/public/templates/client/historyAnalysis.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/routes.js" afterPath="$PROJECT_DIR$/routes.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/views/index.ejs" afterPath="$PROJECT_DIR$/views/index.ejs" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/views/templates/client.ejs" afterPath="$PROJECT_DIR$/views/templates/client.ejs" />
     </list>
     <ignored path="SmartCity.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -45,102 +54,36 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="server.js" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/server.js">
+      <file leaf-file-name="simulation.html" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/public/templates/client/simulation.html">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="935">
-              <caret line="55" column="18" selection-start-line="55" selection-start-column="18" selection-end-line="55" selection-end-column="18" />
+            <state relative-caret-position="425">
+              <caret line="25" column="18" selection-start-line="25" selection-start-column="18" selection-end-line="25" selection-end-column="18" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="routes.js" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/routes.js">
+      <file leaf-file-name="simulationController.js" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/public/javascripts/controllers/simulationController.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-106">
-              <caret line="53" column="78" selection-start-line="53" selection-start-column="78" selection-end-line="53" selection-end-column="78" />
+            <state relative-caret-position="297">
+              <caret line="24" column="31" selection-start-line="24" selection-start-column="19" selection-end-line="24" selection-end-column="31" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="cache.js" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/controllers/cache.js">
+      <file leaf-file-name="clientHome.html" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/public/templates/client/clientHome.html">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-204">
-              <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="calendar.js" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/controllers/calendar.js">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="387">
-              <caret line="149" column="2" selection-start-line="100" selection-start-column="0" selection-end-line="149" selection-end-column="2" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="client.js" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/controllers/client.js">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="273">
-              <caret line="144" column="11" selection-start-line="144" selection-start-column="11" selection-end-line="144" selection-end-column="11" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="events.js" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/controllers/events.js">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-72">
-              <caret line="3" column="0" selection-start-line="3" selection-start-column="0" selection-end-line="4" selection-end-column="53" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="tibco.js" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/controllers/tibco.js">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="370">
-              <caret line="138" column="2" selection-start-line="109" selection-start-column="0" selection-end-line="138" selection-end-column="2" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="util.js" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/controllers/util.js">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="217">
-              <caret line="43" column="0" selection-start-line="43" selection-start-column="0" selection-end-line="43" selection-end-column="0" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="eventsController.js" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/public/javascripts/controllers/eventsController.js">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="221">
-              <caret line="67" column="0" selection-start-line="67" selection-start-column="0" selection-end-line="67" selection-end-column="0" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="nodeRBridge.js" pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/controllers/nodeRBridge.js">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="1560">
-              <caret line="140" column="42" selection-start-line="140" selection-start-column="42" selection-end-line="140" selection-end-column="42" />
-              <folding />
+            <state relative-caret-position="102">
+              <caret line="6" column="16" selection-start-line="6" selection-start-column="16" selection-end-line="6" selection-end-column="50" />
+              <folding>
+                <marker date="1461868931455" expanded="false" signature="1266:1328" placeholder="..." />
+                <marker date="1461868931455" expanded="false" signature="1613:1675" placeholder="..." />
+                <marker date="1461868931455" expanded="false" signature="1950:2012" placeholder="..." />
+              </folding>
             </state>
           </provider>
         </entry>
@@ -172,27 +115,28 @@
         <option value="$PROJECT_DIR$/public/templates/client/mail.html" />
         <option value="$PROJECT_DIR$/views/mail.ejs" />
         <option value="$PROJECT_DIR$/public/javascripts/mail.js" />
-        <option value="$PROJECT_DIR$/public/javascripts/controllers/clientdashboard.js" />
-        <option value="$PROJECT_DIR$/routes.js" />
         <option value="$PROJECT_DIR$/package.json" />
-        <option value="$PROJECT_DIR$/public/templates/client/simulation.html" />
         <option value="$PROJECT_DIR$/public/templates/client/chart1.html" />
         <option value="$PROJECT_DIR$/server.js" />
         <option value="$PROJECT_DIR$/public/templates/client/tab1.html" />
         <option value="$PROJECT_DIR$/public/templates/client/tab2.html" />
-        <option value="$PROJECT_DIR$/controllers/nodeRBridge.js" />
         <option value="$PROJECT_DIR$/public/javascripts/controllers/TabsController.js" />
         <option value="$PROJECT_DIR$/views/templates/client.ejs" />
         <option value="$PROJECT_DIR$/public/css/style.css" />
-        <option value="$PROJECT_DIR$/public/templates/client/clientHome.html" />
         <option value="$PROJECT_DIR$/views/index.ejs" />
         <option value="$PROJECT_DIR$/controllers/calendar.js" />
-        <option value="$PROJECT_DIR$/public/javascripts/controllers/eventsController.js" />
-        <option value="$PROJECT_DIR$/public/templates/client/historyAnalysis.html" />
-        <option value="$PROJECT_DIR$/public/templates/client/events.html" />
         <option value="$PROJECT_DIR$/public/javascripts/controllers/historyAnalysis.js" />
+        <option value="$PROJECT_DIR$/controllers/nodeRBridge.js" />
+        <option value="$PROJECT_DIR$/public/javascripts/controllers/eventsController.js" />
+        <option value="$PROJECT_DIR$/public/templates/client/clientHome.html" />
+        <option value="$PROJECT_DIR$/public/templates/client/events.html" />
+        <option value="$PROJECT_DIR$/public/templates/client/historyAnalysis.html" />
         <option value="$PROJECT_DIR$/controllers/client.js" />
         <option value="$PROJECT_DIR$/controllers/tibco.js" />
+        <option value="$PROJECT_DIR$/public/javascripts/controllers/clientdashboard.js" />
+        <option value="$PROJECT_DIR$/routes.js" />
+        <option value="$PROJECT_DIR$/public/javascripts/controllers/simulationController.js" />
+        <option value="$PROJECT_DIR$/public/templates/client/simulation.html" />
       </list>
     </option>
   </component>
@@ -853,12 +797,12 @@
       <option name="presentableId" value="Default" />
       <updated>1461100562448</updated>
       <workItem from="1461100566455" duration="43956000" />
-      <workItem from="1461638727822" duration="45645000" />
+      <workItem from="1461638727822" duration="48321000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="89601000" />
+    <option name="totallyTimeSpent" value="92277000" />
   </component>
   <component name="TodoView" selected-index="3">
     <todo-panel id="selected-file">
@@ -879,13 +823,13 @@
       <window_info id="Palette&#9;" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Capture Analysis" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="true" content_ui="tabs" />
-      <window_info id="npm" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.18167938" sideWeight="0.20598006" order="0" side_tool="true" content_ui="tabs" />
+      <window_info id="npm" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.18015267" sideWeight="0.21474358" order="0" side_tool="true" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32890365" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
-      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.37209302" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.48172757" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33388704" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Capture Tool" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Designer" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.18167938" sideWeight="0.79401994" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.18015267" sideWeight="0.7852564" order="0" side_tool="false" content_ui="combo" />
       <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32977098" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32890365" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.1785174" sideWeight="0.5057283" order="0" side_tool="true" content_ui="tabs" />
@@ -917,13 +861,6 @@
     <option name="FILTER_TARGETS" value="false" />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/public/javascripts/controllers/clientController.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/node_modules/mongodb/lib/db.js">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="139">
@@ -974,7 +911,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/public/templates/client/simulation.html" />
     <entry file="file://$PROJECT_DIR$/views/templates/login.ejs">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="-1946">
@@ -1119,22 +1055,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/public/templates/client/events.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="91">
-          <caret line="42" column="46" selection-start-line="42" selection-start-column="46" selection-end-line="42" selection-end-column="46" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/public/templates/client/historyAnalysis.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="17">
-          <caret line="8" column="5" selection-start-line="8" selection-start-column="5" selection-end-line="8" selection-end-column="5" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/public/javascripts/controllers/clientRegistrationController.js">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="-278">
@@ -1175,49 +1095,10 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/public/templates/client/clientHome.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="289">
-          <caret line="149" column="34" selection-start-line="149" selection-start-column="34" selection-end-line="149" selection-end-column="34" />
-          <folding>
-            <marker date="1461708671360" expanded="false" signature="1266:1328" placeholder="..." />
-            <marker date="1461708671360" expanded="false" signature="1613:1675" placeholder="..." />
-            <marker date="1461708671360" expanded="false" signature="1950:2012" placeholder="..." />
-            <marker date="1461708671360" expanded="false" signature="8388:8450" placeholder="..." />
-            <marker date="1461708671360" expanded="false" signature="8931:8993" placeholder="..." />
-            <marker date="1461708671360" expanded="false" signature="9464:9526" placeholder="..." />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/routes.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-106">
-          <caret line="53" column="78" selection-start-line="53" selection-start-column="78" selection-end-line="53" selection-end-column="78" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/server.js">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="935">
           <caret line="55" column="18" selection-start-line="55" selection-start-column="18" selection-end-line="55" selection-end-column="18" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/public/javascripts/controllers/historyAnalysis.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-748">
-          <caret line="19" column="39" selection-start-line="19" selection-start-column="39" selection-end-line="19" selection-end-column="39" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/public/javascripts/controllers/clientdashboard.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1191">
-          <caret line="190" column="6" selection-start-line="183" selection-start-column="3" selection-end-line="190" selection-end-column="6" />
           <folding />
         </state>
       </provider>
@@ -1238,22 +1119,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/controllers/client.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="273">
-          <caret line="144" column="11" selection-start-line="144" selection-start-column="11" selection-end-line="144" selection-end-column="11" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/public/javascripts/controllers/eventsController.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="221">
-          <caret line="67" column="0" selection-start-line="67" selection-start-column="0" selection-end-line="67" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/controllers/events.js">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="-72">
@@ -1270,14 +1135,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/controllers/tibco.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="370">
-          <caret line="138" column="2" selection-start-line="109" selection-start-column="0" selection-end-line="138" selection-end-column="2" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/controllers/calendar.js">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="387">
@@ -1286,10 +1143,130 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/controllers/tibco.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="172">
+          <caret line="59" column="31" selection-start-line="59" selection-start-column="31" selection-end-line="59" selection-end-column="31" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/public/templates/client/historyAnalysis.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="408">
+          <caret line="24" column="0" selection-start-line="24" selection-start-column="0" selection-end-line="24" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/public/javascripts/controllers/historyAnalysis.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="121">
+          <caret line="200" column="38" selection-start-line="200" selection-start-column="38" selection-end-line="200" selection-end-column="38" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/public/templates/client/events.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="361">
+          <caret line="50" column="0" selection-start-line="50" selection-start-column="0" selection-end-line="50" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/public/javascripts/controllers/eventsController.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-568">
+          <caret line="125" column="0" selection-start-line="125" selection-start-column="0" selection-end-line="125" selection-end-column="0" />
+          <folding>
+            <marker date="1461868886083" expanded="true" signature="111:12539" placeholder="{...}" />
+            <marker date="1461868886083" expanded="true" signature="259:339" placeholder="{...}" />
+            <marker date="1461868886083" expanded="true" signature="9738:12537" placeholder="{...}" />
+            <marker date="1461868886083" expanded="true" signature="9843:10205" placeholder="{...}" />
+            <marker date="1461868886083" expanded="true" signature="9882:10025" placeholder="{...}" />
+            <marker date="1461868886083" expanded="true" signature="9930:10011" placeholder="{...}" />
+            <marker date="1461868886083" expanded="true" signature="10031:10195" placeholder="{...}" />
+            <marker date="1461868886083" expanded="true" signature="10079:10181" placeholder="{...}" />
+            <marker date="1461868886083" expanded="true" signature="10273:10423" placeholder="{...}" />
+            <marker date="1461868886083" expanded="true" signature="10298:10384" placeholder="{...}" />
+            <marker date="1461868886083" expanded="true" signature="10484:11378" placeholder="{...}" />
+            <marker date="1461868886083" expanded="true" signature="10505:10610" placeholder="{&quot;enable&quot;: true...}" />
+            <marker date="1461868886083" expanded="true" signature="10666:10917" placeholder="{&quot;enable&quot;: true...}" />
+            <marker date="1461868886083" expanded="true" signature="10790:10903" placeholder="{&quot;text-align&quot;: 'center'...}" />
+            <marker date="1461868886083" expanded="true" signature="10938:11368" placeholder="{&quot;type&quot;: 'pieChart'...}" />
+            <marker date="1461868886083" expanded="true" signature="11034:11087" placeholder="{...}" />
+            <marker date="1461868886083" expanded="true" signature="11120:11171" placeholder="{...}" />
+            <marker date="1461868886083" expanded="true" signature="11444:12531" placeholder="{&quot;loading&quot;: false...}" />
+            <marker date="1461868886083" expanded="true" signature="11467:12346" placeholder="{...}" />
+            <marker date="1461868886083" expanded="true" signature="11492:11672" placeholder="{&quot;type&quot;: 'pie'...}" />
+            <marker date="1461868886083" expanded="true" signature="11697:11780" placeholder="{&quot;text&quot;: 'Status Counts in the Current Stage.'...}" />
+            <marker date="1461868886083" expanded="true" signature="11807:11907" placeholder="{&quot;pointFormat&quot;: '{series.name}: &lt;b&gt;{point.percentage:.1f}%&lt;/b&gt;'...}" />
+            <marker date="1461868886083" expanded="true" signature="11938:12332" placeholder="{...}" />
+            <marker date="1461868886083" expanded="true" signature="11965:12314" placeholder="{&quot;allowPointSelect&quot;: true...}" />
+            <marker date="1461868886083" expanded="true" signature="12094:12248" placeholder="{&quot;enabled&quot;: true...}" />
+            <marker date="1461868886083" expanded="true" signature="12368:12493" placeholder="[...]" />
+            <marker date="1461868886083" expanded="true" signature="12369:12492" placeholder="{&quot;name&quot;: 'Brands'...}" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/controllers/client.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="759">
+          <caret line="273" column="12" selection-start-line="273" selection-start-column="12" selection-end-line="273" selection-end-column="12" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/public/javascripts/controllers/clientdashboard.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="120">
+          <caret line="155" column="60" selection-start-line="155" selection-start-column="60" selection-end-line="155" selection-end-column="60" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/routes.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="215">
+          <caret line="59" column="50" selection-start-line="59" selection-start-column="50" selection-end-line="59" selection-end-column="50" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/controllers/nodeRBridge.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1560">
-          <caret line="140" column="42" selection-start-line="140" selection-start-column="42" selection-end-line="140" selection-end-column="42" />
+        <state relative-caret-position="612">
+          <caret line="36" column="19" selection-start-line="36" selection-start-column="19" selection-end-line="36" selection-end-column="19" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/public/templates/client/clientHome.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="102">
+          <caret line="6" column="16" selection-start-line="6" selection-start-column="16" selection-end-line="6" selection-end-column="50" />
+          <folding>
+            <marker date="1461868931455" expanded="false" signature="1266:1328" placeholder="..." />
+            <marker date="1461868931455" expanded="false" signature="1613:1675" placeholder="..." />
+            <marker date="1461868931455" expanded="false" signature="1950:2012" placeholder="..." />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/public/javascripts/controllers/simulationController.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="297">
+          <caret line="24" column="31" selection-start-line="24" selection-start-column="19" selection-end-line="24" selection-end-column="31" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/public/templates/client/simulation.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="425">
+          <caret line="25" column="18" selection-start-line="25" selection-start-column="18" selection-end-line="25" selection-end-column="18" />
           <folding />
         </state>
       </provider>

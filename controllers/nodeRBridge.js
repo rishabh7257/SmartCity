@@ -57,6 +57,12 @@ readTextFile = function(req, res) {
 getFutureWeather = function(req, res) {
     var city = decodeURI(req.body.city).toLowerCase().replace(" ", "_");
     var country = req.body.country;
+    var equipment_failure = req.body.equipment_failure
+    var futureDataDays = 1
+    if (!equipment_failure) {
+        equipment_failure = 0.5
+        futureDataDays = 7
+    }
     var path = "http://api.openweathermap.org/data/2.5/forecast?q=" + city + "," + country + "&appid=469b11f73c72546cbbbb001be0930dd2&units=metric";
     request(path, function(error, response, body) {
         //Check for error
@@ -71,7 +77,7 @@ getFutureWeather = function(req, res) {
         var weather = JSON.parse(body);
         var futureWeekData = []
         if (weather) {
-            for (var i = 0; i < 7; i++) {
+            for (var i = 0; i < futureDataDays; i++) {
                 var wind = weather.list[i]["wind"]["speed"];
                 var windspeedslow = 0,
                     windspeedcalm = 0,
@@ -119,7 +125,7 @@ getFutureWeather = function(req, res) {
                     "heavyrain": heavyrain,
                     "scatteredclouds": scatteredclouds,
                     "clearclouds": clearclouds,
-                    "equipment_failure": 0.5,
+                    "equipment_failure": equipment_failure,
                     "power_outage": 0.0
                 }
                 futureWeekData.push(futureData);

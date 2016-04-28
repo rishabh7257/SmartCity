@@ -72,6 +72,8 @@
                         </button> -->
                     </div>
                 </div>
+            </div>
+            
                 <!-- page start-->
                 <div class="row">
                     <div class="col-lg-12">
@@ -146,64 +148,20 @@
                                             </div>
                                         </div>
                                     </div>
+                                    </section>
+                                      <section>
+                                          <div class="row">                                              
+                                          </div>
+                                      </section>
 
-                                <div ng-controller="HistoryAnalysis" ng-init="recommendations()">
-                                   <highchart id="container3" config="prediction"></highchart>
-                                    <div align = "center"><button type="button" class="btn btn-primary" ng-click="sendMail()">Send Notifications</button></div>
-                                    <div class="w3-card-24 w3-green" style="width: 150px;
-  height: 100px;
-  margin: 16px;
-  padding: 16px">
 
-                                        Send Notification
+                                <div class="panel-footer text-center">
+                                    <highchart id="predictedGraph" config="predictedGraph"></highchart>
+                                    <div align = "center"><button type="button" class="btn btn-primary" ng-click="sendMail()">Send Notifications</button>
                                     </div>
-                                    <!--  <div id ="prediction"></div>-->
                                 </div>
-                                   <!-- <div class="col-lg-2 col-sm-6 follow-info weather-category">
-                                        <div ng-controller="ClientDashboard" ng-init="clientPowerStatus()" align="center">
-                                            Power Outage Status:
-                                            Critical
-                                            <div ng-if="powerStatus=='Red'">
-                                                <div class="w3-card-24 w3-red" style="width: 150px;
-  height: 100px;
-  margin: 16px;
-  padding: 16px">
-                                                    <p>
-                                                        Power Outage predicted in next week
-                                                    </p>
-                                                </div>
-                                            </div>
-                                            <div ng-if="powerStatus=='Green'">
-                                                <div class="w3-card-24 w3-green" style="width: 150px;
-  height: 100px;
-  margin: 16px;
-  padding: 16px">
-                                                    <p>
-                                                        No Outages in this area
-                                                    </p>
-                                                </div>
-                                            </div>
-                                            <div ng-if="powerStatus=='Yellow'">
-                                                <div class="w3-card-24 w3-yellow" style="width: 150px;
-  height: 100px;
-  margin: 16px;
-  padding: 16px">
-                                                    <p>
-                                                        Maintenance in Progres
-                                                    </p>
-                                                </div>
-                                            </div>
-
-                                            <div align = "center"><button type="button" class="btn btn-primary" ng-click="sendMail()">Send Notifications</button></div>
-
-                                        </div>
-                                    </div>-->
+                                   
                                 </section>
-                            </div>
-
-                        </section>
-                    </div>
-                </div>
             </div>
         </div>
     </section>
