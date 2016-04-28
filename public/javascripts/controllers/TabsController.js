@@ -7,10 +7,10 @@
         $urlRouterProvider.otherwise("/template/client/tab1");
 
         $stateProvider
-            .state("main", { abtract: true, url:"/template/client", templateUrl:"historyAnalysis.html" })
-            .state("main.tab1", { url: "/template/client/tab1", templateUrl: "tab1.html" })
-            .state("main.tab2", { url: "/template/client/tab2", templateUrl: "tab2.html" })
-            .state("main.tab3", { url: "/template/client/tab3", templateUrl: "tab3.html" });
+            .state("main", { abtract: true, url:"/template/", templateUrl:"historyAnalysis.html" })
+            .state("main.tab1", { url: "/template/client/", templateUrl: "tab1.html" })
+            .state("main.tab2", { url: "/template/client/", templateUrl: "tab2.html" })
+            .state("main.tab3", { url: "/template/client/", templateUrl: "tab3.html" });
 
     });
 

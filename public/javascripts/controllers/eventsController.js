@@ -69,13 +69,9 @@ wfms.controller("eventsController", function($scope, $rootScope, $modal, $locati
     $scope.EventsCloseToUserEvents = function EventsCloseToUserEvents(){
         var url = "/api/comingEvents";
         DataService.getData(url, []).success(function(response) {
-           // console.log("Inside eventsController"+response);
-            //$scope.extractEvent(response);
             var eventData = $rootScope.eventData;
-          //  console.log("dates"+eventDates[0]);
             var eventsHeadCount = [];
             var eventsStartDate = [];
-            //console.log("Year - live  "+year+"  user"+d.getFullYear());
             var final = [];
             var todaysDate = new Date();
             for(var i =0; i < response.length; i++) {
@@ -91,23 +87,15 @@ wfms.controller("eventsController", function($scope, $rootScope, $modal, $locati
                             if ((d - day) <= 3) {
                                 console.log("To be pushed HC " + $scope.getPredictedHeadCount($rootScope.eventData[i].price));
                                 eventsHeadCount.push($scope.getPredictedHeadCount($rootScope.eventData[i].price));
-                                // console.log("To be pushed start time "+$rootScope.eventData[i].start_time);
                                 eventsStartDate.push($rootScope.eventData[i].start_time);
-
                                 var value = m+":"+d+":"+y+" at "+$rootScope.eventData[j].venue_name;
-
-
                                 var final = [];
                                 var temp = {
                                     name: value,
                                     y: $scope.getPredictedHeadCount($rootScope.eventData[j].price)
-
                                 }
                                 final.push(temp)
-
-
                                 $scope.chartsData = final;
-
                                 console.log("After pushed" + eventsStartDate + " Head Count " + eventsHeadCount);
                             }
                         }

@@ -1070,6 +1070,7 @@ div[data-role="editor-toolbar"] {
   box-shadow: none;
   margin-bottom: 30px;
 }
+
 .panel .panel-heading {
   line-height: 34px;
   padding: 0 15px;
@@ -3245,7 +3246,13 @@ ul.inbox-pagination li {
   margin:100px auto;
   text-align: center;
 }
-
+@font-face {
+    font-family: 'FontAwesome';
+    src: url('../fonts/fontawesome-webfont.eot?v=4.4.0');
+    src: url('../fonts/fontawesome-webfont.eot?#iefix&v=4.4.0') format('embedded-opentype'), url('../fonts/fontawesome-webfont.woff?v=4.4.0') format('woff'), url('../fonts/fontawesome-webfont.ttf?v=4.4.0') format('truetype'), url('../fonts/fontawesome-webfont.svg?v=4.4.0#fontawesomeregular') format('svg');
+    font-weight: normal;
+    font-style: normal;
+}
 .text-404{    
   font-size:138px;
   background:#e9e3dd;

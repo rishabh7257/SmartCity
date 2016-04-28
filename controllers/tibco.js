@@ -121,15 +121,14 @@ getOutagesByCause = function(req,res) {
                 var cause = [];
             var count = [];
             var temp =  db.collection('power_outage').aggregate([{$group : {_id : "$CAUSE", sum: { $sum: 1 }}}]).toArray(function(err, documents){
-                console.log("Data is "+documents);
+                //console.log("Data is "+documents);
 
 
                 for(var i=0; i< documents.length; i++){
                     cause.push(documents[i]._id);
 
                     count.push(documents[i].sum);
-                    console.log("Count"+count);
-                    console.log("Cause"+cause);
+
 
                 }
                 res.status(200).json({Cause:cause, Count:count});

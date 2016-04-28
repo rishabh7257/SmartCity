@@ -5,7 +5,9 @@ var request = require('request');
 var json2csv = require('json2csv');
 var fs = require('fs');
 runRScripts = function(req, res) {
-    var rScript = "R CMD BATCH " + __dirname + "/../RScripts/CrossValidation_Script.r " + __dirname + "/../RScripts/output.txt"
+
+    var rScript = "C:\Program Files\R\R-3.1.3\bin\R.exe CMD BATCH --vanilla --slave c:\Users\pooja\Project\SmartCity\RScripts\CrossValidation_Script.r " //+ __dirnasme + "/../RScripts/output.txt"
+    console.log(rScript)
     child = exec(rScript, function(error, stdout, stderr) {
         if (error) {
             res.status(500).json({

@@ -1,23 +1,13 @@
 <section id="main-content" ng-controller="HistoryAnalysis">
       <section class="wrapper">
-		  <div ng-controller="mainController">
+		<!--  <body ng-app="routedTabs" class="container">
 
-			  <tabset>
-				  <tab
-						  ng-repeat="t in tabs"
-						  heading="{{t.heading}}"
-						  select="go(t.route)"
-						  active="t.active">
-				  </tab>
-			  </tabset>
+		  <div ui-view></div>
 
-			  <h2>View:</h2>
-			  <div ui-view></div>
-
-		  </div>
+		  </body>-->
 
      
-<!--<div ng-init="getOutageData()">
+<div ng-init="getOutageData()">
 
 	<highchart id="container1" config="chart2"></highchart>
 </div><br/><br/><br/>
@@ -29,7 +19,7 @@
 		  <div ng-init="outagesByCause()">
 			  <highchart id="container2" config="pieChart2"></highchart>
 
-		  </div>-->
+		  </div>
 
 	
 		</section>

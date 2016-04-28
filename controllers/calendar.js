@@ -122,6 +122,7 @@ addUserEvents = function(req,res) {
     if (mode == "updated")
         db.user_events.updateById( sid, data, update_response);
     else if (mode == "inserted"){
+       // alert("Inside insert");
         inserEvent(data, userId);
         // db.user_events.insert(data, update_response);
         console.log("Data is"+data);

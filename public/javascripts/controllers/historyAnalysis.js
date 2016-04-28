@@ -215,12 +215,12 @@ wfms.controller("HistoryAnalysis", function($scope, $rootScope, $modal, $locatio
                     type: String,
                     categories: $scope.xAxis,
                     title: {
-                        text: 'No. of Outages'
+                        text: 'Causes'
                     }
                 },
                 yAxis: {
                     title: {
-                        text: 'Causes'
+                        text: 'No. of Customers affected'
                     }
                 },
                 series: [{
