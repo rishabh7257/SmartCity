@@ -124,31 +124,16 @@ getClientInfo=function(req,res){
 
 sendMail = function(req,res){
 	console.log("Inside sendMail");
-	/*var maillist = [
+	var maillist = [
 		'er.poojashukla07@gmail.com',
 		'pooja.shukla@sjsu.edu'
 	];
-	var msgList = [
-		'+16692219847',
-		'+14083345829'
-	];*/
-	//elect select phonenumber,p.email from login l join person p where l.type ="Residential"
 	mysql.queryDb('SELECT DISTINCT phonenumber from login l join person p WHERE ?',[{type:req.session.type}],function(err,rows){
 	if (err) {
-			console.log("Error while listing all the client details !!!"  + err);
-			//res.status(500).json({ status : 500, message : "Error while listing client details !!!" });
+			console.log("Error while listing all phonenumbers !!!"  + err);
 		} else {
-			//console.log(" send mail to"+ rows.toString());
-		var msgList = [];
 
-		// msgList.push(rows[0].phonenumber);
-		// var mailList = [rows[0].email];
-		// msgList.forEach(function(t){
-		// 	console.log("msg"+t);
-		// });
-		//console.log("msgList"+ msgList[0]+" "+msgList[1]+msgList[2]+msgList[3]);
-		//console.log("maillist"+ mailList[0]+mailList[1]);
-			//res.status(200).json({ status : 200, data : rows});
+		var msgList = [];
 		rows.forEach(function(t,j, array){
 			sinchSms.send(t.phonenumber, 'Alert !! Power Outage predicted in your area tomorrow!').then(function(response) {
 				//All good, response contains messageId
@@ -161,29 +146,19 @@ sendMail = function(req,res){
 		}
 	});
 
-	//var txt = 'Alert !! Power Outage predicted in your area tomorrow!';
-	//sinchSms.send('+14088096757', 'Alert !! Power Outage predicted in your area tomorrow!')
-	var msg = {
-		subject: "Alert - Power Outage",
-		text: "There is an outage predicted in your area tomorrow!"
-	}
-	 console.log(msg);
 
-	/*maillist.forEach(function (to, i, array) {
+
+	maillist.forEach(function (to, i, array) {
 		msg.to = to;
-
 		smtpTransport.sendMail(msg, function (err) {
 			if (err) {
 				console.log('Sending to ' + to + ' failed: ' + err);
 				return;
 			} else {
 				console.log('Sent to ' + to);
-
 			}
-			//res.render('index');
 		});
-
-	});*/
+	});
 };
 
 getWeatherForecast = function(req,res) {
