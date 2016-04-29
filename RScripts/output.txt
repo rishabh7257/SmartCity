@@ -39,9 +39,6 @@ Type rfNews() to see new features/changes/bug fixes.
 > testLocation <- "/RScripts/test.csv"
 > final <- read.csv(paste(wd,location, sep= ""))
 > predict<-read.csv(paste(wd,testLocation, sep= ""))
-Warning message:
-In read.table(file = file, header = header, sep = sep, quote = quote,  :
-  incomplete final line found by readTableHeader on '/Users/rsangvhi/Documents/SmartCity/RScripts/test.csv'
 > 
 > do_cv_class<-function(df,num_folds,model_name)
 + {
@@ -125,4 +122,4 @@ In randomForest.default(m, y, ...) :
 > 
 > proc.time()
    user  system elapsed 
-  1.261   0.049   1.319 
+  1.453   0.077   1.679 

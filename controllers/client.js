@@ -51,52 +51,6 @@ createClient = function(req, res) {
         });
     }
 };
-/*createUserEvents = function(req,res) {
-	var db = mongo.getMongoConnection();
-
-	db.open(function (err, db) {
-		db.authenticate('username', 'password', function (err) {
-			if (err) {
-				throw err;
-			} else {
-				db.collection('user_events', function (err, collection) {
-					console.log("User id is"+$rootScope.userId);
-					collection.insert(({
-						text:"My test event A",
-						start_date: new Date(2016,4,4),
-						end_date:   new Date(2016,4,4),
-						user_id: 01
-					}), function (err, res) {
-						if (err) {
-							throw err;
-						} else {
-							console.log('inserted into user events');
-						}
-						db.close();
-					});
-				});
-			}
-		});
-	});
-
-}*/
-powerStatus = function(req, res) {
-    console.log("User type in client" + req.session.type);
-    mysql.queryDb("select alertinfo.thresholdLevel, alertinfo.date from alertinfo WHERE date between date_sub(CURDATE(), INTERVAL 7 day) and CURDATE()", function(err, rows) {
-        if (err) {
-            res.status(500).json({
-                status: 500,
-                message: "Error while retrieving data"
-            });
-        } else {
-            //console.log(rows);
-            res.status(200).json({
-                status: 200,
-                data: rows
-            });
-        }
-    });
-};
 getClient = function(req, res) {
     if (!req.params.idperson) {
         res.status(400).json({
@@ -277,8 +231,5 @@ sendMail = function(req,res) {
     }
 }
 exports.getClient = getClient;
-    exports.sendMail = sendMail;
+exports.sendMail = sendMail;
 exports.getClientInfo = getClientInfo;
-//exports.getUserEvents = getUserEvents;
-//exports.addUserEvents = addUserEvents;
-exports.powerStatus = powerStatus;

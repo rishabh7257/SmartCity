@@ -14,10 +14,6 @@ getEventsAroundUserEvents = function(req,res){
 			if (err) {
 				throw err;
 			} else
-
-			//var temp = db.collection('power_outage').find().toArray(function(err, documents){
-
-
 			var temp =  db.collection('user_events').find({userId:userID}, {start_date:1}).toArray(function(err,documents){
 
 				for (var j = 0; j < documents.length; j++) {

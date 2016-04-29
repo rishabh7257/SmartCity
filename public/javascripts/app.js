@@ -16,11 +16,8 @@ var wfms = angular.module("wfms", [ 'ngRoute', 'ui.bootstrap','highcharts-ng','n
 	});
 	
 	})
-	/**
-	 * to remove hash in the URL
-	 */
-	
-.run(['$rootScope','$window' ,'$location',  'DataService',function($rootScope,$window, $location,DataService) {
+
+.run(['$rootScope','$window' ,'$location',  'DataService', 'EventService', function($rootScope,$window, $location, DataService, EventService) {
 	$rootScope.$on('$routeChangeStart', function(event) {
 	});
 

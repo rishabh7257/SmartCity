@@ -29,8 +29,21 @@ wfms.controller("ClientDashboard", function($scope, $rootScope, $modal, $locatio
         };
         DataService.postData("/api/getFutureWeather", params).success(function(response) {
             DataService.getData("/api/runRScripts", []).success(function(response) {
-                console.log("get the response from R Script" + response)
                 DataService.getData("/api/readTextFile/newOutput", []).success(function(response) {
+                    DataService.getData("/api/readTextFile/newOutputRounded", []).success(function(response) {
+                        console.log("response.message" + response.message)
+                        console.log("RootScope User Type" + $rootScope.userType)
+                        for (var i = 0; i < response.message.length; i++) {
+                            if (($rootScope.userType == "Hospital" && response.message[i] > 0.3) || ($rootScope.userType == "Commercial" && response.message[i] > 0.5) || ($rootScope.userType == "Residential" && response.message[i] > 0.7)) {
+                                $scope.powerStatus = "Red";
+                            } else {
+                                $scope.powerStatus = "Green";
+                            }
+                        }
+                        console.log("RootScope powerStatus " + $scope.powerStatus)
+                    }).error(function(err) {
+                        console.log(err.message);
+                    });
                     $scope.predictedGraph = {
                         options: {
                             chart: {
@@ -151,19 +164,19 @@ wfms.controller("ClientDashboard", function($scope, $rootScope, $modal, $locatio
         }],
         loading: false
     }
-    $scope.clientPowerStatus = function() {
-        DataService.getData("/api/getOutageStatus", []).success(function(response) {
-            for (var i = 0; i < response.data.length; i++) {
-                if (($rootScope.userType == "Hospital" && response.data[i].thresholdLevel > 1) || ($rootScope.userType == "Commercial" && response.data[i].thresholdLevel > 5) || ($rootScope.userType == "Residential" && response.data[i].thresholdLevel > 10)) {
-                    $scope.powerStatus = "Red";
-                } else {
-                    $scope.powerStatus = "Green";
-                }
-            }
-        }).error(function(err) {
-            console.log(err.message);
-        });
-    }
+    // $scope.clientPowerStatus = function() {
+    //     DataService.getData("/api/getOutageStatus", []).success(function(response) {
+    //         for (var i = 0; i < response.data.length; i++) {
+    //             if (($rootScope.userType == "Hospital" && response.data[i].thresholdLevel > 1) || ($rootScope.userType == "Commercial" && response.data[i].thresholdLevel > 5) || ($rootScope.userType == "Residential" && response.data[i].thresholdLevel > 10)) {
+    //                 $scope.powerStatus = "Red";
+    //             } else {
+    //                 $scope.powerStatus = "Green";
+    //             }
+    //         }
+    //     }).error(function(err) {
+    //         console.log(err.message);
+    //     });
+    // }
 
     function clientInfo() {
         var uri = "/api/getClientInfo/" + $rootScope.idperson;
