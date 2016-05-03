@@ -98,14 +98,18 @@ getClientInfo = function(req, res) {
 sendMail = function(req,res) {
     console.log("Inside sendMail");
     var maillist = [
-        'er.poojashukla07@gmail.com',
-        'pooja.shukla@sjsu.edu'
+        req.session.email
     ];
-    mysql.queryDb('SELECT DISTINCT phonenumber from login l join person p WHERE ?', [{type: req.session.type}], function (err, rows) {
+   // console.log("City "+ req.session.usercity);
+    var msg = {
+        subject: "Alert - Power Outage",
+        text: "There is an outage predicted in your area tomorrow!"
+    }
+    mysql.queryDb('SELECT DISTINCT phonenumber, p.email from login l join person p WHERE ?? = ? AND ?? = ?', ['type',req.session.type , 'city',req.session.usercity], function (err, rows) {
         if (err) {
             console.log("Error while listing all phonenumbers !!!" + err);
         } else {
-
+            console.log(rows);
             var msgList = [];
             rows.forEach(function (t, j, array) {
                 sinchSms.send(t.phonenumber, 'Alert !! Power Outage predicted in your area tomorrow!').then(function (response) {
@@ -170,10 +174,7 @@ sendMail = function(req,res) {
                 });
             }
         });
-        var msg = {
-            subject: "Alert - Power Outage",
-            text: "There is an outage predicted in your area tomorrow!"
-        }
+
         console.log(msg);
     };
     getWeatherForecast = function (req, res) {

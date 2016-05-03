@@ -112,17 +112,20 @@ addUserEvents = function(req,res) {
     function update_response(err, result){
         if (err)
             mode = "error";
-        else if (mode == "inserted")
+      /*  else if (mode == "inserted")
             tid = data._id;
 
         res.setHeader("Content-Type","text/xml");
-        res.send("<data><action type='"+mode+"' sid='"+sid+"' tid='"+tid+"'/></data>");
+        res.send("<data><action type='"+mode+"' sid='"+sid+"' tid='"+tid+"'/></data>");*/
     }
 
     if (mode == "updated")
         db.user_events.updateById( sid, data, update_response);
     else if (mode == "inserted"){
-       // alert("Inside insert");
+        tid = data._id;
+
+        res.setHeader("Content-Type","text/xml");
+        res.send("<data><action type='"+mode+"' sid='"+sid+"' tid='"+tid+"'/></data>");
         inserEvent(data, userId);
         // db.user_events.insert(data, update_response);
         console.log("Data is"+data);

@@ -66,6 +66,8 @@ exports.register = function(req, res) {
                     });
                 } else {
                     req.session.idperson = idperson;
+                    req.session.city = city;
+
                     passport.authenticate('local')(req, res, function() {
                         lastLogin = new Date();
                         req.session.email = un;
@@ -109,8 +111,7 @@ exports.checkLogin = function(req, res, next) {
             var last_login = moment(user.last_login).format('LLL');
             req.session.last_login = last_login;
             req.session.idperson = user.idperson;
-            req.session.email = user.username;
-           // req.session.type = user.type;
+            req.session.email = user.email;
             console.log(moment(user.last_login).format('LLL'));
             //Async Query
 
@@ -125,7 +126,7 @@ exports.checkLogin = function(req, res, next) {
                     res.status(500).json({status:500,message : "Please try again later"});
                 } else {
                     console.log("User type"+result[0].type);
-                   // res.status(200).json({status:200, zipcode : result[0].zipcode, idperson:user.idperson, email:user.username, name : result[0].fname  + ' ' + result[0].lname,state : result[0].state, city : result[0].city,country : result[0].country, lastLogin:last_login});
+                   //res.status(200).json({status:200, zipcode : result[0].zipcode, idperson:user.idperson, email:user.username, name : result[0].fname  + ' ' + result[0].lname,state : result[0].state, city : result[0].city,country : result[0].country, lastLogin:last_login});
                     req.session.type = result[0].type;
                 }
             });
@@ -145,7 +146,8 @@ exports.checkLogin = function(req, res, next) {
                         message: "Please try again later"
                     });
                 } else {
-                    console.log(result[0].zipcode);
+                    console.log(result[0].city);
+                    req.session.usercity = result[0].city;
                     res.status(200).json({
                         status: 200,
                         zipcode: result[0].zipcode,
@@ -157,6 +159,8 @@ exports.checkLogin = function(req, res, next) {
                         country: result[0].country,
                         lastLogin: last_login
                     });
+
+
                 }
             });
         });

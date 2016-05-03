@@ -19,7 +19,7 @@ wfms.controller("UserEvents", function($scope, $rootScope, $modal, $location, Da
         });
     }
     $scope.initCal = function() {
-        scheduler.init('scheduler_here', new Date(2016, 3, 16), "month");
+        scheduler.init('scheduler_here', new Date(2016, 4, 16), "month");
         scheduler.templates.xml_date = function(value) {
             return new Date(value);
         };
@@ -31,10 +31,11 @@ wfms.controller("UserEvents", function($scope, $rootScope, $modal, $location, Da
     $scope.eventsCloseToUserEvents = function() {
         console.log("In eventclose to user evetns");
         var url = "/api/comingEvents";
+        $scope.pooja = "hello";
+        var headCount =[];
         DataService.getData(url, []).success(function(response) {
-            var eventsHeadCount = [];
-            var eventsStartDate = [];
-            var final = [];
+            var value = [];
+            var element ;
             var todaysDate = new Date();
             for (var i = 0; i < response.length; i++) {
                 var day = parseInt(response[i].start_date.split("/")[1]);
@@ -48,55 +49,18 @@ wfms.controller("UserEvents", function($scope, $rootScope, $modal, $location, Da
                         if (y == year && m == month) {
                             if ((d - day) <= 3) {
                                 console.log("To be pushed HC " + EventService.getPredictedHeadCount($scope.allEvents[j].price));
-                                eventsHeadCount.push($scope.allEvents[j].predictedHeadCount);
-                                eventsStartDate.push($scope.allEvents[j].date);
-                                var value = m + ":" + d + ":" + y + " at " + $scope.allEvents[j].name;
-                                var final = [];
-                                var temp = {
-                                    name: value,
-                                    y: $scope.allEvents[j].predictedHeadCount
+                                if(!($scope.allEvents[j].predictedHeadCount == 0)){
+                                    var v= m + ":" + d + ":" + y + " at " + $scope.allEvents[j].name;
+                                    element = {hc: $scope.allEvents[j].predictedHeadCount, sd: v };
+                                    value.push(element);
                                 }
-                                final.push(temp)
-                                $scope.chartsData = final;
-                                console.log("After pushed" + eventsStartDate + " Head Count " + eventsHeadCount);
-                                console.log("$scope.chartsData" + $scope.chartsData);
+                                $scope.e = value;
+
                             }
                         }
                     }
                 }
-            }
-            $scope.eventsChart = {
-                options: {
-                    chart: {
-                        type: 'pie',
-                        plotBackgroundColor: null,
-                        plotBorderWidth: null,
-                        plotShadow: false
-                    },
-                    title: {
-                        text: 'Power Consumption by events nearby'
-                    },
-                    tooltip: {
-                        pointFormat: '{series.name}: <b>{point.percentage:.1f}%</b>'
-                    },
-                    plotOptions: {
-                        pie: {
-                            allowPointSelect: true,
-                            cursor: 'pointer',
-                            dataLabels: {
-                                enabled: true,
-                                format: '<b>{point.name}</b>: {point.percentage:.1f} %'
-                            },
-                            showInLegend: true
-                        }
-                    }
-                },
-                series: [{
-                    name: "Average power consumption",
-                    colorByPoint: true,
-                    data: $scope.chartsData,
-                    loading: false
-                }]
+
             }
         }).error(function(err) {
             console.log(err.message);
