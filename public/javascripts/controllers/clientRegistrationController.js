@@ -217,6 +217,7 @@ wfms.controller("ClientRegistrationController", function($scope, $modalInstance,
         return re.test(email);
     }
     $scope.register = function() {
+        console.log("Into registration and value of user type is " + $scope.usertype);
         var state_long;
         var zipcode;
         var country;

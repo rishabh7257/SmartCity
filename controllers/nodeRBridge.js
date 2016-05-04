@@ -6,7 +6,7 @@ var json2csv = require('json2csv');
 var fs = require('fs');
 runRScripts = function(req, res) {
 
-    var rScript = "R CMD BATCH " + __dirname + "/../RScripts/CrossValidation_Script.r " + __dirname + "/../RScripts/output.txt"
+    var rScript = "R CMD BATCH " + __dirname + "/../RScripts/CrossValidation_Script.R " + __dirname + "/../RScripts/output.txt"
     console.log(rScript)
     child = exec(rScript, function(error, stdout, stderr) {
         if (error) {
@@ -96,8 +96,7 @@ getFutureWeather = function(req, res) {
                     mostlycloudy = 0,
                     heavyrain = 0,
                     scatteredclouds = 0,
-                    clearclouds = 0,
-                    equipment_failure = 0;
+                    clearclouds = 0;
                 var desc = weather.list[i]["weather"]["description"];
                 if (desc == "clear sky") {
                     clearclouds = 1;

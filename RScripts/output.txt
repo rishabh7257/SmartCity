@@ -1,7 +1,7 @@
 
-R version 3.2.3 (2015-12-10) -- "Wooden Christmas-Tree"
+R version 3.1.3 (2015-03-09) -- "Smooth Sidewalk"
 Copyright (C) 2015 The R Foundation for Statistical Computing
-Platform: x86_64-apple-darwin13.4.0 (64-bit)
+Platform: x86_64-apple-darwin10.8.0 (64-bit)
 
 R is free software and comes with ABSOLUTELY NO WARRANTY.
 You are welcome to redistribute it under certain conditions.
@@ -30,86 +30,69 @@ Type 'q()' to quit R.
 +      }
 > pkgTest("randomForest")
 Loading required package: randomForest
-randomForest 4.6-12
+randomForest 4.6-10
 Type rfNews() to see new features/changes/bug fixes.
 > library(randomForest)
 > 
 > wd <- getwd()
 > location <- "/RScripts/final.csv"
 > testLocation <- "/RScripts/test.csv"
+> #Read the data 
+> 
 > final <- read.csv(paste(wd,location, sep= ""))
-> predict<-read.csv(paste(wd,testLocation, sep= ""))
+> testresult<-read.csv(paste(wd,testLocation, sep= ""))
 > 
-> do_cv_class<-function(df,num_folds,model_name)
-+ {
-+   nf<-ncol(df)
-+   df<-na.omit(df)
-+   df<-df[sample(nrow(df)),]  #sampling the data
-+   n<-nrow(df)
-+   x<-floor(n/num_folds)
-+   my_data<-data.frame()
-+   
-+   for(i in 0:(num_folds-1))
-+   {
-+     begin<- ((x*i)+1)
-+     
-+     if(i==num_folds-1){
-+       end<-nrow(df)
-+     }
-+     else{
-+       end<-(x*(i+1))
-+     }
-+     index<-c(begin:end)
-+     test<-df[index,]
-+     train<-df[-index,]
-+     my_output<-randomforest(train,test)
-+     my_data<-rbind(my_data,my_output)
-+     return(my_output)
-+   } 
-+ }
-> 
-> randomforest<-function(train,test)
-+ {
-+   nf <- ncol(train)
-+   library(randomForest)
-+   fit <- randomForest(power_outage ~ .,train,ntree=500)
-+   predicted <- predict(fit,predict[,-nf])
-+   return(predicted) 
-+ }
-> 
-> #Making the actual prediction
-> myResultFrame<-do_cv_class(final,5,randomforest)
+> #I have to give final as training data and testresult as test data.
+> #Is below the correct way of doing it
+> fit <- randomForest(power_outage ~ .,final,ntree=500)
 Warning message:
 In randomForest.default(m, y, ...) :
   The response has five or fewer unique values.  Are you sure you want to do regression?
+> nf<-ncol(final)
+> nrow(testresult)
+[1] 7
+> myResultFrame <- predict(fit,testresult[,-nf])
+> #predicted 
+> myResultFrame <- data.frame(myResultFrame)
+> #View(myResultFrame)
+> myPredictedFrame<-as.data.frame(myResultFrame)
 > 
-> #Rounding off the predicted values
-> myPredictedFrame<- data.frame(myResultFrame)
+> #I get results but not with good accuracy.
+> #so does it use the trained model or is using simple random forest?
 > 
-> cutofflow <- 0.2
+> 
+> cutofflow <- 0.1
+> cutoffmod <- 0.2
 > cutoffmid <- 0.4
 > cutoffhigh <- 0.6
 > 
 > #Check the threshold
 > for(i in 1:nrow(myPredictedFrame))
 + {
-+   if(myPredictedFrame[i,1]<cutofflow)
++   if(myPredictedFrame[i,1]<=cutofflow)
++   {
++     myPredictedFrame[i,1]<-0.125
++   }
++   else if((myPredictedFrame[i,1]>=cutofflow) && (myPredictedFrame[i,1]<cutoffmod))
 +   {
 +     myPredictedFrame[i,1]<-0.25
 +   }
-+   else if((myPredictedFrame[i,1]>=cutofflow) && (myPredictedFrame[i,1]<cutoffmid))
++   else if((myPredictedFrame[i,1]>=cutoffmod) && (myPredictedFrame[i,1]<cutoffmid))
 +   {
 +     myPredictedFrame[i,1]<-0.50
 +   }
 +   else if((myPredictedFrame[i,1]>=cutoffmid) && (myPredictedFrame[i,1]<cutoffhigh))
 +   {
 +     myPredictedFrame[i,1]<-0.75
-+     
 +   }
-+   else{
-+     myPredictedFrame[i,1]<-1.00
++   else
++   {
++     myPredictedFrame[i,1]<-0.95
 +   }
 + }
+> 
+> 
+> #View(myPredictedFrame)
 > 
 > #Writing actual values in the table
 > newOutput <-paste(wd,'/RScripts/newOutput.txt', sep= "")
@@ -119,7 +102,14 @@ In randomForest.default(m, y, ...) :
 > newOutputRounded<-paste(wd,'/RScripts/newOutputRounded.txt', sep= "")
 > write.table(myPredictedFrame, newOutputRounded, sep="\n",append=F,row.names=FALSE, col.names=FALSE)
 > 
+> #RandomForestResult <- get_metrics(myResultFrame)
+> 
+> #RandomForestResult
+> 
+> 
+> 
+> 
 > 
 > proc.time()
    user  system elapsed 
-  1.453   0.077   1.679 
+  2.125   0.092   2.292 
