@@ -50,7 +50,8 @@ wfms.controller("UserEvents", function($scope, $rootScope, $modal, $location, Da
                             if ((d - day) <= 3) {
                                 console.log("To be pushed HC " + EventService.getPredictedHeadCount($scope.allEvents[j].price));
                                 if(!($scope.allEvents[j].predictedHeadCount == 0)){
-                                    var v= m + ":" + d + ":" + y + " at " + $scope.allEvents[j].name;
+                                   // var v= m + ":" + d + ":" + y + " at " + $scope.allEvents[j].name;
+                                    var v = m + ":" + d + ":" + y;
                                     element = {hc: $scope.allEvents[j].predictedHeadCount, sd: v };
                                     value.push(element);
                                 }
