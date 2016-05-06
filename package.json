@@ -1,6 +1,4 @@
 {
-  "name": "SmartCity",
-  "version": "0.0.2",
   "name": "sinch-auth",
   "version": "0.0.7",
   "description": "Smart City",
@@ -36,5 +34,10 @@
     "redis": "latest",
     "sinch-sms": "0.0.8",
     "textbelt": "0.0.3"
+  },
+  "devDependencies": {
+    "mocha": "^2.4.5",
+    "should": "^8.3.1",
+    "supertest": "^1.2.0"
   }
 }
