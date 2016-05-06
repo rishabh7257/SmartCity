@@ -1,7 +1,7 @@
 'use strict';
 wfms.controller("UserEvents", function($scope, $rootScope, $modal, $location, DataService, EventService) {
     $scope.getData = function() {
-        $scope.initCal();
+       // $scope.initCal();
         $scope.configureDynamicView($rootScope.postal)
     };
     $scope.configureDynamicView = function configureDynamicView(postal) {

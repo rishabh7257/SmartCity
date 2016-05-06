@@ -61,16 +61,28 @@
                                     </option>
                                 </select>
                             </div>
+
                             <highchart id="predictedGraph" config="predictedGraph">
                             </highchart>
                         </div>
                     </div>
                     <div class="form-group">
-                        <div class="col-lg-offset-2 col-lg-5">
+                        <div class="col-lg-offset-2 col-lg-12">
+                            <table>
+                                <tr><td>
                             <button class="btn btn-primary" ng-click="predict()">
                                 Predict
-                            </button>
-                        </div>
+                            </button></td><td>
+                            <div ng-if="powerStatus=='Red'">
+                            <div ng-controller="ClientDashboard">
+                            <div align = "center"><button type="button" class="btn btn-primary" ng-click="sendMail()">Send Notifications</button>
+                            </div>
+
+                            </div>
+                                </div>
+                                </td>
+                                </tr>
+                                </table>
                         <div class="row">
                         </form>
                     </div>

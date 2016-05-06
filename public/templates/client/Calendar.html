@@ -1,5 +1,6 @@
 <section id="main-content">
     <section class="wrapper" ng-controller="UserEvents" ng-init="getData()">
+        <div ng-init ="initCal()">
         <div style="height:350px;width:1050px;" align = "center">
             <div id="scheduler_here" class="dhx_cal_container" style='width:100%; height:100%;'>
                 <div class="dhx_cal_navline">
@@ -32,7 +33,7 @@
                 </highchart>-->
             </div>
         </div><br/><br/><br/><br/><br/>
-       
+
         <div align = "center"> Average Electricity consumption by nearby Events</div><br/><br/><br/>
         <div data-ng-repeat="h in e">
 
@@ -44,6 +45,7 @@
                {{h.hc/10}} % on {{h.sd}} &nbsp;
             </div>
             </div>
+        </div>
         </div>
     </section>
 
