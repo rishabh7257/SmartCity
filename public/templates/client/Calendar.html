@@ -1,7 +1,7 @@
 <section id="main-content">
     <section class="wrapper" ng-controller="UserEvents" ng-init="getData()">
         <div style="height:350px;width:1050px;" align = "center">
-            <div id="scheduler_here" class="dhx_cal_container" style='width:100%; height:100%;'>
+            <div ng-onload="initCal()" id="scheduler_here" class="dhx_cal_container" style='width:100%; height:100%;'>
                 <div class="dhx_cal_navline">
                     <div class="dhx_cal_prev_button">
                         &nbsp;
