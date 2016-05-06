@@ -76,6 +76,7 @@ getFutureWeather = function(req, res) {
         //All is good. Print the body
         var weather = JSON.parse(body);
         var futureWeekData = []
+        console.log(weather.list[1]["weather"][0]["description"]);
         if (weather) {
             for (var i = 0; i < futureDataDays; i++) {
                 var wind = weather.list[i]["wind"]["speed"];
@@ -97,7 +98,8 @@ getFutureWeather = function(req, res) {
                     heavyrain = 0,
                     scatteredclouds = 0,
                     clearclouds = 0;
-                var desc = weather.list[i]["weather"]["description"];
+                var desc = weather.list[i]["weather"][0]["description"];
+
                 if (desc == "clear sky") {
                     clearclouds = 1;
                 } else if (desc == "scattered clouds") {

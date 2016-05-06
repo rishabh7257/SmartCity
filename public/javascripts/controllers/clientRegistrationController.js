@@ -201,15 +201,16 @@ wfms.controller("ClientRegistrationController", function($scope, $modalInstance,
     };
 
     function isValidPostalCode(postalCode) {
-        console.log("inside postal check");
+        // console.log("inside postal check");
         // var postalCodeRegex = /^\d{5}(?:[-\s]\d{4})?$/;
         // return postalCodeRegex.test(postalCode);
         return true;
     }
 
     function isValidPhone(phone) {
-        var phoneRegex = /^(\([0-9]{3}\) |[0-9]{3}-)[0-9]{3}-[0-9]{4}/;
-        return phoneRegex.test(phone);
+        // var phoneRegex = /^(\([0-9]{3}\) |[0-9]{3}-)[0-9]{3}-[0-9]{4}/;
+        // return phoneRegex.test(phone);
+        return true;
     }
 
     function isValidateEmail(email) {
@@ -239,13 +240,15 @@ wfms.controller("ClientRegistrationController", function($scope, $modalInstance,
             console.log("inside invalid zip");
             $scope.formError = "Invalid Zipcode !!!";
         }
-        /* else if(!(isValidPhone($scope.phone)))
+       else if(!(isValidPhone($scope.phone)))
 			   {
+                console.log("inside phone");
 			   $scope.formError = "Invalid Phone Number!!!";
-			   }*/
+			   }
         else if (!(isValidateEmail($scope.email))) {
             $scope.formError = "Invalid Email-Id!!!";
         } else {
+            console.log("This is what should come :" + $scope.firstname + $scope.lastname + $scope.address + city  +zipcode + $scope.email + $scope.number + $scope.password + state_long + country + $scope.usertype);
             if ($scope.firstname && $scope.lastname && $scope.address && city && zipcode && $scope.email && $scope.number && $scope.password && state_long && country && $scope.usertype) {
                 console.log("Inside query");
                 var params = {
