@@ -81,6 +81,7 @@ describe("Retreive reasons for power failure",function(){
 describe("Shoud run R scripts",function(){
 // #1 should return home page
   it("Should return message containing probabitity of power failure",function(done){
+ this.timeout(15000);
 
     // calling home page api
     server
@@ -91,8 +92,7 @@ describe("Shoud run R scripts",function(){
       // HTTP status should be 200
       //res.status.should.equal(200);
       
-      this.timeout(15000);
-
+     
       //res.status.should.equal(200);
       done();
       // Error key should be false.

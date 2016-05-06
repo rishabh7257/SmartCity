@@ -23,10 +23,10 @@ wfms.controller("SimulationController", function($scope, $rootScope, DataService
         val: '1.0',
     }];
     $scope.predict = function() {
-        $rootScope.methodCalled = true;
+        $window.sessionStorage.methodCalled = true;
         var city;
-        if ($rootScope.city) {
-            city = $rootScope.city;
+        if ($window.sessionStorage.city) {
+            city = $window.sessionStorage.city;
         } else {
             city = "San Jose"
         }
@@ -46,7 +46,7 @@ wfms.controller("SimulationController", function($scope, $rootScope, DataService
                             console.log("response.message[i]" + response.message[i]);
                             console.log("$rootScope.userType" + $rootScope.userType);
                            
-                            if (($rootScope.userType == "Hospital" && response.message[0]> 0.3) || ($rootScope.userType == "Commercial" && response.message[0] > 0.5) || ($rootScope.userType == "Residential" && response.message[0] > 0.7)) {
+                            if (($window.sessionStorage.userType == "Hospital" && response.message[0]> 0.3) || ($window.sessionStorage.userType == "Commercial" && response.message[0] > 0.5) || ($window.sessionStorage.userType == "Residential" && response.message[0] > 0.7)) {
                                 $scope.powerStatus = "Red";
                             } else {
                                 $scope.powerStatus = "Green";
