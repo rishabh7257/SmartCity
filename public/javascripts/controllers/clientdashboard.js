@@ -34,7 +34,7 @@ wfms.controller("ClientDashboard", function($scope, $rootScope, $modal, $locatio
                         console.log("response.message" + response.message)
                         console.log("RootScope User Type" + $rootScope.userType)
                         for (var i = 0; i < response.message.length; i++) {
-                            if (($rootScope.userType == "Hospital" && response.message[i] > 0.3) || ($rootScope.userType == "Commercial" && response.message[i] > 0.5) || ($rootScope.userType == "Residential" && response.message[i] > 0.7)) {
+                            if (($rootScope.userType == "Hospital" && response.message[i] > 0.4) || ($rootScope.userType == "Commercial" && response.message[i] > 0.5) || ($rootScope.userType == "Residential" && response.message[i] > 0.7)) {
                                 $scope.powerStatus = "Red";
                             } else {
                                 $scope.powerStatus = "Green";
