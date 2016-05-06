@@ -41,6 +41,9 @@ Type rfNews() to see new features/changes/bug fixes.
 > 
 > final <- read.csv(paste(wd,location, sep= ""))
 > testresult<-read.csv(paste(wd,testLocation, sep= ""))
+Warning message:
+In read.table(file = file, header = header, sep = sep, quote = quote,  :
+  incomplete final line found by readTableHeader on '/Users/kasatswati/Desktop/Studies/273/eclipse/workspace/275/SmartCity/RScripts/test.csv'
 > 
 > #I have to give final as training data and testresult as test data.
 > #Is below the correct way of doing it
@@ -50,7 +53,7 @@ In randomForest.default(m, y, ...) :
   The response has five or fewer unique values.  Are you sure you want to do regression?
 > nf<-ncol(final)
 > nrow(testresult)
-[1] 7
+[1] 1
 > myResultFrame <- predict(fit,testresult[,-nf])
 > #predicted 
 > myResultFrame <- data.frame(myResultFrame)
@@ -61,11 +64,11 @@ In randomForest.default(m, y, ...) :
 > #so does it use the trained model or is using simple random forest?
 > 
 > 
-> cutofflowone <- 0.0025
-> cutofflowtwo <- 0.0050
-> cutofflowthree <- 0.0075
-> cutofflowfour <- 0.01
-> cutofflowfive <- 0.0150
+> cutofflowone <- 0.01
+> cutofflowtwo <- 0.02
+> cutofflowthree <- 0.03
+> cutofflowfour <- 0.04
+> cutofflowfive <- 0.05
 > cutoffmod <- 0.2
 > cutoffmid <- 0.4
 > cutoffhigh <- 0.6
@@ -79,24 +82,24 @@ In randomForest.default(m, y, ...) :
 +   }
 +   else if((myPredictedFrame[i,1]>=cutofflowone) && (myPredictedFrame[i,1]<cutofflowtwo))
 +   {
-+     myPredictedFrame[i,1]<-0.15
++     myPredictedFrame[i,1]<-0.20
 +   }
 +   else if((myPredictedFrame[i,1]>=cutofflowtwo) && (myPredictedFrame[i,1]<cutofflowthree))
 +   {
-+     myPredictedFrame[i,1]<-0.20
++     myPredictedFrame[i,1]<-0.25
 +   }
 +   else if((myPredictedFrame[i,1]>=cutofflowthree) && (myPredictedFrame[i,1]<cutofflowfour))
 +   {
-+     myPredictedFrame[i,1]<-0.25
++     myPredictedFrame[i,1]<-0.45
 +   }
 +   else if((myPredictedFrame[i,1]>=cutofflowfour) && (myPredictedFrame[i,1]<cutofflowfive))
 +   {    
-+     myPredictedFrame[i,1]<-0.30
++     myPredictedFrame[i,1]<-0.50
 +   }
 + 
 +   else if((myPredictedFrame[i,1]>=cutofflowfive) && (myPredictedFrame[i,1]<cutoffmod))
 +   {
-+     myPredictedFrame[i,1]<-0.40
++     myPredictedFrame[i,1]<-0.60
 +   }
 +  
 +   else if((myPredictedFrame[i,1]>=cutoffmod) && (myPredictedFrame[i,1]<cutoffmid))
@@ -134,4 +137,4 @@ In randomForest.default(m, y, ...) :
 > 
 > proc.time()
    user  system elapsed 
-  1.947   0.071   2.070 
+  1.841   0.054   1.885 

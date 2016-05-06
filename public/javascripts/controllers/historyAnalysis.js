@@ -1,7 +1,7 @@
 'use strict';
-wfms.controller("HistoryAnalysis", function($scope, $rootScope, $modal, $location, DataService) {
-    $rootScope.userType = "Hospital";
-          
+wfms.controller("HistoryAnalysis", function($scope, $rootScope, $modal, $location, DataService,$window) {
+   // $rootScope.userType = "Hospital";
+    $window.sessionStorage.userType = "Hospital";  
     $scope.getData = function() {
         clientInfo();
         getFutureData();

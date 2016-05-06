@@ -43,6 +43,8 @@ wfms.controller("ShowClientRegisController", function($scope, $rootScope, $modal
                 $window.sessionStorage.city = response.city;
                 $window.sessionStorage.state = response.state;
                 $window.sessionStorage.country = response.country;
+                $window.sessionStorage.postal = response.zipcode;
+
                 console.log("city: " + $window.sessionStorage.city);
                 console.log("state: " + $window.sessionStorage.state);
                 $rootScope.type = $window.sessionStorage.type;

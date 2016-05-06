@@ -179,7 +179,7 @@ wfms.controller("ClientDashboard", function($scope, $rootScope, $modal, $locatio
     // }
 
     function clientInfo() {
-        var uri = "/api/getClientInfo/" + $rootScope.idperson;
+        var uri = "/api/getClientInfo/" + $window.sessionStorage.idperson;
         DataService.getData(uri, []).success(function(response) {
             var data = response.data[0];
             console.log(JSON.stringify(response, null, " "));
@@ -189,6 +189,14 @@ wfms.controller("ClientDashboard", function($scope, $rootScope, $modal, $locatio
             $rootScope.userLastLogin = response.data[0].lastLogin;
             $rootScope.city = response.data[0].city;
             $rootScope.postal = response.data[0].zipcode;
+
+            $window.sessionStorage.userId = response.data[0].email;
+            $window.sessionStorage.userName = response.data[0].name;
+            $window.sessionStorage.userLastLogin = response.data[0].lastLogin;
+            $window.sessionStorage.city = response.data[0].city;
+            $window.sessionStorage.postal = response.data[0].zipcode;
+
+           
         }).error(function(err) {
             console.log(err.message);
         });
