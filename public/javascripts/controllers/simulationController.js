@@ -1,5 +1,6 @@
 'use strict';
 wfms.controller("SimulationController", function($scope, $rootScope, DataService, $window, $http) {
+   
     $scope.equipfailure = [{
         val: '0.1',
     }, {

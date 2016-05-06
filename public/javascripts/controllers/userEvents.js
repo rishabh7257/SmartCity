@@ -2,7 +2,6 @@
 wfms.controller("UserEvents", function($scope, $rootScope, $modal, $location, DataService, EventService, $window) {
     $scope.getData = function() {
         $scope.initCal();
-        $scope.configureDynamicView($rootScope.postal);
         $scope.configureDynamicView($window.sessionStorage.postal);
 
     };
