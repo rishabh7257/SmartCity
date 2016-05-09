@@ -95,36 +95,16 @@ getClientInfo = function(req, res) {
     });
 };
 
-sendMail = function(req,res) {
-    console.log("Inside sendMail");
-    var maillist = [
-        req.session.email
-    ];
-   // console.log("City "+ req.session.usercity);
+// SEND MAIL  - WORKING
+
+/*sendMail = function(req,res) {
+    var mailList=['er.poojashukla07@gmail.com',
+        'pooja.shukla@sjsu.edu'];
     var msg = {
         subject: "Alert - Power Outage",
         text: "There is an outage predicted in your area tomorrow!"
     }
-    mysql.queryDb('SELECT DISTINCT phonenumber, p.email from login l join person p WHERE ?? = ? AND ?? = ?', ['type',req.session.type , 'city',req.session.usercity], function (err, rows) {
-        if (err) {
-            console.log("Error while listing all phonenumbers !!!" + err);
-        } else {
-            console.log(rows);
-            var msgList = [];
-            rows.forEach(function (t, j, array) {
-                sinchSms.send(t.phonenumber, 'Alert !! Power Outage predicted in your area tomorrow!').then(function (response) {
-                    //All good, response contains messageId
-                    console.log(response);
-                }).fail(function (error) {
-                    // Some type of error, see error object
-                    console.log(error);
-                });
-            });
-        }
-    });
-
-
-    maillist.forEach(function (to, i, array) {
+    mailList.forEach(function (to, i, array) {
         msg.to = to;
         smtpTransport.sendMail(msg, function (err) {
             if (err) {
@@ -134,49 +114,64 @@ sendMail = function(req,res) {
                 console.log('Sent to ' + to);
             }
         });
-    });
-    sendMail = function (req, res) {
-        console.log("Inside sendMail");
-        /*var maillist = [
-         'er.poojashukla07@gmail.com',
-         'pooja.shukla@sjsu.edu'
-         ];
-         var msgList = [
-         '+16692219847',
-         '+14083345829'
-         ];*/
-        //elect select phonenumber,p.email from login l join person p where l.type ="Residential"
-        mysql.queryDb('SELECT DISTINCT phonenumber from login l join person p WHERE ?', [{
-            type: req.session.type
-        }], function (err, rows) {
-            if (err) {
-                console.log("Error while listing all the client details !!!" + err);
-                //res.status(500).json({ status : 500, message : "Error while listing client details !!!" });
-            } else {
-                //console.log(" send mail to"+ rows.toString());
-                var msgList = [];
-                // msgList.push(rows[0].phonenumber);
-                // var mailList = [rows[0].email];
-                // msgList.forEach(function(t){
-                // 	console.log("msg"+t);
-                // });
-                //console.log("msgList"+ msgList[0]+" "+msgList[1]+msgList[2]+msgList[3]);
-                //console.log("maillist"+ mailList[0]+mailList[1]);
-                //res.status(200).json({ status : 200, data : rows});
-                rows.forEach(function (t, j, array) {
-                    sinchSms.send(t.phonenumber, 'Alert !! Power Outage predicted in your area tomorrow!').then(function (response) {
-                        //All good, response contains messageId
-                        console.log(response);
-                    }).fail(function (error) {
-                        // Some type of error, see error object
-                        console.log(error);
-                    });
-                });
-            }
-        });
+    })
+}*/
+sendMail = function(req,res) {
 
-        console.log(msg);
-    };
+    var mailList = [];
+    var msgList = [];
+
+
+
+
+    mysql.queryDb('SELECT DISTINCT phonenumber,p.email from login l join person p WHERE ?? = ? AND ?? = ?', ['type',req.session.type , 'city',req.session.usercity], function (err, rows) {
+        console.log("Fetching contacts from db here");
+        if (err) {
+            console.log("Error while listing all phonenumbers !!!" + err);
+
+        } else {
+            console.log(rows);
+            rows.forEach(function (t, j, array) {
+                mailList.push(t.email);
+                msgList.push(t.phonenumber);
+
+            })
+
+            msgList.forEach(function (t, j, array) {
+                console.log("sending msg to "+ t);
+                sinchSms.send(t, 'Test Msg').then(function (response) {
+                    //All good, response contains messageId
+                    // maillist.push(t.email);
+                    // console.log(maillist);
+                }).fail(function (error) {
+                    // Some type of error, see error object
+                    console.log(error);
+                });
+            });
+            var msg = {
+                subject: "Alert - Power Outage",
+                text: "There is an outage predicted in your area tomorrow!"
+            }
+            mailList.forEach(function (to, i, array) {
+                msg.to = to;
+                smtpTransport.sendMail(msg, function (err) {
+                    if (err) {
+                        console.log('Sending to ' + to + ' failed: ' + err);
+                        return;
+                    } else {
+                        console.log('Sent to ' + to);
+                    }
+                });
+            })
+            res.status(500).json({
+                status: 500,
+                message: "Error while listing client details !!!"
+            });
+        }
+    });
+};
+
+
     getWeatherForecast = function (req, res) {
         var cityName = req.params.city;
     }
@@ -208,7 +203,7 @@ sendMail = function(req,res) {
                 }
             });
         });
-    }
+    };
     addUserEvents = function (req, res) {
         var data = req.body;
         var mode = data["!nativeeditor_status"];
@@ -229,8 +224,9 @@ sendMail = function(req,res) {
         else if (mode == "inserted") db.user_events.insert(data, update_response);
         else if (mode == "deleted") db.user_events.removeById(sid, update_response);
         else res.send("Not supported operation");
-    }
-}
+
+
+};
 exports.getClient = getClient;
 exports.sendMail = sendMail;
 exports.getClientInfo = getClientInfo;

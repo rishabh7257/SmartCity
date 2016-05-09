@@ -1,7 +1,8 @@
 'use strict';
-wfms.controller("eventsController", function($scope, $rootScope, $modal, $location, DataService, EventService) {
+wfms.controller("eventsController", function($scope, $rootScope, $modal, $location, DataService, EventService,$window) {
     $scope.getData = function() {
-        $scope.configureDynamicView($rootScope.postal);
+       // $scope.configureDynamicView($rootScope.postal);
+        $scope.configureDynamicView($window.sessionStorage.postal);
     };
     $scope.configureDynamicView = function configureDynamicView(postal) {
         var url;

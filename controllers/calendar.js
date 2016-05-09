@@ -32,7 +32,7 @@ createUserEvents = function(req,res) {
                         if (err) {
                             throw err;
                         } else {
-                            console.log('inserted into user events');
+                            console.log('created event');
                         }
                         db.close();
                     });
@@ -61,6 +61,7 @@ getUserEvents = function(req,res) {
                        
                     res.send(data);
                 });
+              //  db.close();
             }
         });
 
@@ -69,6 +70,7 @@ getUserEvents = function(req,res) {
 }
 
 function inserEvent(data, userId) {
+    console.log("Inside Insert Event");
     var db = mongo.getMongoConnection();
 
     db.open(function (err, db) {
@@ -90,6 +92,7 @@ function inserEvent(data, userId) {
                             throw err;
                         } else {
                             console.log('inserted into user events');
+                            db.close();
                         }
                         db.close();
                     });
@@ -122,13 +125,14 @@ addUserEvents = function(req,res) {
     if (mode == "updated")
         db.user_events.updateById( sid, data, update_response);
     else if (mode == "inserted"){
+        console.log("Mode is insterted");
         tid = data._id;
 
         res.setHeader("Content-Type","text/xml");
         res.send("<data><action type='"+mode+"' sid='"+sid+"' tid='"+tid+"'/></data>");
         inserEvent(data, userId);
         // db.user_events.insert(data, update_response);
-        console.log("Data is"+data);
+        console.log("Inserted"+data);
 
     }
     else if (mode == "deleted")

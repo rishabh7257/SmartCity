@@ -33,11 +33,11 @@ myPredictedFrame<-as.data.frame(myResultFrame)
 #so does it use the trained model or is using simple random forest?
 
 
-cutofflowone <- 0.0025
-cutofflowtwo <- 0.0050
-cutofflowthree <- 0.0075
-cutofflowfour <- 0.01
-cutofflowfive <- 0.0150
+cutofflowone <- 0.01
+cutofflowtwo <- 0.02
+cutofflowthree <- 0.03
+cutofflowfour <- 0.04
+cutofflowfive <- 0.05
 cutoffmod <- 0.2
 cutoffmid <- 0.4
 cutoffhigh <- 0.6
@@ -51,24 +51,24 @@ for(i in 1:nrow(myPredictedFrame))
   }
   else if((myPredictedFrame[i,1]>=cutofflowone) && (myPredictedFrame[i,1]<cutofflowtwo))
   {
-    myPredictedFrame[i,1]<-0.15
+    myPredictedFrame[i,1]<-0.20
   }
   else if((myPredictedFrame[i,1]>=cutofflowtwo) && (myPredictedFrame[i,1]<cutofflowthree))
   {
-    myPredictedFrame[i,1]<-0.20
+    myPredictedFrame[i,1]<-0.25
   }
   else if((myPredictedFrame[i,1]>=cutofflowthree) && (myPredictedFrame[i,1]<cutofflowfour))
   {
-    myPredictedFrame[i,1]<-0.25
+    myPredictedFrame[i,1]<-0.45
   }
   else if((myPredictedFrame[i,1]>=cutofflowfour) && (myPredictedFrame[i,1]<cutofflowfive))
   {    
-    myPredictedFrame[i,1]<-0.30
+    myPredictedFrame[i,1]<-0.50
   }
 
   else if((myPredictedFrame[i,1]>=cutofflowfive) && (myPredictedFrame[i,1]<cutoffmod))
   {
-    myPredictedFrame[i,1]<-0.40
+    myPredictedFrame[i,1]<-0.60
   }
  
   else if((myPredictedFrame[i,1]>=cutoffmod) && (myPredictedFrame[i,1]<cutoffmid))
