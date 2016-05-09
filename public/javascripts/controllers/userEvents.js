@@ -33,7 +33,6 @@ wfms.controller("UserEvents", function($scope, $rootScope, $modal, $location, Da
     $scope.eventsCloseToUserEvents = function() {
         console.log("In eventclose to user evetns");
         var url = "/api/comingEvents";
-        $scope.noEvents = false;
         var headCount =[];
         DataService.getData(url, []).success(function(response) {
             var value = [];
@@ -64,7 +63,6 @@ wfms.controller("UserEvents", function($scope, $rootScope, $modal, $location, Da
                         $scope.noEvents = false;
                     }
                 } else{
-                    alert("Inside else");
                     $scope.noEvents = true;
                 }
             }
