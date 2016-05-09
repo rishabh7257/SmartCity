@@ -55,16 +55,15 @@ wfms.controller("UserEvents", function($scope, $rootScope, $modal, $location, Da
                                     var v = m + ":" + d + ":" + y;
                                     element = {hc: $scope.allEvents[j].predictedHeadCount, sd: v };
                                     value.push(element);
+                                    $scope.noEvents = false;
+
                                 }
                                 $scope.e = value;
 
                             }
                         }
-                        $scope.noEvents = false;
                     }
-                } else{
-                    $scope.noEvents = true;
-                }
+                } 
             }
         }).error(function(err) {
             console.log(err.message);
