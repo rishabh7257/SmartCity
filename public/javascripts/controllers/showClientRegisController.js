@@ -30,10 +30,11 @@ wfms.controller("ShowClientRegisController", function($scope, $rootScope, $modal
                 $rootScope.lname = response.lname;
                 $rootScope.email = response.email;
                 $rootScope.lastLogin = response.lastLogin;
-                console.log("window element:" + $window.sessionStorage.idperson);
-                console.log("ziocdeo:" + response.zipcode);
-                console.log("idperson:" + response.idperson);
+                
+
                 $window.sessionStorage.type = response.type;
+                console.log("Session Type" + $window.sessionStorage.type);
+                console.log("Data " + response.type);
                 $window.sessionStorage.idclient = response.idclient;
                 $window.sessionStorage.idperson = response.idperson;
                 $window.sessionStorage.fname = response.fname;

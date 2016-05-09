@@ -41,6 +41,9 @@ Type rfNews() to see new features/changes/bug fixes.
 > 
 > final <- read.csv(paste(wd,location, sep= ""))
 > testresult<-read.csv(paste(wd,testLocation, sep= ""))
+Warning message:
+In read.table(file = file, header = header, sep = sep, quote = quote,  :
+  incomplete final line found by readTableHeader on '/Users/rsangvhi/Documents/SmartCity/RScripts/test.csv'
 > 
 > #I have to give final as training data and testresult as test data.
 > #Is below the correct way of doing it
@@ -50,7 +53,7 @@ In randomForest.default(m, y, ...) :
   The response has five or fewer unique values.  Are you sure you want to do regression?
 > nf<-ncol(final)
 > nrow(testresult)
-[1] 7
+[1] 1
 > myResultFrame <- predict(fit,testresult[,-nf])
 > #predicted 
 > myResultFrame <- data.frame(myResultFrame)
@@ -134,4 +137,4 @@ In randomForest.default(m, y, ...) :
 > 
 > proc.time()
    user  system elapsed 
-  1.749   0.100   2.329 
+  1.625   0.065   1.697 
