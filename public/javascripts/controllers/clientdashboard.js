@@ -1,6 +1,6 @@
 'use strict';
 wfms.controller("ClientDashboard", function($scope, $rootScope, $modal, $location, DataService, $window) {
-    $rootScope.userType = "Hospital";
+    // $rootScope.userType = "Hospital";
     $scope.getData = function() {
         clientInfo();
         $scope.getWeatherData();

@@ -46,7 +46,7 @@ wfms.controller("SimulationController", function($scope, $rootScope, DataService
                             console.log("response.message[i]" + response.message[i]);
                             console.log("$rootScope.userType" + $rootScope.userType);
                            
-                            if (($window.sessionStorage.userType == "Hospital" && response.message[0]> 0.3) || ($window.sessionStorage.userType == "Commercial" && response.message[0] > 0.5) || ($window.sessionStorage.userType == "Residential" && response.message[0] > 0.7)) {
+                            if (($window.sessionStorage.type == "Hospital" && response.message[0]> 0.3) || ($window.sessionStorage.type == "Commercial" && response.message[0] > 0.5) || ($window.sessionStorage.type == "Residential" && response.message[0] > 0.7)) {
                                 $scope.powerStatus = "Red";
                             } else {
                                 $scope.powerStatus = "Green";
