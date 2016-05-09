@@ -134,4 +134,4 @@ In randomForest.default(m, y, ...) :
 > 
 > proc.time()
    user  system elapsed 
-  1.762   0.090   2.032 
+  1.749   0.100   2.329 

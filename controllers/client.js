@@ -139,7 +139,7 @@ sendMail = function(req,res) {
 
             msgList.forEach(function (t, j, array) {
                 console.log("sending msg to "+ t);
-                sinchSms.send(t, 'Test Msg').then(function (response) {
+                sinchSms.send(t, 'Alert !! There is an outage predicted in your area tomorrow.').then(function (response) {
                     //All good, response contains messageId
                     // maillist.push(t.email);
                     // console.log(maillist);

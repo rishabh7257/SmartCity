@@ -34,13 +34,17 @@ wfms.service('EventService', function() {
             for (var i = 0; i < price.length; i++) {
                 if (price[i] == " ") {
                     console.log(predictedHeadCount);
-                    return ((parseInt(predictedHeadCount) * 100) / 10);
+                    if (((parseInt(predictedHeadCount) * 100) / 10)) {
+                        return ((parseInt(predictedHeadCount) * 100) / 10);    
+                    } else {
+                        return 100;
+                    }
                 } else {
                     predictedHeadCount = predictedHeadCount + price[i];
                 }
             }
         } else {
-            return 0;
+            return 50;
         }
     }
 	

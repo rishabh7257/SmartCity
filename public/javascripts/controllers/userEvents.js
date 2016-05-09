@@ -28,11 +28,11 @@ wfms.controller("UserEvents", function($scope, $rootScope, $modal, $location, Da
         var dp = new dataProcessor("/data");
         dp.init(scheduler);
         dp.setTransactionMode("POST", false);
+        $scope.eventsCloseToUserEvents();
     }
     $scope.eventsCloseToUserEvents = function() {
         console.log("In eventclose to user evetns");
         var url = "/api/comingEvents";
-        $scope.pooja = "hello";
         var headCount =[];
         DataService.getData(url, []).success(function(response) {
             var value = [];
@@ -60,9 +60,11 @@ wfms.controller("UserEvents", function($scope, $rootScope, $modal, $location, Da
 
                             }
                         }
+                        $scope.noEvents = false;
                     }
+                } else{
+                    $scope.noEvents = true;
                 }
-
             }
         }).error(function(err) {
             console.log(err.message);
