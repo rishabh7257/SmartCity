@@ -34,13 +34,15 @@
             </div>
         </div><br/><br/><br/><br/><br/>
 
-
-        <div ng-if="noEvents==true">
+        <div ng-if="noEvents!=false">
         <h4> No Events  in next three days</h4>
         </div>
+
             <div ng-if="noEvents==false">
+
             <div align = "center"> Average Electricity consumption by nearby Events</div><br/><br/><br/>
         <div class="progress"  data-ng-repeat="h in e">
+
             <div>
             <div class="progress-bar progress-bar-success progress-bar-striped" role="progressbar"
                  aria-valuenow="40" aria-valuemin="0" aria-valuemax="100" style="width:{{h.hc/10}}%">
@@ -48,7 +50,9 @@
             </div>
             </div>
         </div>
+
             </div>
+
         </div>
     </section>
 

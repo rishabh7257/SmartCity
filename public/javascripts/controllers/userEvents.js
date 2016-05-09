@@ -1,10 +1,11 @@
 'use strict';
 wfms.controller("UserEvents", function($scope, $rootScope, $modal, $location, DataService, EventService, $window) {
     $scope.getData = function() {
-        $scope.initCal();
+       // $scope.initCal();
         $scope.configureDynamicView($window.sessionStorage.postal);
 
     };
+
     $scope.configureDynamicView = function configureDynamicView(postal) {
         var url;
         if (postal) {
@@ -33,7 +34,7 @@ wfms.controller("UserEvents", function($scope, $rootScope, $modal, $location, Da
     $scope.eventsCloseToUserEvents = function() {
         console.log("In eventclose to user evetns");
         var url = "/api/comingEvents";
-        $scope.noEvents = false;
+       // $scope.noEvents = false;
         var headCount =[];
         DataService.getData(url, []).success(function(response) {
             var value = [];
@@ -56,16 +57,14 @@ wfms.controller("UserEvents", function($scope, $rootScope, $modal, $location, Da
                                     var v = m + ":" + d + ":" + y;
                                     element = {hc: $scope.allEvents[j].predictedHeadCount, sd: v };
                                     value.push(element);
+                                    $scope.noEvents = false;
+
                                 }
                                 $scope.e = value;
-
                             }
                         }
-                        $scope.noEvents = false;
                     }
-                } else{
-                    alert("Inside else");
-                    $scope.noEvents = true;
+                    break;
                 }
             }
         }).error(function(err) {

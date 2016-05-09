@@ -133,7 +133,7 @@ addUserEvents = function(req,res) {
         inserEvent(data, userId);
         // db.user_events.insert(data, update_response);
         console.log("Inserted"+data);
-
+        
     }
     else if (mode == "deleted")
     {
