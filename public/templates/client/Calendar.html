@@ -2,7 +2,7 @@
     <section class="wrapper" ng-controller="UserEvents" ng-init="getData()">
         <div ng-init ="initCal()">
         <div style="height:350px;width:1050px;" align = "center">
-            <div id="scheduler_here" class="dhx_cal_container" style='width:100%; height:100%;'>
+            <div ng-onload="initCal()" id="scheduler_here" class="dhx_cal_container" style='width:100%; height:100%;'>
                 <div class="dhx_cal_navline">
                     <div class="dhx_cal_prev_button">
                         &nbsp;
@@ -34,21 +34,41 @@
             </div>
         </div><br/><br/><br/><br/><br/>
 
+
         <div ng-if="noEvents!=false">
         <h4> No Events  in next three days</h4>
         </div>
 
             <div ng-if="noEvents==false">
 
-            <div align = "center"> Average Electricity consumption by nearby Events</div><br/><br/><br/>
-        <div class="progress"  data-ng-repeat="h in e">
+            <div align = "center"> Average Electricity consumption by nearby Events<br/><br/><br/>
+            <table st-table="Power Consumption" align = "center" >
+                <thead>
+                <tr>
+                    <th>Power Consumption</th>
+                    <th>Venue</th>
 
+                </tr>
+                </thead>
+                <tbody>
+                <tr ng-repeat="row in e">
+                    <td bgcolor="#faebd7">{{row.hc/10}} %</td>
+                    <td bgcolor="#faebd7">{{row.sd }}</td>
+
+
+                </tr>
+                </tbody>
+            </table>
+            </div>
+<!--</div>
             <div>
+                    <div class="progress"  data-ng-repeat="h in e">
+
             <div class="progress-bar progress-bar-success progress-bar-striped" role="progressbar"
-                 aria-valuenow="40" aria-valuemin="0" aria-valuemax="100" style="width:{{h.hc/10}}%">
+                  aria-valuemin="0" aria-valuemax="100" style="width:{{h.hc/10}}%">
                {{h.hc/10}} % on {{h.sd}} &nbsp;
             </div>
-            </div>
+            </div>-->
         </div>
 
             </div>

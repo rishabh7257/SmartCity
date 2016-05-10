@@ -34,7 +34,7 @@ wfms.controller("UserEvents", function($scope, $rootScope, $modal, $location, Da
     $scope.eventsCloseToUserEvents = function() {
         console.log("In eventclose to user evetns");
         var url = "/api/comingEvents";
-       // $scope.noEvents = false;
+
         var headCount =[];
         DataService.getData(url, []).success(function(response) {
             var value = [];
@@ -53,8 +53,8 @@ wfms.controller("UserEvents", function($scope, $rootScope, $modal, $location, Da
                             if ((d - day) <= 3) {
                                 console.log("To be pushed HC " + EventService.getPredictedHeadCount($scope.allEvents[j].price));
                                 if(!($scope.allEvents[j].predictedHeadCount == 0)){
-                                   // var v= m + ":" + d + ":" + y + " at " + $scope.allEvents[j].name;
-                                    var v = m + ":" + d + ":" + y;
+                                    var v= m + ":" + d + ":" + y + " at " + $scope.allEvents[j].name;
+                                   // var v = m + ":" + d + ":" + y;
                                     element = {hc: $scope.allEvents[j].predictedHeadCount, sd: v };
                                     value.push(element);
                                     $scope.noEvents = false;
@@ -66,6 +66,8 @@ wfms.controller("UserEvents", function($scope, $rootScope, $modal, $location, Da
                     }
                     break;
                 }
+
+
             }
         }).error(function(err) {
             console.log(err.message);

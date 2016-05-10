@@ -101,6 +101,8 @@ function inserEvent(data, userId) {
         });
     });
 }
+
+
 addUserEvents = function(req,res) {
     var data = req.body;
     var mode = data["!nativeeditor_status"];
@@ -133,7 +135,8 @@ addUserEvents = function(req,res) {
         inserEvent(data, userId);
         // db.user_events.insert(data, update_response);
         console.log("Inserted"+data);
-        
+       
+
     }
     else if (mode == "deleted")
     {

@@ -67,7 +67,6 @@ exports.register = function(req, res) {
                 } else {
                     req.session.idperson = idperson;
                     req.session.city = city;
-
                     passport.authenticate('local')(req, res, function() {
                         lastLogin = new Date();
                         req.session.email = un;
@@ -114,31 +113,18 @@ exports.checkLogin = function(req, res, next) {
             req.session.email = user.email;
             console.log(moment(user.last_login).format('LLL'));
             //Async Query
-
-            mysql.queryDb('update login set ? where ?',[{last_login:new Date()},{idperson:user.idperson}],function(err,result){
-            if(err) {
-              console.log(err);
-            }
-          });
-            mysql.queryDb("select type from login where ?",[{idperson:user.idperson}],function(err,result){
-                if(err) {
-                    console.log(err);
-                    res.status(500).json({status:500,message : "Please try again later"});
-                } else {
-                    console.log("User type"+result[0].type);
-                   //res.status(200).json({status:200, zipcode : result[0].zipcode, idperson:user.idperson, email:user.username, name : result[0].fname  + ' ' + result[0].lname,state : result[0].state, city : result[0].city,country : result[0].country, lastLogin:last_login});
-                    req.session.type = result[0].type;
-                }
-            });
-            mysql.queryDb("select fname, lname, zipcode , state , city, country from person where ?",[{idperson:user.idperson}],function(err,result){
-                if(err) {
-
-                    console.log(err);
-                }
-            });
-            mysql.queryDb("select fname, lname, zipcode , state , city, country from person where ?", [{
+            mysql.queryDb('update login set ? where ?', [{
+                last_login: new Date()
+            }, {
                 idperson: user.idperson
             }], function(err, result) {
+                if (err) {
+                    console.log(err);
+                }
+            });
+            mysql.queryDb("select type from login where ?", [{
+                idperson: user.idperson
+            }], function(err, resultType) {
                 if (err) {
                     console.log(err);
                     res.status(500).json({
@@ -146,21 +132,34 @@ exports.checkLogin = function(req, res, next) {
                         message: "Please try again later"
                     });
                 } else {
-                    console.log(result[0].city);
-                    req.session.usercity = result[0].city;
-                    res.status(200).json({
-                        status: 200,
-                        zipcode: result[0].zipcode,
-                        idperson: user.idperson,
-                        email: user.username,
-                        name: result[0].fname + ' ' + result[0].lname,
-                        state: result[0].state,
-                        city: result[0].city,
-                        country: result[0].country,
-                        lastLogin: last_login
+                    console.log("User type" + resultType[0].type);
+                    req.session.type = resultType[0].type;
+                    mysql.queryDb("select fname, lname, zipcode , state , city, country from person where ?", [{
+                        idperson: user.idperson
+                    }], function(err, result) {
+                        if (err) {
+                            console.log(err);
+                            res.status(500).json({
+                                status: 500,
+                                message: "Please try again later"
+                            });
+                        } else {
+                            console.log(result[0].city);
+                            req.session.usercity = result[0].city;
+                            res.status(200).json({
+                                status: 200,
+                                zipcode: result[0].zipcode,
+                                idperson: user.idperson,
+                                email: user.username,
+                                name: result[0].fname + ' ' + result[0].lname,
+                                state: result[0].state,
+                                city: result[0].city,
+                                country: result[0].country,
+                                lastLogin: last_login,
+                                type: resultType[0].type
+                            });
+                        }
                     });
-
-
                 }
             });
         });

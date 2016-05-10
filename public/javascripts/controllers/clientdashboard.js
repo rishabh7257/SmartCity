@@ -1,6 +1,6 @@
 'use strict';
 wfms.controller("ClientDashboard", function($scope, $rootScope, $modal, $location, DataService, $window) {
-    $rootScope.userType = "Hospital";
+    // $rootScope.userType = "Hospital";
     $scope.getData = function() {
         clientInfo();
         $scope.getWeatherData();
@@ -164,19 +164,6 @@ wfms.controller("ClientDashboard", function($scope, $rootScope, $modal, $locatio
         }],
         loading: false
     }
-    // $scope.clientPowerStatus = function() {
-    //     DataService.getData("/api/getOutageStatus", []).success(function(response) {
-    //         for (var i = 0; i < response.data.length; i++) {
-    //             if (($rootScope.userType == "Hospital" && response.data[i].thresholdLevel > 1) || ($rootScope.userType == "Commercial" && response.data[i].thresholdLevel > 5) || ($rootScope.userType == "Residential" && response.data[i].thresholdLevel > 10)) {
-    //                 $scope.powerStatus = "Red";
-    //             } else {
-    //                 $scope.powerStatus = "Green";
-    //             }
-    //         }
-    //     }).error(function(err) {
-    //         console.log(err.message);
-    //     });
-    // }
 
     function clientInfo() {
         var uri = "/api/getClientInfo/" + $window.sessionStorage.idperson;
